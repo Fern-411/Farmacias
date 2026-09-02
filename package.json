@@ -1,0 +1,30 @@
+{
+  "name": "siip-farmacias-peruanas",
+  "version": "1.0.0",
+  "description": "Sistema Inteligente de Inventario y Prediccion - Farmacias Peruanas (InkaFarma & Mifarma)",
+  "author": "Mendoza Paucar Ronny Fernando - UTP",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "dev:backend": "cd backend && mvn spring-boot:run",
+    "build:backend": "cd backend && mvn clean package -DskipTests",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "lint": "npm --prefix frontend run lint"
+  },
+  "keywords": [
+    "farmacias-peruanas",
+    "inkafarma",
+    "mifarma",
+    "spring-boot",
+    "react",
+    "fefo",
+    "prediccion-quiebres",
+    "utp"
+  ]
+}

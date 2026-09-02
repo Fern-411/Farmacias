@@ -1,0 +1,56 @@
+# ==============================================================================
+# .gitignore - SISTEMA SIIP FARMACIAS PERUANAS
+# PROTECCIÓN DE SECRETOS, CREDENCIALES Y AMBIENTES (Puntos 1, 2 y 3)
+# ==============================================================================
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Node & Frontend dependencies and build
+node_modules
+dist
+dist-ssr
+*.local
+
+# Java & Backend Maven build
+backend/target/
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Environment files & Secrets (Punto 1 y 2: Ocultar API Keys y Secretos de Git)
+.env
+.env.local
+.env.*.local
+*.env
+*.pem
+*.key
+*.keystore
+*.cer
+*.crt
+credentials.json
+secrets.json
+!/.env.example
+
+# IDE & Editors
+.idea/
+*.iml
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+docker-data/
+postgres-data/
+postgres_data/
