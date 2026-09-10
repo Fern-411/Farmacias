@@ -1,0 +1,140 @@
+services:
+  # Base de Datos PostgreSQL Centralizada
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: siip-postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: siip_farmacias_db
+      POSTGRES_USER: siip_admin
+      POSTGRES_PASSWORD: siip_secure_password_2026
+    ports:
+      - "5445:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/database-seed.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - siip-network
+
+  # Administrador Web de Base de Datos (pgAdmin 4)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: siip-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@farmaciasperuanas.pe
+      PGADMIN_DEFAULT_PASSWORD: admin_password_2026
+    ports:
+      - "5055:80"
+    depends_on:
+      - postgres-db
+    networks:
+      - siip-network
+
+  # 1. API Gateway (Spring Cloud Gateway - Puerto 8080)
+  api-gateway:
+    build:
+      context: ./backend
+      dockerfile: api-gateway/Dockerfile
+    container_name: siip-api-gateway
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      INVENTARIO_SERVICE_URL: http://ms-inventario:8081
+      PREDICCION_SERVICE_URL: http://ms-prediccion:8082
+      TRASLADOS_SERVICE_URL: http://ms-traslados:8083
+      AUTH_SERVICE_URL: http://ms-auth:8084
+    depends_on:
+      - ms-inventario
+      - ms-prediccion
+      - ms-traslados
+      - ms-auth
+    networks:
+      - siip-network
+
+  # 2. Microservicio de Inventario & Geocercano <10km (Puerto 8081)
+  ms-inventario:
+    build:
+      context: ./backend
+      dockerfile: service-inventario/Dockerfile
+    container_name: siip-ms-inventario
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/siip_farmacias_db
+      SPRING_DATASOURCE_USERNAME: siip_admin
+      SPRING_DATASOURCE_PASSWORD: siip_secure_password_2026
+    depends_on:
+      - postgres-db
+    networks:
+      - siip-network
+
+  # 3. Microservicio de Predicción y Alertas FEFO (Puerto 8082)
+  ms-prediccion:
+    build:
+      context: ./backend
+      dockerfile: service-prediccion-alertas/Dockerfile
+    container_name: siip-ms-prediccion
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/siip_farmacias_db
+      SPRING_DATASOURCE_USERNAME: siip_admin
+      SPRING_DATASOURCE_PASSWORD: siip_secure_password_2026
+    depends_on:
+      - postgres-db
+    networks:
+      - siip-network
+
+  # 4. Microservicio de Traslados y Guías SUNAT (Puerto 8083)
+  ms-traslados:
+    build:
+      context: ./backend
+      dockerfile: service-traslados/Dockerfile
+    container_name: siip-ms-traslados
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/siip_farmacias_db
+      SPRING_DATASOURCE_USERNAME: siip_admin
+      SPRING_DATASOURCE_PASSWORD: siip_secure_password_2026
+    depends_on:
+      - postgres-db
+    networks:
+      - siip-network
+
+  # 5. Microservicio de Autenticación & JWT (Puerto 8084)
+  ms-auth:
+    build:
+      context: ./backend
+      dockerfile: service-auth/Dockerfile
+    container_name: siip-ms-auth
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/siip_farmacias_db
+      SPRING_DATASOURCE_USERNAME: siip_admin
+      SPRING_DATASOURCE_PASSWORD: siip_secure_password_2026
+    depends_on:
+      - postgres-db
+    networks:
+      - siip-network
+
+  # Frontend Web React + Nginx (Puerto 8088 / 80)
+  frontend-ui:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/Dockerfile.frontend
+    container_name: siip-frontend-ui
+    restart: always
+    ports:
+      - "8088:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - siip-network
+
+networks:
+  siip-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
