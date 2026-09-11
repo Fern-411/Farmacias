@@ -1,0 +1,63 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      default-filters:
+        # Puntos 18 y 19: Security Headers Oficiales de OWASP y forzar HTTPS
+        - AddResponseHeader=X-Content-Type-Options, nosniff
+        - AddResponseHeader=X-Frame-Options, DENY
+        - AddResponseHeader=X-XSS-Protection, 1; mode=block
+        - AddResponseHeader=Strict-Transport-Security, max-age=31536000; includeSubDomains; preload
+        - AddResponseHeader=Content-Security-Policy, default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' http://localhost:* https://*.farmaciasperuanas.pe;
+        - AddResponseHeader=Referrer-Policy, strict-origin-when-cross-origin
+        - AddResponseHeader=Permissions-Policy, geolocation=(self), camera=(), microphone=(), payment=()
+
+      routes:
+        # Ruta hacia Microservicio de Autenticación (Punto 6: Forzar autenticación)
+        - id: service-auth
+          uri: ${AUTH_SERVICE_URL:http://localhost:8084}
+          predicates:
+            - Path=/api/v1/auth/**
+
+        # Ruta hacia Microservicio de Inventario (Punto 4: RLS por Sucursal <10km)
+        - id: service-inventario
+          uri: ${INVENTARIO_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/v1/inventario/**
+
+        # Ruta hacia Microservicio de Predicción y Alertas FEFO (Punto 7: Restringir acceso)
+        - id: service-prediccion-alertas
+          uri: ${PREDICCION_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/v1/alertas/**
+
+        # Ruta hacia Microservicio de Traslados y Guías SUNAT (Punto 8: Bloquear manipulación de campos)
+        - id: service-traslados
+          uri: ${TRASLADOS_SERVICE_URL:http://localhost:8083}
+          predicates:
+            - Path=/api/v1/traslados/**
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 
+              - "http://localhost:5173"
+              - "http://localhost"
+              - "https://siip.farmaciasperuanas.pe"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: 
+              - Authorization
+              - Content-Type
+              - X-Requested-With
+              - Accept
+            allowCredentials: true
+            maxAge: 3600
