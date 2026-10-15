@@ -1,0 +1,11 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: service-prediccion-alertas
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:predicciondb;DB_CLOSE_DELAY=-1}
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
