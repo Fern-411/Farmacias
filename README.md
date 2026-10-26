@@ -16,7 +16,7 @@
 - **Curso:** Curso Integrador I: Sistemas Software (Sección 20065)
 - **Docente:** IRANI GUILLEN GOMEZ
 - **Alumnos:** 
-   **Mendoza Paucar Ronny Fernando**
+   **Mendoza Paucar Ronny Fernando** - 
    **Herrera Villanueva Luis Javier**
 - **Fecha de Entrega:** 30/08/2026
 
