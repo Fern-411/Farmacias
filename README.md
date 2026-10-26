@@ -126,7 +126,7 @@ git push -u origin main
 
 ### Paso 2: ¿Cómo lo descarga y lo usa tu compañero en su PC?
 
-Tu compañero **NO NECESITA INSTALAR NI Java, NI Maven, NI PostgreSQL, NI Node.js**. Solo necesita tener instalado **Docker Desktop** (o Git).
+Intalacion **NO NECESITA INSTALAR NI Java, NI Maven, NI PostgreSQL, NI Node.js**. Solo necesita tener instalado **Docker Desktop** (o Git).
 
 #### 👉 Opción A: Ejecución con Docker (Recomendada para sustentar)
 1. Clona el repositorio:
