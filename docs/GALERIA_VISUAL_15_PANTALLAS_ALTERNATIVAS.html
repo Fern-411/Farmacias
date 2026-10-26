@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Galería Visual de Diseños UI/UX - 15 Pantallas de las 3 Alternativas | UTP 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap');
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f172a;
+      color: #f1f5f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Top Sticky Navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #334155;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .brand-title {
+      font-size: 13pt;
+      font-weight: 900;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      background: #c8102e;
+      color: white;
+      font-size: 8pt;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: #334155;
+      color: #ffffff;
+    }
+
+    .tab-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 80px 20px;
+    }
+
+    .section-header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 24px 30px;
+      margin-bottom: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 16pt;
+      color: #f8fafc;
+      font-weight: 900;
+    }
+
+    .section-header p {
+      margin: 6px 0 0 0;
+      font-size: 10pt;
+      color: #94a3b8;
+    }
+
+    .tic-tag {
+      background: #0369a1;
+      color: #e0f2fe;
+      font-weight: 800;
+      font-size: 9pt;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #38bdf8;
+    }
+
+    /* Screen Card Wrapper */
+    .screen-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .screen-meta {
+      padding: 16px 20px;
+      background: #0f172a;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .screen-title {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .screen-desc {
+      font-size: 9pt;
+      color: #cbd5e1;
+    }
+
+    /* Mockup Browser Window Frame */
+    .mockup-window {
+      background: #ffffff;
+      color: #0f172a;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .window-header {
+      background: #e2e8f0;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .window-url {
+      background: #ffffff;
+      padding: 3px 12px;
+      border-radius: 6px;
+      font-size: 8pt;
+      color: #64748b;
+      font-family: monospace;
+      flex: 1;
+      max-width: 450px;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* =========================================================================
+       ESTILOS VISUALES ESPECÍFICOS: ALTERNATIVA 1 (MODERNO REACT + TAILWIND)
+       ========================================================================= */
+    .a1-canvas {
+      background: #f1f5f9;
+      padding: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .a1-login-box {
+      max-width: 420px;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+    }
+
+    .a1-dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .a1-kpi-card {
+      background: #ffffff;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .a1-kpi-label { font-size: 7.5pt; font-weight: 700; color: #64748b; text-transform: uppercase; }
+    .a1-kpi-value { font-size: 16pt; font-weight: 900; color: #0f172a; margin-top: 4px; font-family: monospace; }
+
+    .a1-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 8pt;
+    }
+
+    .a1-table th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 7.5pt;
+    }
+
+    .a1-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+
+    .badge-fefo-rojo { background: #fee2e2; color: #b91c1c; font-weight: 800; padding: 2px 6px; border-radius: 4px; font-size: 7pt; }
+    .badge-fefo-naranja { background: #ffedd5; color: #c2410c; font-weight: 800; padding: 2px 6px; border-radius: 4px; font-size: 7pt; }
+    .badge-fefo-amarillo { background: #fef3c7; color: #b45309; font-weight: 800; padding: 2px 6px; border-radius: 4px; font-size: 7pt; }
+
+    .btn-action-a1 {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 7.5pt;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* =========================================================================
+       ESTILOS VISUALES ESPECÍFICOS: ALTERNATIVA 2 (MONOLITO JSF / PRIMEFACES)
+       ========================================================================= */
+    .a2-canvas {
+      background: #eaeaea;
+      padding: 15px;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .a2-header-bar {
+      background: #3c5a78;
+      color: white;
+      padding: 8px 14px;
+      font-size: 9pt;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid #283d52;
+    }
+
+    .a2-layout {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .a2-sidebar {
+      width: 180px;
+      background: #f4f4f4;
+      border: 1px solid #cccccc;
+      padding: 8px;
+      font-size: 8pt;
+    }
+
+    .a2-menu-item {
+      padding: 5px 8px;
+      background: #e2e8f0;
+      margin-bottom: 4px;
+      border: 1px solid #cbd5e1;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .a2-content {
+      flex: 1;
+      background: white;
+      border: 1px solid #cccccc;
+      padding: 12px;
+    }
+
+    .a2-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+    }
+
+    .a2-table th {
+      background: #dde4eb;
+      color: #333333;
+      border: 1px solid #b8c4cf;
+      padding: 6px;
+      text-align: left;
+    }
+
+    .a2-table td {
+      border: 1px solid #dddddd;
+      padding: 5px 6px;
+    }
+
+    .btn-jsf {
+      background: #f0f0f0;
+      border: 1px solid #999999;
+      padding: 4px 10px;
+      font-size: 8pt;
+      font-weight: bold;
+      color: #333333;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    /* =========================================================================
+       ESTILOS VISUALES ESPECÍFICOS: ALTERNATIVA 3 (ERP CLOUD + TELEMETRÍA)
+       ========================================================================= */
+    .a3-canvas {
+      background: #111827;
+      color: #f3f4f6;
+      padding: 15px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .a3-telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .a3-telemetry-card {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .a3-telemetry-title { font-size: 7pt; color: #9ca3af; text-transform: uppercase; font-weight: bold; }
+    .a3-telemetry-val { font-size: 14pt; color: #10b981; font-weight: 900; font-family: monospace; }
+
+    .a3-erp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.5pt;
+      background: #1f2937;
+    }
+
+    .a3-erp-table th {
+      background: #111827;
+      color: #93c5fd;
+      border: 1px solid #374151;
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .a3-erp-table td {
+      border: 1px solid #374151;
+      padding: 5px 8px;
+      color: #e5e7eb;
+    }
+
+    .print-btn {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 10pt;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV BAR CON SELECTOR DE ALTERNATIVA -->
+  <div class="top-nav">
+    <div class="brand-title">
+      <span>SIIP • GALERÍA UI/UX DE ALTERNATIVAS</span>
+      <span class="brand-badge">UTP 2026</span>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showAlternative(1)">Alternativa 1: Microservicios (5 Pantallas)</button>
+      <button class="tab-btn" onclick="showAlternative(2)">Alternativa 2: Monolito JSF (5 Pantallas)</button>
+      <button class="tab-btn" onclick="showAlternative(3)">Alternativa 3: ERP Cloud (5 Pantallas)</button>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">📥 Imprimir / Guardar PDF</button>
+  </div>
+
+  <div class="container">
+
+    <!-- =======================================================================
+         BLOQUE: ALTERNATIVA 1 (ELEGIDA)
+         ======================================================================= -->
+    <div id="alt-1-content">
+      
+      <div class="section-header">
+        <div>
+          <h2>ALTERNATIVA 1 (SOLUCIÓN ELEGIDA)</h2>
+          <p>Arquitectura de Microservicios con Java 17 Spring Boot 3 + Frontend React 18 + PostgreSQL</p>
+        </div>
+        <div class="tic-tag">70% TIC JAVA • ALTA ESCALABILIDAD (>350 TPS)</div>
+      </div>
+
+      <!-- PANTALLA 1.1 -->
+      <div class="screen-card">
+        <div class="screen-meta">
+          <div class="screen-title">PANTALLA 1.1: Autenticación y Autorización (Login JWT con Sede Asignada)</div>
+          <div class="screen-desc">Acceso rápido por perfil con asignación automática de rol y sucursal.</div>
+        </div>
+        <div class="mockup-window">
+          <div class="window-header">
+            <div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+            <div class="window-url">https://siip.farmaciasperuanas.pe/auth/login</div>
+          </div>
+          <div class="a1-canvas">
+            <div class="a1-login-box">
+              <div style="text-align:center; margin-bottom: 15px;">
+                <span style="background: linear-gradient(90deg, #06b6d4, #2563eb); color:white; font-weight:900; font-size:12pt; padding:4px 10px; border-radius:8px;">SIIP v1.0</span>
+                <h3 style="margin: 8px 0 2px 0; font-size:11pt; color:#0f172a;">Farmacias Peruanas</h3>
+                <div style="font-size:8pt; color:#64748b;">InkaFarma | Mifarma</div>
+              </div>
+              <div style="font-size:7.5pt; font-weight:bold; color:#475569; margin-bottom:6px;">PERFILES DE DEMOSTRACIÓN RÁPIDA:</div>
+              <div style="display:flex; gap:6px; margin-bottom:12px;">
+                <div style="flex:1; background:#e0f2fe; border:1px solid #38bdf8; padding:6px; border-radius:8px; font-size:7pt; text-align:center; font-weight:bold; color:#0369a1;">
+                  👨‍⚕️ QF. San Isidro<br><span style="font-size:6pt; color:#64748b;">InkaFarma</span>
+                </div>
+                <div style="flex:1; background:#f8fafc; border:1px solid #cbd5e1; padding:6px; border-radius:8px; font-size:7pt; text-align:center; font-weight:bold; color:#334155;">
+                  🏢 Admin CD<br><span style="font-size:6pt; color:#64748b;">CD Huachipa</span>
+                </div>
+              </div>
+              <div style="margin-bottom:8px;">
+                <label style="font-size:7.5pt; font-weight:bold; color:#475569;">Usuario:</label>
+                <input type="text" value="qf_mendoza@farmaciasperuanas.pe" style="width:100%; padding:6px; border:1px solid #cbd5e1; border-radius:6px; font-size:8pt; margin-top:2px;" readonly>
+              </div>
+              <div style="margin-bottom:12px;">
+                <label style="font-size:7.5pt; font-weight:bold; color:#475569;">Contraseña:</label>
+                <input type="password" value="••••••••••••" style="width:100%; padding:6px; border:1px solid #cbd5e1; border-radius:6px; font-size:8pt; margin-top:2px;" readonly>
+              </div>
+              <button style="width:100%; background:#2563eb; color:white; border:none; padding:8px; border-radius:8px; font-weight:bold; font-size:8.5pt; cursor:pointer;">Ingresar al Sistema SIIP ➔</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 1.2 -->
+      <div class="screen-card">
+        <div class="screen-meta">
+          <div class="screen-title">PANTALLA 1.2: Dashboard Operativo y Analítica de KPIs en Tiempo Real</div>
+          <div class="screen-desc">Métricas de rotación, reducción de mermas y semáforo de vencimientos.</div>
+        </div>
+        <div class="mockup-window">
+          <div class="window-header">
+            <div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+            <div class="window-url">https://siip.farmaciasperuanas.pe/dashboard</div>
+          </div>
+          <div class="a1-canvas">
+            <div class="a1-dashboard-grid">
+              <div class="a1-kpi-card">
+                <div class="a1-kpi-label">Tasa de Quiebre</div>
+                <div class="a1-kpi-value" style="color:#2563eb;">3.2%</div>
+                <div style="font-size:7pt; color:#10b981; font-weight:bold;">▼ 8.4% vs mes anterior</div>
+              </div>
+              <div class="a1-kpi-card">
+                <div class="a1-kpi-label">Reducción Mermas</div>
+                <div class="a1-kpi-value" style="color:#10b981;">-21.4%</div>
+                <div style="font-size:7pt; color:#64748b;">Meta Corporativa: 22%</div>
+              </div>
+              <div class="a1-kpi-card">
+                <div class="a1-kpi-label">Disponibilidad</div>
+                <div class="a1-kpi-value" style="color:#0f172a;">96.8%</div>
+                <div style="font-size:7pt; color:#10b981; font-weight:bold;">▲ Óptima en ventanilla</div>
+              </div>
+              <div class="a1-kpi-card">
+                <div class="a1-kpi-label">Valor en Riesgo FEFO</div>
+                <div class="a1-kpi-value" style="color:#ef4444;">S/ 4,120</div>
+                <div style="font-size:7pt; color:#ef4444; font-weight:bold;">7 Lotes monitoreados</div>
+              </div>
+            </div>
+
+            <!-- Gráficos Mock -->
+            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:12px;">
+              <div style="background:white; padding:12px; border-radius:12px; border:1px solid #e2e8f0;">
+                <div style="font-size:8pt; font-weight:bold; color:#0f172a; margin-bottom:10px;">DEMANDA DIARIA VS STOCK POR CATEGORÍA TERAPÉUTICA</div>
+                <div style="display:flex; align-items:flex-end; gap:20px; height:100px; padding:0 20px; border-bottom:1px solid #cbd5e1;">
+                  <div style="text-align:center;"><div style="width:24px; height:70px; background:#38bdf8; border-radius:4px 4px 0 0; margin:0 auto;"></div><span style="font-size:6.5pt; color:#64748b;">Antibióticos</span></div>
+                  <div style="text-align:center;"><div style="width:24px; height:85px; background:#2563eb; border-radius:4px 4px 0 0; margin:0 auto;"></div><span style="font-size:6.5pt; color:#64748b;">Analgésicos</span></div>
+                  <div style="text-align:center;"><div style="width:24px; height:45px; background:#10b981; border-radius:4px 4px 0 0; margin:0 auto;"></div><span style="font-size:6.5pt; color:#64748b;">Cardio</span></div>
+                  <div style="text-align:center;"><div style="width:24px; height:60px; background:#f59e0b; border-radius:4px 4px 0 0; margin:0 auto;"></div><span style="font-size:6.5pt; color:#64748b;">Dermo</span></div>
+                </div>
+              </div>
+
+              <div style="background:white; padding:12px; border-radius:12px; border:1px solid #e2e8f0;">
+                <div style="font-size:8pt; font-weight:bold; color:#0f172a; margin-bottom:8px;">SEMÁFORO FEFO VENCIMIENTOS</div>
+                <div style="font-size:7.5pt; margin-bottom:4px;"><span class="badge-fefo-rojo">🔴 &lt;30 días</span> 3 Lotes (S/ 2,565)</div>
+                <div style="font-size:7.5pt; margin-bottom:4px;"><span class="badge-fefo-naranja">🟠 30-60 días</span> 2 Lotes (S/ 960)</div>
+                <div style="font-size:7.5pt; margin-bottom:4px;"><span class="badge-fefo-amarillo">🟡 60-90 días</span> 2 Lotes (S/ 595)</div>
+                <div style="margin-top:8px; font-size:7pt; color:#10b981; font-weight:bold;">✓ 95% dispensación prioritaria</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 1.3 -->
+      <div class="screen-card">
+        <div class="screen-meta">
+          <div class="screen-title">PANTALLA 1.3: Buscador Georreferenciado de Stock (&lt; 10 km con Haversine)</div>
+          <div class="screen-desc">Ranking de las 5 sucursales más cercanas con stock en tiempo real.</div>
+        </div>
+        <div class="mockup-window">
+          <div class="window-header">
+            <div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+            <div class="window-url">https://siip.farmaciasperuanas.pe/inventario/geocercano</div>
+          </div>
+          <div class="a1-canvas">
+            <div style="background:#0f172a; color:white; padding:10px 14px; border-radius:10px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <span style="font-size:7pt; background:#0284c7; padding:2px 6px; border-radius:4px; font-weight:bold;">ANTIBIÓTICO</span>
+                <div style="font-size:10pt; font-weight:bold; margin-top:2px;">AMOXICILINA 500MG CAJA X 100 • Medifarma S.A.</div>
+              </div>
+              <div style="text-align:right;">
+                <span style="font-size:7pt; color:#94a3b8;">Stock en mi Sede (San Isidro):</span>
+                <div style="font-size:12pt; font-weight:900; color:#ef4444; font-family:monospace;">0 cjs (SIN STOCK)</div>
+              </div>
+            </div>
+
+            <table class="a1-table">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th>Sucursal / Marca</th>
+                  <th>Dirección / Distrito</th>
+                  <th>Distancia Haversine</th>
+                  <th>Stock Disp.</th>
+                  <th>Autonomía</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#1</td>
+                  <td><strong>[InkaFarma] Corpac</strong></td>
+                  <td>Av. Canaval y Moreyra 450 (San Isidro)</td>
+                  <td><span style="background:#e0f2fe; color:#0369a1; font-weight:bold; padding:2px 6px; border-radius:4px;">1.2 km</span></td>
+                  <td><strong>85 cjs</strong></td>
+                  <td>14 días</td>
+                  <td><button class="btn-action-a1">Solicitar ➔</button></td>
+                </tr>
+                <tr>
+                  <td>#2</td>
+                  <td><strong>[Mifarma] Miraflores</strong></td>
+                  <td>Av. José Larco 720 (Miraflores)</td>
+                  <td><span style="background:#e0f2fe; color:#0369a1; font-weight:bold; padding:2px 6px; border-radius:4px;">2.4 km</span></td>
+                  <td><strong>42 cjs</strong></td>
+                  <td>9 días</td>
+                  <td><button class="btn-action-a1">Solicitar ➔</button></td>
+                </tr>
+                <tr>
+                  <td>#3</td>
+                  <td><strong>[InkaFarma] San Borja</strong></td>
+                  <td>Av. Aviación 2800 (San Borja)</td>
+                  <td><span style="background:#e0f2fe; color:#0369a1; font-weight:bold; padding:2px 6px; border-radius:4px;">3.1 km</span></td>
+                  <td><strong>60 cjs</strong></td>
+                  <td>12 días</td>
+                  <td><button class="btn-action-a1">Solicitar ➔</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 1.4 -->
+      <div class="screen-card">
+        <div class="screen-meta">
+          <div class="screen-title">PANTALLA 1.4: Bandeja de Alertas Predictivas y Reporte Tabular FEFO</div>
+          <div class="screen-desc">Matriz interactiva de lotes clasificados a 90, 60 y 30 días para evitar pérdidas.</div>
+        </div>
+        <div class="mockup-window">
+          <div class="window-header">
+            <div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+            <div class="window-url">https://siip.farmaciasperuanas.pe/alertas/fefo</div>
+          </div>
+          <div class="a1-canvas">
+            <table class="a1-table">
+              <thead>
+                <tr>
+                  <th>Código Lote</th>
+                  <th>Medicamento / Reg. DIGEMID</th>
+                  <th>Sede Ubicación</th>
+                  <th>Vence en</th>
+                  <th>Semáforo FEFO</th>
+                  <th>Cantidad</th>
+                  <th>Pérdida en Riesgo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code style="font-weight:bold;">LT-AMX-01</code></td>
+                  <td>Amoxicilina 500mg (EN-04892)</td>
+                  <td>InkaFarma San Isidro</td>
+                  <td><strong>18 días</strong></td>
+                  <td><span class="badge-fefo-rojo">🔴 CRÍTICO &lt;30D</span></td>
+                  <td>40 cajas</td>
+                  <td style="color:#ef4444; font-weight:bold;">S/ 1,440.00</td>
+                </tr>
+                <tr>
+                  <td><code style="font-weight:bold;">LT-AZI-04</code></td>
+                  <td>Azitromicina 500mg (EN-05120)</td>
+                  <td>Mifarma Miraflores</td>
+                  <td><strong>25 días</strong></td>
+                  <td><span class="badge-fefo-rojo">🔴 CRÍTICO &lt;30D</span></td>
+                  <td>25 cajas</td>
+                  <td style="color:#ef4444; font-weight:bold;">S/ 1,125.00</td>
+                </tr>
+                <tr>
+                  <td><code style="font-weight:bold;">LT-PAN-09</code></td>
+                  <td>Panadol Antigripal (EN-01284)</td>
+                  <td>InkaFarma Surco</td>
+                  <td><strong>42 días</strong></td>
+                  <td><span class="badge-fefo-naranja">🟠 ALERTA 30-60D</span></td>
+                  <td>80 cajas</td>
+                  <td style="color:#c2410c; font-weight:bold;">S/ 960.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 1.5 -->
+      <div class="screen-card">
+        <div class="screen-meta">
+          <div class="screen-title">PANTALLA 1.5: Gestor de Traslados Internos y Guía de Remisión SUNAT</div>
+          <div class="screen-desc">Aprobación en 1 clic y modal oficial con código QR validado ante SUNAT.</div>
+        </div>
+        <div class="mockup-window">
+          <div class="window-header">
+            <div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+            <div class="window-url">https://siip.farmaciasperuanas.pe/traslados/guias-sunat</div>
+          </div>
+          <div class="a1-canvas">
+            <div style="background:white; border:2px solid #0f172a; padding:16px; border-radius:12px; max-width:650px; margin:0 auto; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
+              <div style="display:flex; justify-content:space-between; border-bottom:2px solid #0f172a; padding-bottom:8px; margin-bottom:10px;">
+                <div>
+                  <div style="font-size:11pt; font-weight:900; color:#0f172a;">FARMACIAS PERUANAS S.A.</div>
+                  <div style="font-size:7pt; color:#64748b;">RUC: 20509872134 • Av. Defensores del Morro 1277</div>
+                </div>
+                <div style="border:2px solid #0f172a; padding:4px 8px; text-align:center; font-size:7.5pt; font-weight:bold;">
+                  GUÍA DE REMISIÓN ELECTRÓNICA<br><span style="color:#0284c7; font-size:9pt;">GR-001-0008492</span>
+                </div>
+              </div>
+              <div style="display:grid; grid-template-columns: 2fr 1fr; gap:10px; font-size:7.5pt; margin-bottom:10px;">
+                <div>
+                  <div><strong>Punto Partida:</strong> InkaFarma Surquillo (Av. Angamos 1200)</div>
+                  <div><strong>Punto Llegada:</strong> InkaFarma San Isidro (Av. Begonias 450)</div>
+                  <div><strong>Transportista:</strong> Logística Express InkaFarma (Placa: ABC-782)</div>
+                  <div><strong>Bienes:</strong> 25 Cajas - Amoxicilina 500mg (Lote: LT-AMX-01)</div>
+                </div>
+                <div style="text-align:center; background:#f8fafc; border:1px dashed #cbd5e1; padding:6px; border-radius:8px;">
+                  <div style="font-family:monospace; font-size:18pt; line-height:1;">▦▨▦<br>▨▦▨</div>
+                  <div style="font-size:6pt; color:#64748b; margin-top:4px;">QR OFICIAL SUNAT<br>Hash: e8b9f12...</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <button style="background:#10b981; color:white; border:none; padding:6px 12px; border-radius:6px; font-size:8pt; font-weight:bold; cursor:pointer;">🖨️ Imprimir Guía Oficial</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         BLOQUE: ALTERNATIVA 2 (MONOLITO JSF)
+         ======================================================================= -->
+    <div id="alt-2-content" style="display:none;">
+      
+      <div class="section-header">
+        <div>
+          <h2>ALTERNATIVA 2: APLICACIÓN WEB MONOLÍTICA TRADICIONAL (JAVA EE / JSF)</h2>
+          <p>Arquitectura monolítica centralizada en JavaServer Faces (JSF) + EJB desplegada en WildFly</p>
+        </div>
+        <div class="tic-tag" style="background:#475569;">90% TIC JAVA • ENFOQUE MONOLÍTICO</div>
+      </div>
+
+      <!-- PANTALLA 2.1 -->
+      <div class="screen-card">
+        <div class="screen-meta">
+          <div class="screen-title">PANTALLA 2.1: Autenticación Estándar JSF (Server-Side Rendered)</div>
+          <div class="screen-desc">Formulario síncrono clásico con Managed Beans y recarga de página.</div>
+        </div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">http://192.168.1.50:8080/farmacias-monolito/login.xhtml</div></div>
+          <div class="a2-canvas">
+            <div style="max-width:360px; margin:20px auto; background:white; border:1px solid #999999; padding:20px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
+              <div style="background:#3c5a78; color:white; padding:6px 10px; font-weight:bold; font-size:9pt; margin:-20px -20px 15px -20px;">Acceso al Sistema - Java EE / JSF</div>
+              <div style="font-size:8pt; margin-bottom:8px;">
+                <label>Usuario:</label><br>
+                <input type="text" value="admin_farmacia" style="width:100%; padding:4px; font-size:8pt; border:1px solid #999;">
+              </div>
+              <div style="font-size:8pt; margin-bottom:12px;">
+                <label>Contraseña:</label><br>
+                <input type="password" value="••••••••" style="width:100%; padding:4px; font-size:8pt; border:1px solid #999;">
+              </div>
+              <button class="btn-jsf">Iniciar Sesión (HTTP POST)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 2.2 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 2.2: Menú Clásico de Navegación y Tabla JSF</div><div class="screen-desc">Panel lateral jerárquico estático y grid de datos con paginación server-side.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">http://192.168.1.50:8080/farmacias-monolito/main.xhtml</div></div>
+          <div class="a2-canvas">
+            <div class="a2-header-bar"><span>Sistema Integrado Farmacéutico v2.4 (Java EE)</span><span>Usuario: admin [Cerrar Sesión]</span></div>
+            <div class="a2-layout">
+              <div class="a2-sidebar">
+                <div class="a2-menu-item">📁 Inventario Local</div>
+                <div class="a2-menu-item">📁 Mantenimiento</div>
+                <div class="a2-menu-item">📁 Movimientos Kardex</div>
+                <div class="a2-menu-item">📁 Reportes XLS</div>
+              </div>
+              <div class="a2-content">
+                <div style="font-weight:bold; font-size:8.5pt; margin-bottom:6px;">Inventario de la Sucursal: Local 001 San Isidro</div>
+                <table class="a2-table">
+                  <thead><tr><th>Código EAN</th><th>Producto</th><th>Stock</th><th>Precio S/.</th></tr></thead>
+                  <tbody>
+                    <tr><td>7750123456789</td><td>Amoxicilina 500mg Cax100</td><td>25 cjs</td><td>S/ 36.00</td></tr>
+                    <tr><td>7750987654321</td><td>Paracetamol 500mg Cax100</td><td>80 cjs</td><td>S/ 12.50</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 2.3 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 2.3: Formulario Síncrono de Mantenimiento CRUD</div><div class="screen-desc">Registro y edición de fármacos mediante validadores JSF estándar.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">http://192.168.1.50:8080/farmacias-monolito/crud_medicamento.xhtml</div></div>
+          <div class="a2-canvas">
+            <div class="a2-content" style="max-width:600px; margin:0 auto;">
+              <div style="font-weight:bold; font-size:9pt; border-bottom:1px solid #ccc; padding-bottom:4px; margin-bottom:8px;">Formulario de Medicamento</div>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; font-size:8pt;">
+                <div><label>EAN-13:</label><br><input type="text" value="7750123456789" style="width:100%; border:1px solid #999; padding:3px;"></div>
+                <div><label>Nombre:</label><br><input type="text" value="Amoxicilina 500mg" style="width:100%; border:1px solid #999; padding:3px;"></div>
+                <div><label>Registro DIGEMID:</label><br><input type="text" value="EN-04892 DIGEMID" style="width:100%; border:1px solid #999; padding:3px;"></div>
+                <div><label>Precio Unitario:</label><br><input type="text" value="36.00" style="width:100%; border:1px solid #999; padding:3px;"></div>
+              </div>
+              <div style="margin-top:12px; text-align:right;">
+                <button class="btn-jsf">Guardar</button> <button class="btn-jsf">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 2.4 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 2.4: Reporte Tabular Estático de Caducidades</div><div class="screen-desc">Matriz de vencimientos con exportación manual a Excel / PDF.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">http://192.168.1.50:8080/farmacias-monolito/reporte_vencidos.xhtml</div></div>
+          <div class="a2-canvas">
+            <div class="a2-content">
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span style="font-weight:bold; font-size:8.5pt;">Lotes Próximos a Vencer (Corte 30 Días)</span>
+                <div><button class="btn-jsf">📥 Exportar a Excel (.xls)</button></div>
+              </div>
+              <table class="a2-table">
+                <thead><tr><th>Lote</th><th>Producto</th><th>Fecha Venc.</th><th>Días Rest.</th><th>Cantidad</th></tr></thead>
+                <tbody>
+                  <tr><td>LT-AMX-2024</td><td>Amoxicilina 500mg</td><td>15/10/2026</td><td>18 días</td><td>40 cjs</td></tr>
+                  <tr><td>LT-AZI-2024</td><td>Azitromicina 500mg</td><td>25/10/2026</td><td>25 días</td><td>25 cjs</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 2.5 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 2.5: Historial de Movimientos de Almacén (Kardex)</div><div class="screen-desc">Auditoría secuencial de entradas y salidas de inventario.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">http://192.168.1.50:8080/farmacias-monolito/kardex.xhtml</div></div>
+          <div class="a2-canvas">
+            <div class="a2-content">
+              <div style="font-weight:bold; font-size:8.5pt; margin-bottom:6px;">Kardex Físico: Amoxicilina 500mg</div>
+              <table class="a2-table">
+                <thead><tr><th>Fecha/Hora</th><th>Tipo</th><th>N° Doc</th><th>Entrada</th><th>Salida</th><th>Saldo</th></tr></thead>
+                <tbody>
+                  <tr><td>20/09/2026 09:30</td><td>Venta</td><td>BOL-10492</td><td>-</td><td>2 cjs</td><td>25 cjs</td></tr>
+                  <tr><td>18/09/2026 14:15</td><td>Entrada CD</td><td>GUIA-8490</td><td>20 cjs</td><td>-</td><td>27 cjs</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         BLOQUE: ALTERNATIVA 3 (ERP CLOUD + MIDDLEWARE)
+         ======================================================================= -->
+    <div id="alt-3-content" style="display:none;">
+      
+      <div class="section-header">
+        <div>
+          <h2>ALTERNATIVA 3: ERP COMERCIAL CLOUD CON MIDDLEWARE DE INTEGRACIÓN JAVA</h2>
+          <p>Plataforma comercial ERP propietaria en la nube + Middleware Java broker (JMS/Camel)</p>
+        </div>
+        <div class="tic-tag" style="background:#1e3a8a;">50% TIC JAVA • ENFOQUE ERP PROPIETARIO</div>
+      </div>
+
+      <!-- PANTALLA 3.1 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 3.1: Panel de Monitoreo del Middleware Java (Broker)</div><div class="screen-desc">Supervisión en tiempo real de colas JMS, salud de conexiones y latencia.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">https://middleware.farmaciasperuanas.pe/admin/monitor</div></div>
+          <div class="a3-canvas">
+            <div class="a3-telemetry-grid">
+              <div class="a3-telemetry-card"><div class="a3-telemetry-title">Estado Conexión ERP</div><div class="a3-telemetry-val">🟢 CONECTADO</div></div>
+              <div class="a3-telemetry-card"><div class="a3-telemetry-title">Latencia Promedio</div><div class="a3-telemetry-val">142 ms</div></div>
+              <div class="a3-telemetry-card"><div class="a3-telemetry-title">Mensajes en Cola</div><div class="a3-telemetry-val" style="color:#38bdf8;">124 msg/s</div></div>
+            </div>
+            <div style="background:#1f2937; padding:8px; border-radius:6px; font-family:monospace; font-size:7pt; color:#10b981;">
+              14:02:11 [INFO] Sincronización exitosa SUC-001 -&gt; ERP_INVENTORY_UPDATE (ID: 98124)<br>
+              14:02:15 [INFO] Solicitud de reabastecimiento enviada a ERP_MRP_MODULE (ID: 98125)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 3.2 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 3.2: Maestro de Almacenes ERP (Centro de Distribución)</div><div class="screen-desc">Gestión y valorización global de materiales en CD Huachipa.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">https://erp-cloud.farmaciasperuanas.pe/materials/cd-huachipa</div></div>
+          <div class="a3-canvas">
+            <div style="font-weight:bold; font-size:8pt; margin-bottom:6px; color:#93c5fd;">Almacén Central: CD Huachipa (ALM-01)</div>
+            <table class="a3-erp-table">
+              <thead><tr><th>Cód. Material</th><th>Descripción</th><th>Stock Físico</th><th>Reserva</th><th>Valorización (S/.)</th></tr></thead>
+              <tbody>
+                <tr><td>MAT-100849</td><td>Amoxicilina 500mg Cax100</td><td>12,400 cjs</td><td>1,500 cjs</td><td>S/ 446,400.00</td></tr>
+                <tr><td>MAT-100912</td><td>Paracetamol 500mg Cax100</td><td>35,000 cjs</td><td>4,200 cjs</td><td>S/ 437,500.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 3.3 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 3.3: Planificación de Demanda MRP en el ERP</div><div class="screen-desc">Cálculo de pedidos automáticos a laboratorios farmacéuticos.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">https://erp-cloud.farmaciasperuanas.pe/mrp/planning</div></div>
+          <div class="a3-canvas">
+            <div style="font-weight:bold; font-size:8pt; margin-bottom:6px; color:#93c5fd;">Planificación de Reabastecimiento - Octubre 2026</div>
+            <table class="a3-erp-table">
+              <thead><tr><th>Proveedor</th><th>Producto</th><th>Demanda Proy.</th><th>Stock Actual</th><th>Pedido Sugerido</th></tr></thead>
+              <tbody>
+                <tr><td>Medifarma S.A.</td><td>Amoxicilina 500mg</td><td>45,000 cjs</td><td>12,400 cjs</td><td><strong>32,600 cjs</strong></td></tr>
+                <tr><td>Farmindustria</td><td>Azitromicina 500mg</td><td>18,000 cjs</td><td>4,100 cjs</td><td><strong>13,900 cjs</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 3.4 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 3.4: Asignación y Despacho Logístico de Flotas</div><div class="screen-desc">Programación de camiones y rutas de distribución hacia locales.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">https://erp-cloud.farmaciasperuanas.pe/logistics/dispatch</div></div>
+          <div class="a3-canvas">
+            <div style="background:#1f2937; padding:10px; border-radius:8px; border:1px solid #374151;">
+              <div style="font-weight:bold; font-size:8pt; color:#93c5fd;">Ruta de Entrega: RUTA-04 LIMA SUR (Camión Placa B4F-892)</div>
+              <div style="margin:6px 0; font-size:7.5pt;">Capacidad de Carga Ocupada: <strong>82% (3.8 / 5.0 Toneladas)</strong></div>
+              <div style="background:#374151; height:8px; border-radius:4px; overflow:hidden; margin-bottom:8px;">
+                <div style="background:#10b981; width:82%; height:100%;"></div>
+              </div>
+              <div style="font-size:7pt; color:#9ca3af;">• Parada 1: SUC-002 Mifarma Miraflores (45 bultos)<br>• Parada 2: SUC-005 InkaFarma Surco (60 bultos)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 3.5 -->
+      <div class="screen-card">
+        <div class="screen-meta"><div class="screen-title">PANTALLA 3.5: Consola de Trazabilidad y Logs del Middleware</div><div class="screen-desc">Diagnóstico y reintento de tramas de datos fallidas entre boticas y ERP.</div></div>
+        <div class="mockup-window">
+          <div class="window-header"><div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div><div class="window-url">https://middleware.farmaciasperuanas.pe/admin/exceptions</div></div>
+          <div class="a3-canvas">
+            <table class="a3-erp-table">
+              <thead><tr><th>ID Trama</th><th>Sucursal</th><th>Hora</th><th>Detalle del Error</th><th>Acción</th></tr></thead>
+              <tbody>
+                <tr><td>TRM-99120</td><td>SUC-042 Tacna</td><td>13:45:10</td><td><span style="color:#ef4444;">SOAP_TIMEOUT: ERP no responde</span></td><td><button style="background:#3b82f6; color:white; border:none; padding:2px 6px; border-radius:3px; font-size:7pt; cursor:pointer;">🔄 Reintentar</button></td></tr>
+                <tr><td>TRM-99124</td><td>SUC-018 Trujillo</td><td>13:50:22</td><td><span style="color:#f59e0b;">INVALID_SKU: Código no mapeado</span></td><td><button style="background:#3b82f6; color:white; border:none; padding:2px 6px; border-radius:3px; font-size:7pt; cursor:pointer;">✏️ Corregir</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function showAlternative(num) {
+      document.getElementById('alt-1-content').style.display = (num === 1) ? 'block' : 'none';
+      document.getElementById('alt-2-content').style.display = (num === 2) ? 'block' : 'none';
+      document.getElementById('alt-3-content').style.display = (num === 3) ? 'block' : 'none';
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach((btn, idx) => {
+        if (idx === num - 1) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+    }
+  </script>
+
+</body>
+</html>

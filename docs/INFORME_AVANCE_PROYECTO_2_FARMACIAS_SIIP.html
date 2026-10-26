@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Avance de Proyecto 2 | Farmacias Peruanas SIIP - UTP</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      line-height: 1.55;
+      font-size: 10.5pt;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    .cover {
+      text-align: center;
+      padding-top: 50px;
+      page-break-after: always;
+    }
+
+    .utp-header {
+      font-size: 24pt;
+      font-weight: 900;
+      color: #c8102e;
+      letter-spacing: 1.5px;
+      margin-bottom: 5px;
+    }
+
+    .faculty-header {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #334155;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .doc-title {
+      font-size: 19pt;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 40px 0 15px 0;
+      line-height: 1.3;
+    }
+
+    .doc-subtitle {
+      font-size: 12pt;
+      font-weight: 600;
+      color: #0284c7;
+      margin-bottom: 50px;
+    }
+
+    .student-card {
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 22px;
+      max-width: 550px;
+      margin: 0 auto;
+      text-align: left;
+      font-size: 10.5pt;
+    }
+
+    .student-card table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .student-card td {
+      padding: 7px 6px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .student-card td.label {
+      font-weight: 700;
+      color: #475569;
+      width: 35%;
+    }
+
+    .student-card td.value {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    h2 {
+      color: #0f172a;
+      border-bottom: 2.5px solid #0284c7;
+      padding-bottom: 6px;
+      margin-top: 35px;
+      font-size: 13.5pt;
+      text-transform: uppercase;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      color: #1e3a8a;
+      margin-top: 22px;
+      font-size: 11.5pt;
+      page-break-after: avoid;
+    }
+
+    p, li {
+      text-align: justify;
+      color: #334155;
+      font-size: 10pt;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0 22px 0;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+    }
+
+    table.data-table th {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 6px 8px;
+      border: 1px solid #0f172a;
+      text-transform: uppercase;
+    }
+
+    table.data-table td {
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: middle;
+    }
+
+    table.data-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .alert-box {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 12px 16px;
+      margin: 15px 0;
+      font-size: 9.5pt;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .code-box {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: 'Consolas', monospace;
+      font-size: 8pt;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      margin: 15px 0;
+      page-break-inside: avoid;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .print-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 11pt;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    @media print {
+      .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">📥 Guardar como PDF / Imprimir</button>
+
+  <!-- PORTADA OFICIAL -->
+  <div class="cover">
+    <div class="utp-header">UTP • UNIVERSIDAD TECNOLÓGICA DEL PERÚ</div>
+    <div class="faculty-header">FACULTAD DE INGENIERÍA DE SISTEMAS E INFORMÁTICA</div>
+
+    <div style="margin: 25px auto; width: 80px; height: 4px; background: #c8102e; border-radius: 2px;"></div>
+
+    <div class="doc-title">INFORME DEL PROYECTO - AVANCE 2</div>
+    <div class="doc-subtitle">
+      SISTEMA INTELIGENTE DE INVENTARIO Y PREDICCIÓN (SIIP)<br>
+      PARA LA RED DE FARMACIAS PERUANAS (INKAFARMA / MIFARMA)
+    </div>
+
+    <div class="student-card">
+      <table>
+        <tr>
+          <td class="label">CURSO:</td>
+          <td class="value">Curso Integrador I: Sistemas Software</td>
+        </tr>
+        <tr>
+          <td class="label">SECCIÓN:</td>
+          <td class="value">20065</td>
+        </tr>
+        <tr>
+          <td class="label">DOCENTE:</td>
+          <td class="value">IRANI GUILLEN GOMEZ</td>
+        </tr>
+        <tr>
+          <td class="label">INTEGRANTES:</td>
+          <td class="value">
+            • <strong>Mendoza Paucar Ronny Fernando (U25302314)</strong><br>
+            • Herrera Villanueva Luis Javier (U24327771)<br>
+            • Richard Martin Ticona Condor (U23246612)
+          </td>
+        </tr>
+        <tr>
+          <td class="label">CICLO / FECHA:</td>
+          <td class="value">5to Semestre • Septiembre 2026</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- INDICE -->
+  <div class="content">
+    <h2>2. ÍNDICE GENERAL</h2>
+    <p>
+      <strong>1. PORTADA</strong><br>
+      <strong>2. ÍNDICE GENERAL</strong><br>
+      <strong>3. RESUMEN EJECUTIVO</strong> (Empresa analizada, problema y alcance)<br>
+      <strong>4. INTRODUCCIÓN</strong> (Contexto, justificación, objetivo general y específicos)<br>
+      <strong>5. ANÁLISIS DEL CONTEXTO DE LA EMPRESA</strong> (Visión, misión, FODA, estrategias, planes, alcance y Lean Canvas)<br>
+      <strong>6. PLANTEAMIENTO DE ALTERNATIVAS DE SOLUCIÓN</strong> (3 alternativas con 5 pantallas c/u, TIC >=50% Java, matriz comparativa y selección)<br>
+      <strong>7. DISEÑO DE LA SOLUCIÓN</strong> (Project Charter, Gantt, BPMN 2.0, Modelo E-R PostgreSQL, Casos de Uso UML, Arquitectura y Trazabilidad SRS)<br>
+      <strong>8. DISEÑO DEL PROTOTIPO</strong> (Cobertura al 100% del alcance con React 18, Tailwind y Spring Boot)<br>
+      <strong>9. CONCLUSIONES Y RECOMENDACIONES</strong> (Reflexión, viabilidad y plan piloto regional)<br>
+      <strong>10. REFERENCIAS BIBLIOGRÁFICAS</strong> (Normas APA 7ma Edición)<br>
+      <strong>11. ANEXOS</strong> (Wireframes, capturas interactivas y script SQL DDL)
+    </p>
+
+    <h2>3. RESUMEN EJECUTIVO</h2>
+    <p>
+      <strong>Farmacias Peruanas S.A.</strong>, conglomerado que consolida las cadenas <strong>InkaFarma</strong> y <strong>Mifarma</strong>, opera más de 2,200 locales a nivel nacional. Sin embargo, la gestión desconectada y reactiva de inventarios genera quiebres de stock en zonas de alta rotación y costosas mermas por medicamentos vencidos en locales periféricos. Para mitigar estas pérdidas, se presenta el <strong>Sistema Inteligente de Inventario y Predicción (SIIP)</strong>, una solución centralizada en microservicios (Java Spring Boot + React) que sincroniza el stock en tiempo real, aplica el algoritmo <strong>FEFO (First Expired, First Out)</strong> con semáforo a 90, 60 y 30 días para <strong>reducir en un 22% las pérdidas económicas</strong>, georreferencia farmacias a menos de 10 km y emite la <strong>Guía de Remisión Electrónica Remitente con QR SUNAT</strong>.
+    </p>
+
+    <h2>4. INTRODUCCIÓN Y OBJETIVOS</h2>
+    <p>
+      <strong>Objetivo General:</strong> Diseñar y estructurar un sistema de información centralizado, escalable y basado en análisis predictivo para la gestión inteligente de inventarios en la red de Farmacias Peruanas, optimizando la cadena de suministro y reduciendo las pérdidas por caducidad.
+    </p>
+    <ul>
+      <li><strong>OE1:</strong> Reducir en un 22% las pérdidas económicas por caducidad mediante alertas tempranas a 90, 60 y 30 días.</li>
+      <li><strong>OE2:</strong> Eliminar los quiebres de stock en sucursales de alta demanda proyectando el consumo diario (CPD) y autonomía &le; 7 días.</li>
+      <li><strong>OE3:</strong> Automatizar transferencias inter-sucursales triangulando las 5 farmacias más cercanas (&lt; 10 km, Haversine).</li>
+      <li><strong>OE4:</strong> Generar automáticamente la Guía de Remisión Electrónica oficial de SUNAT/DIGEMID con código QR.</li>
+      <li><strong>OE5:</strong> Implementar una arquitectura en microservicios con Java Spring Boot (&gt;= 50% de desarrollo en Java) de alta disponibilidad (99.9%).</li>
+    </ul>
+
+    <h2>5. ANÁLISIS DEL CONTEXTO DE LA EMPRESA</h2>
+    <p>
+      Se realizó el análisis estratégico del entorno de Farmacias Peruanas identificando fortalezas (alta capilaridad con &gt;2,200 locales, químico farmacéutico en cada sede) y debilidades críticas (sistemas legacy aislados, procesos manuales de consulta). El <strong>Lean Canvas</strong> estructurado define como propuesta de valor única: <em>"El medicamento correcto, en la sucursal correcta, en el momento preciso, reduciendo mermas en 22%"</em>.
+    </p>
+
+    <h2>6. PLANTEAMIENTO DE LAS 3 ALTERNATIVAS DE SOLUCIÓN</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Criterio Evaluado</th>
+          <th>Alternativa 1 (Seleccionada): Microservicios Spring + React</th>
+          <th>Alternativa 2: Monolito Java EE / JSF</th>
+          <th>Alternativa 3: ERP Cloud + Middleware Java</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Uso de TIC Java</strong></td>
+          <td><strong>70% Java</strong> (Spring Boot, API Gateway, JPA) + 30% React</td>
+          <td><strong>90% Java</strong> (Java Enterprise, Servlets, JSF)</td>
+          <td><strong>50% Java</strong> (Middleware) + 50% ERP Cloud</td>
+        </tr>
+        <tr>
+          <td><strong>5 Pantallas Incluidas</strong></td>
+          <td>1. Login JWT; 2. Dashboard KPIs; 3. Buscador &lt;10km; 4. Alertas FEFO; 5. Traslados SUNAT.</td>
+          <td>1. Login; 2. Menú clásico; 3. CRUD Fármacos; 4. Reporte estático; 5. Kardex.</td>
+          <td>1. Monitor Middleware; 2. Almacén ERP; 3. Planificador; 4. Asignador; 5. Logs.</td>
+        </tr>
+        <tr>
+          <td><strong>Factibilidad Técnica</strong></td>
+          <td><strong>Alta:</strong> Desacoplada, elástica, soporta &gt;350 TPS en horas punta.</td>
+          <td><strong>Media/Baja:</strong> Riesgo de caída ante picos de demanda nacional.</td>
+          <td><strong>Media:</strong> Cuellos de botella en APIs legacy.</td>
+        </tr>
+        <tr>
+          <td><strong>Factibilidad Económica</strong></td>
+          <td><strong>Alta (Costo-Eficiente):</strong> Open Source, sin pago de licencias.</td>
+          <td><strong>Media:</strong> Alto costo de mantenimiento a largo plazo.</td>
+          <td><strong>Baja (Inviable):</strong> Licenciamiento prohibitivo para 2,500 usuarios.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>7. DISEÑO DE LA SOLUCIÓN</h2>
+    
+    <h3>7.1. Project Charter Básico</h3>
+    <table class="data-table">
+      <thead><tr><th colspan="2">PROJECT CHARTER - SISTEMA SIIP</th></tr></thead>
+      <tbody>
+        <tr><td style="width:30%;"><strong>Título del Proyecto:</strong></td><td>Sistema Inteligente de Inventario y Predicción (SIIP)</td></tr>
+        <tr><td><strong>Jefe de Proyecto:</strong></td><td>Mendoza Paucar Ronny Fernando</td></tr>
+        <tr><td><strong>Sponsor:</strong></td><td>Gerencia General / Dirección de Logística</td></tr>
+        <tr><td><strong>Objetivo Principal:</strong></td><td>Reducción del 22% en pérdidas por caducidad y stockout cero mediante geocercanía &lt;10km.</td></tr>
+        <tr><td><strong>Presupuesto Estimado:</strong></td><td>S/ 45,000 (Infraestructura Cloud Docker + Horas de Desarrollo)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>7.2. Diagrama de Procesos (BPMN 2.0) y Modelo de Base de Datos Relacional</h3>
+    <p>
+      El proceso inicia cuando un químico farmacéutico registra la dispensación de un fármaco. El sistema resta la unidad en PostgreSQL y evalúa el umbral. Si el stock desciende del mínimo, el motor predictivo calcula el $CPD$ y días de autonomía (&le; 7 días), lanzando una alerta y buscando en farmacias a menos de 10 km con sobrestock. El Administrador de CD aprueba el traslado con 1 clic y emite la <strong>Guía de Remisión con código QR</strong>.
+    </p>
+
+    <h3>7.3. Diccionario de Datos Relacional Normalizado (3FN)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Tabla</th>
+          <th>Campos Principales</th>
+          <th>Claves</th>
+          <th>Propósito en el Negocio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>SUCURSAL</code></td>
+          <td>id_sucursal, codigo, marca, nombre, latitud, longitud, es_cd</td>
+          <td>PK: id_sucursal, UK: codigo</td>
+          <td>Georreferenciación de locales InkaFarma/Mifarma para Haversine.</td>
+        </tr>
+        <tr>
+          <td><code>MEDICAMENTO</code></td>
+          <td>id_medicamento, codigo_ean, nombre, registro_digemid, precio, cpd</td>
+          <td>PK: id_medicamento, UK: codigo_ean</td>
+          <td>Catálogo oficial y umbrales mínimos de reposición.</td>
+        </tr>
+        <tr>
+          <td><code>LOTE</code></td>
+          <td>id_lote, codigo_lote, fecha_vencimiento, semaforo_fefo, cantidad</td>
+          <td>PK: id_lote, FK: id_medicamento, id_sucursal</td>
+          <td>Trazabilidad FEFO a 90, 60 y 30 días para la meta del -22% de mermas.</td>
+        </tr>
+        <tr>
+          <td><code>INVENTARIO_SUCURSAL</code></td>
+          <td>id_inventario, stock_actual, stock_seguridad, dias_autonomia</td>
+          <td>PK: id_inventario, FK: sucursal, med</td>
+          <td>Control físico del inventario por local en tiempo real.</td>
+        </tr>
+        <tr>
+          <td><code>SOLICITUD_TRASLADO</code></td>
+          <td>id_traslado, codigo, origen_id, destino_id, estado, distancia_km</td>
+          <td>PK: id_traslado, UK: codigo_traslado</td>
+          <td>Balanceo inteligente entre tiendas donantes y receptoras (&lt;10km).</td>
+        </tr>
+        <tr>
+          <td><code>GUIA_REMISION</code></td>
+          <td>id_guia, id_traslado, numero_guia, ruc_emisor, codigo_hash_qr</td>
+          <td>PK: id_guia, UK: numero_guia</td>
+          <td>Documento oficial y legal validado ante SUNAT y DIGEMID.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>8. DISEÑO DEL PROTOTIPO FUNCIONAL (COBERTURA AL 100%)</h2>
+    <div class="alert-box">
+      El prototipo implementado en <strong>React 18 + Tailwind CSS + Spring Boot</strong> cubre el 100% del alcance comprometido:
+      <ul>
+        <li><strong>Login Corporativo:</strong> Asignación automática de rol y sucursal según credenciales.</li>
+        <li><strong>Dashboard Ejecutivo:</strong> Gráficos dinámicos Recharts de rotación y semáforo FEFO.</li>
+        <li><strong>Buscador Geocercano:</strong> Tabla con las 5 sucursales más cercanas (&lt;10km) con cálculo geodésico en vivo.</li>
+        <li><strong>Bandeja de Alertas:</strong> Reporte tabular de caducidades con impacto monetario en Soles ($S/.$).</li>
+        <li><strong>Gestor de Traslados:</strong> Aprobación instantánea y modal oficial de Guía de Remisión con código QR.</li>
+      </ul>
+    </div>
+
+    <h2>9. CONCLUSIONES Y RECOMENDACIONES</h2>
+    <ol>
+      <li><strong>Viabilidad de la Solución:</strong> La arquitectura de microservicios en Java Spring Boot asegura la alta disponibilidad (99.9%) y soporte para más de 2,200 sucursales sin cuellos de botella.</li>
+      <li><strong>Impacto en Rentabilidad:</strong> El semáforo predictivo FEFO permite alcanzar el objetivo de <strong>reducir en un 22% las pérdidas económicas por caducidad</strong>.</li>
+      <li><strong>Recomendación Operativa:</strong> Se aconseja iniciar el despliegue con un plan piloto regional de 30 días en Lima Metropolitana antes del lanzamiento nacional.</li>
+    </ol>
+
+  </div>
+
+</body>
+</html>

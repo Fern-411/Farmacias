@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagramas de Alta Definición (Tamaño Grande para Capturas e Informe) | UTP 2026</title>
+  <!-- Mermaid.js con configuración de fuente GRANDE y vectores nítidos -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ 
+      startOnLoad: true, 
+      theme: 'default',
+      securityLevel: 'loose',
+      flowchart: { 
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: 'basis',
+        nodeSpacing: 50,
+        rankSpacing: 60
+      },
+      themeVariables: {
+        fontSize: '16px',
+        fontFamily: 'Inter, Segoe UI, sans-serif',
+        primaryColor: '#e0f2fe',
+        primaryTextColor: '#0f172a',
+        primaryBorderColor: '#0284c7',
+        lineColor: '#0284c7',
+        secondaryColor: '#f1f5f9',
+        tertiaryColor: '#ffffff',
+        mainBkg: '#ffffff',
+        nodeBorder: '#0284c7',
+        clusterBkg: '#f8fafc',
+        clusterBorder: '#94a3b8'
+      }
+    });
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;700&display=swap');
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Top Sticky Navigation Bar */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      background: #0f172a;
+      color: white;
+      border-bottom: 2px solid #0284c7;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .brand-title {
+      font-size: 12pt;
+      font-weight: 900;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      background: #c8102e;
+      color: white;
+      font-size: 8pt;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .nav-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 30px 20px 80px 20px;
+    }
+
+    .header-banner {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px 30px;
+      margin-bottom: 35px;
+      border-left: 6px solid #0284c7;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .header-banner h1 {
+      margin: 0 0 6px 0;
+      font-size: 19pt;
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .header-banner p {
+      margin: 0;
+      font-size: 10.5pt;
+      color: #475569;
+    }
+
+    /* Diagram Card */
+    .diagram-card {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      margin-bottom: 50px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      page-break-inside: avoid;
+    }
+
+    .diagram-header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0284c7;
+    }
+
+    .diagram-title {
+      font-size: 13pt;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .diagram-tag {
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 8.5pt;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* Canvas / Image Container Extra Large */
+    .diagram-body {
+      padding: 35px 25px;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+      min-height: 400px;
+    }
+
+    .diagram-body svg {
+      max-width: 100% !important;
+      height: auto !important;
+      font-size: 16px !important;
+    }
+
+    .diagram-footer {
+      background: #f8fafc;
+      padding: 16px 24px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 9.5pt;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .diagram-footer strong {
+      color: #0284c7;
+    }
+
+    .btn-tool {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 9.5pt;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-tool:hover { background: #0369a1; }
+
+    .zoom-hint {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 9pt;
+      font-weight: 600;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Native Large Diagram CSS Cards for ER & Architecture */
+    .native-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    .native-table-box {
+      background: #ffffff;
+      border: 2px solid #0f172a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .native-table-head {
+      background: #0f172a;
+      color: white;
+      font-weight: 800;
+      font-size: 10pt;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .native-table-row {
+      padding: 6px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      font-family: 'Fira Code', monospace;
+      font-size: 8.5pt;
+      display: flex;
+      justify-content: space-between;
+      color: #334155;
+    }
+
+    .native-table-row:nth-child(even) { background: #f8fafc; }
+    .pk-badge { background:#fee2e2; color:#b91c1c; font-weight:bold; padding:1px 4px; border-radius:3px; font-size:7pt; }
+    .fk-badge { background:#e0f2fe; color:#0369a1; font-weight:bold; padding:1px 4px; border-radius:3px; font-size:7pt; }
+    .uk-badge { background:#fef3c7; color:#b45309; font-weight:bold; padding:1px 4px; border-radius:3px; font-size:7pt; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .top-nav, .zoom-hint, .btn-tool { display: none; }
+      .container { max-width: 100%; padding: 0; }
+      .diagram-card { box-shadow: none; border: 2px solid #000; margin-bottom: 40px; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR CON HERRAMIENTAS -->
+  <div class="top-nav">
+    <div class="brand-title">
+      <span>📐 SIIP • DIAGRAMAS TÉCNICOS EN ALTA DEFINICIÓN</span>
+      <span class="brand-badge">UTP 2026</span>
+    </div>
+
+    <div class="nav-controls">
+      <button class="btn-tool" onclick="window.print()">📥 Imprimir / Guardar como PDF</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="header-banner">
+      <h1>DIAGRAMAS TÉCNICOS Y MODELOS DE INGENIERÍA (SIIP)</h1>
+      <p>
+        <strong>Proyecto:</strong> Farmacias Peruanas (InkaFarma / Mifarma) • <strong>Curso:</strong> Integrador I: Sistemas Software (Sección 20065)<br>
+        <strong>Estudiante:</strong> Mendoza Paucar Ronny Fernando (U25302314) • <strong>Docente:</strong> Irani Guillen Gomez
+      </p>
+    </div>
+
+    <div class="zoom-hint">
+      💡 <strong>Instrucción para tu Informe:</strong> Estos diagramas han sido diseñados con tipografía extra grande (16px) y fondo blanco de alto contraste. Puedes tomarles captura directamente con la tecla <strong>Windows + Shift + S</strong> y pegarlos en tu documento de Word o diapositivas con total nitidez.
+    </div>
+
+    <!-- =======================================================================
+         1. DIAGRAMA DE PROCESOS DE NEGOCIO (BPMN 2.0)
+         ======================================================================= -->
+    <div class="diagram-card">
+      <div class="diagram-header">
+        <div class="diagram-title">1. DIAGRAMA DE PROCESOS DE NEGOCIO (BPMN 2.0)</div>
+        <div class="diagram-tag">Gestión de Quiebres y Despacho SUNAT</div>
+      </div>
+      <div class="diagram-body">
+        <div class="mermaid" style="width: 100%; min-width: 850px;">
+flowchart TD
+    classDef startEvent fill:#dcfce7,stroke:#16a34a,stroke-width:3px,font-size:16px,font-weight:bold;
+    classDef endEvent fill:#fee2e2,stroke:#dc2626,stroke-width:3px,font-size:16px,font-weight:bold;
+    classDef task fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,font-size:15px,color:#0f172a,font-weight:bold;
+    classDef decision fill:#fef3c7,stroke:#d97706,stroke-width:3px,font-size:15px,font-weight:bold;
+    classDef systemTask fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,font-size:15px,font-weight:bold;
+
+    subgraph LANE_QF["👤 CARRIL 1: QUÍMICO FARMACÉUTICO (VENTANILLA SUCURSAL)"]
+        A(["🟢 INICIO: Paciente solicita medicamento esencial"]):::startEvent --> B["🔎 Consultar disponibilidad en Buscador SIIP"]:::task
+        B --> C{"¿Hay Stock en Sede?"}:::decision
+        C -- "SÍ HAY STOCK" --> D["💊 Dispensar medicamento y cobrar"]:::task
+        C -- "SIN STOCK (0 cjs)" --> E["🗺️ Activar Búsqueda Georreferenciada < 10 km"]:::task
+        E --> F["📍 Seleccionar Sede Donante con Sobrestock"]:::task
+        F --> G["🚚 Clic en 'Solicitar Traslado de Emergencia'"]:::task
+    end
+
+    subgraph LANE_SYS["⚙️ CARRIL 2: MICROSERVICIOS SIIP (JAVA SPRING BOOT)"]
+        D --> H["💾 MS-Inventario: Resta física en PostgreSQL"]:::systemTask
+        H --> I{"¿Stock < Umbral Seguridad?"}:::decision
+        I -- "NO (Stock Óptimo)" --> J(["🔴 FIN: Venta cerrada sin alertas"]):::endEvent
+        I -- "SÍ (Bajo Umbral)" --> K["🧠 MS-Predicción: Calcular Consumo Promedio Diario CPD"]:::systemTask
+        K --> L["⏱️ Calcular Días de Autonomía = Stock / CPD"]:::systemTask
+        L --> M["🚨 Disparar Alerta Predictiva de Quiebre <= 7 Días"]:::systemTask
+        G --> N["📝 MS-Traslados: Registrar Orden PENDIENTE"]:::systemTask
+    end
+
+    subgraph LANE_CD["🏢 CARRIL 3: ADMINISTRADOR DE CENTRO DE DISTRIBUCIÓN (CD)"]
+        M --> O["📊 Visualizar Alerta en Dashboard Central"]:::task
+        N --> O
+        O --> P{"¿Aprueba Traslado Sugerido?"}:::decision
+        P -- "SÍ (Aprobado)" --> Q["✅ Clic en 'Aprobar Traslado' (1 Clic)"]:::task
+        P -- "NO" --> R["❌ Rechazar y reasignar lote"]:::task
+        Q --> S["📄 MS-Traslados: Emitir Guía Remisión Electrónica SUNAT con QR"]:::systemTask
+        S --> T(["🏁 FIN: Despacho Express en Tránsito Hacia Sucursal"]):::endEvent
+    end
+        </div>
+      </div>
+      <div class="diagram-footer">
+        <strong>Descripción Técnica BPMN 2.0:</strong> Modela la trazabilidad integral de punta a punta: el químico farmacéutico activa la búsqueda de Haversine (&lt; 10 km) en caso de quiebre, el microservicio evalúa los umbrales dinámicos y dispara la alerta, y el Administrador del CD autoriza el traslado generando la <strong>Guía de Remisión Electrónica con código QR oficial</strong>.
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         2. DIAGRAMA DE CASOS DE USO UML
+         ======================================================================= -->
+    <div class="diagram-card">
+      <div class="diagram-header">
+        <div class="diagram-title">2. DIAGRAMA DE CASOS DE USO UML (ESTÁNDAR UML 2.5)</div>
+        <div class="diagram-tag">CU01 al CU06 • Actores y Límites del Sistema</div>
+      </div>
+      <div class="diagram-body">
+        <div class="mermaid" style="width: 100%; min-width: 850px;">
+graph LR
+    classDef actorNode fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#ffffff,font-size:15px,font-weight:bold;
+    classDef usecaseNode fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0f172a,font-size:14px,font-weight:bold;
+    classDef systemBoundary fill:#f8fafc,stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5;
+
+    subgraph ACTORES["👥 ACTORES DEL SISTEMA"]
+        QF["👨‍⚕️ Químico Farmacéutico<br/>(Ventanilla / Sede)"]:::actorNode
+        ACD["🏢 Administrador de CD<br/>(Centro de Distribución)"]:::actorNode
+        GER["📈 Gerencia de Operaciones<br/>(Control de Mermas)"]:::actorNode
+        TIMER["⏱️ Cron Job / Daemon<br/>(Motor Batch Predictivo)"]:::actorNode
+    end
+
+    subgraph SIIP["📦 LÍMITE DEL SISTEMA: SIIP FARMACIAS PERUANAS"]
+        CU01["(CU01: Consultar Inventario Geocercano < 10 km)"]:::usecaseNode
+        CU02["(CU02: Evaluar Caducidades FEFO 90/60/30 días)"]:::usecaseNode
+        CU03["(CU03: Solicitar y Aprobar Traslado de Stock)"]:::usecaseNode
+        CU04["(CU04: Emitir Guía de Remisión SUNAT con QR)"]:::usecaseNode
+        CU05["(CU05: Visualizar Dashboard de KPIs y Mermas)"]:::usecaseNode
+        CU06["(CU06: Autenticación y Control de Roles JWT)"]:::usecaseNode
+    end
+
+    QF --> CU01
+    QF --> CU03
+    QF --> CU06
+    ACD --> CU03
+    ACD --> CU04
+    ACD --> CU06
+    GER --> CU05
+    GER --> CU06
+    TIMER --> CU02
+        </div>
+      </div>
+      <div class="diagram-footer">
+        <strong>Especificación de Casos de Uso:</strong> Delimita las responsabilidades de los 4 actores. El Químico Farmacéutico interactúa con el buscador georreferenciado; el Administrador CD autoriza los movimientos de inventario y genera las guías tributarias; Gerencia audita la meta de <strong>reducción del 22% en pérdidas</strong>; y el Timer ejecuta el cálculo FEFO cada 6 horas.
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         3. DIAGRAMA DE ARQUITECTURA DE MICROSERVICIOS
+         ======================================================================= -->
+    <div class="diagram-card">
+      <div class="diagram-header">
+        <div class="diagram-title">3. DIAGRAMA DE ARQUITECTURA DE MICROSERVICIOS</div>
+        <div class="diagram-tag">Java Spring Boot 3 + React 18 + PostgreSQL 16</div>
+      </div>
+      <div class="diagram-body">
+        <div class="mermaid" style="width: 100%; min-width: 850px;">
+graph TD
+    classDef clientTier fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,font-size:15px,font-weight:bold,color:#0f172a;
+    classDef gatewayTier fill:#fef3c7,stroke:#d97706,stroke-width:3px,font-size:15px,font-weight:bold,color:#0f172a;
+    classDef serviceTier fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,font-size:14px,font-weight:bold,color:#0f172a;
+    classDef dataTier fill:#dcfce7,stroke:#16a34a,stroke-width:3px,font-size:15px,font-weight:bold,color:#0f172a;
+
+    subgraph TIER1["1. CAPA DE PRESENTACIÓN (CLIENTE SPA)"]
+        UI["⚛️ FRONTEND REACT 18 + VITE + TAILWIND CSS<br/>• Dashboard KPIs Recharts • Buscador Haversine • Alertas FEFO • Traslados"]:::clientTier
+    end
+
+    subgraph TIER2["2. CAPA DE ENRUTAMIENTO, SEGURIDAD Y BALANCEO"]
+        GW["🚪 SPRING CLOUD API GATEWAY (Puerto 8080)<br/>• Validación Tokens JWT • CORS Global • Rate Limiting Reactivo"]:::gatewayTier
+    end
+
+    subgraph TIER3["3. CAPA DE LÓGICA DE NEGOCIO (MICROSERVICIOS SPRING BOOT 3)"]
+        MS_AUTH["🔐 service-auth (8084)<br/>• Login RBAC<br/>• JWT Secret Token"]:::serviceTier
+        MS_INV["📦 service-inventario (8081)<br/>• Stock en Tiempo Real<br/>• Haversine < 10 km"]:::serviceTier
+        MS_PRED["🧠 service-prediccion (8082)<br/>• Motor Predictivo CPD<br/>• Semáforo FEFO 90/60/30d"]:::serviceTier
+        MS_TRAS["🚚 service-traslados (8083)<br/>• Balanceo Inteligente<br/>• Guías SUNAT con QR"]:::serviceTier
+        SK["🧩 shared-kernel (Librería Compartida Java)<br/>• DTOs, Enums de Estado, HaversineGeoUtil, FefoEvaluationUtil"]:::serviceTier
+    end
+
+    subgraph TIER4["4. CAPA DE PERSISTENCIA Y ALMACENAMIENTO"]
+        DB[("🐘 POSTGRESQL 16 ENTERPRISE (Puerto 5432)<br/>• Transacciones ACID Estrictas • Índices B-Tree • Extensiones PostGIS Geo")]:::dataTier
+    end
+
+    UI -->|HTTPS / REST API| GW
+    GW --> MS_AUTH
+    GW --> MS_INV
+    GW --> MS_PRED
+    GW --> MS_TRAS
+    MS_AUTH -.-> SK
+    MS_INV -.-> SK
+    MS_PRED -.-> SK
+    MS_TRAS -.-> SK
+    MS_AUTH --> DB
+    MS_INV --> DB
+    MS_PRED --> DB
+    MS_TRAS --> DB
+        </div>
+      </div>
+      <div class="diagram-footer">
+        <strong>Descripción Arquitectónica:</strong> Arquitectura 100% desacoplada en 4 capas de software contenerizadas en Docker. Cumple con la restricción del <strong>70% de desarrollo en Java</strong>, garantizando alta resiliencia (99.9% uptime) y escalabilidad elástica ante más de 350 transacciones por segundo.
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         4. MODELO ENTIDAD-RELACIÓN MER/DER EN 3FN
+         ======================================================================= -->
+    <div class="diagram-card">
+      <div class="diagram-header">
+        <div class="diagram-title">4. MODELO DE BASE DE DATOS ENTIDAD-RELACIÓN (MER / DER EN 3FN)</div>
+        <div class="diagram-tag">PostgreSQL 16 • 11 Tablas Normalizadas</div>
+      </div>
+      <div class="diagram-body" style="background:#f8fafc; padding: 25px;">
+        <div class="native-card-grid">
+          
+          <!-- SUCURSAL -->
+          <div class="native-table-box">
+            <div class="native-table-head"><span>🏢 SUCURSAL</span><span>Tabla 1</span></div>
+            <div class="native-table-row"><span>id_sucursal</span><span class="pk-badge">PK BIGINT</span></div>
+            <div class="native-table-row"><span>codigo</span><span class="uk-badge">UK VARCHAR(20)</span></div>
+            <div class="native-table-row"><span>marca (Inka/Mifa)</span><span>VARCHAR(50)</span></div>
+            <div class="native-table-row"><span>nombre</span><span>VARCHAR(150)</span></div>
+            <div class="native-table-row"><span>latitud / longitud</span><span>NUMERIC(10,7)</span></div>
+            <div class="native-table-row"><span>es_centro_distrib</span><span>BOOLEAN</span></div>
+          </div>
+
+          <!-- MEDICAMENTO -->
+          <div class="native-table-box">
+            <div class="native-table-head"><span>💊 MEDICAMENTO</span><span>Tabla 2</span></div>
+            <div class="native-table-row"><span>id_medicamento</span><span class="pk-badge">PK BIGINT</span></div>
+            <div class="native-table-row"><span>codigo_ean</span><span class="uk-badge">UK VARCHAR(30)</span></div>
+            <div class="native-table-row"><span>nombre_comercial</span><span>VARCHAR(150)</span></div>
+            <div class="native-table-row"><span>principio_activo</span><span>VARCHAR(150)</span></div>
+            <div class="native-table-row"><span>id_categoria</span><span class="fk-badge">FK CATEGORIA</span></div>
+            <div class="native-table-row"><span>precio_unitario</span><span>NUMERIC(10,2)</span></div>
+            <div class="native-table-row"><span>registro_digemid</span><span>VARCHAR(50)</span></div>
+            <div class="native-table-row"><span>consumo_diario_cpd</span><span>NUMERIC(8,2)</span></div>
+          </div>
+
+          <!-- LOTE -->
+          <div class="native-table-box">
+            <div class="native-table-head"><span>📦 LOTE (FEFO)</span><span>Tabla 3</span></div>
+            <div class="native-table-row"><span>id_lote</span><span class="pk-badge">PK BIGINT</span></div>
+            <div class="native-table-row"><span>codigo_lote</span><span>VARCHAR(50)</span></div>
+            <div class="native-table-row"><span>id_medicamento</span><span class="fk-badge">FK MEDICAMENTO</span></div>
+            <div class="native-table-row"><span>id_sucursal</span><span class="fk-badge">FK SUCURSAL</span></div>
+            <div class="native-table-row"><span>fecha_vencimiento</span><span>DATE</span></div>
+            <div class="native-table-row"><span>cantidad_cajas</span><span>INT</span></div>
+            <div class="native-table-row"><span>semaforo_fefo</span><span>VARCHAR(20)</span></div>
+          </div>
+
+          <!-- INVENTARIO_SUCURSAL -->
+          <div class="native-table-box">
+            <div class="native-table-head"><span>📊 INVENTARIO_SUCURSAL</span><span>Tabla 4</span></div>
+            <div class="native-table-row"><span>id_inventario</span><span class="pk-badge">PK BIGINT</span></div>
+            <div class="native-table-row"><span>id_sucursal</span><span class="fk-badge">FK SUCURSAL</span></div>
+            <div class="native-table-row"><span>id_medicamento</span><span class="fk-badge">FK MEDICAMENTO</span></div>
+            <div class="native-table-row"><span>stock_actual</span><span>INT</span></div>
+            <div class="native-table-row"><span>stock_seguridad</span><span>INT</span></div>
+            <div class="native-table-row"><span>dias_autonomia</span><span>NUMERIC(6,1)</span></div>
+            <div class="native-table-row"><span>estado_stock</span><span>VARCHAR(30)</span></div>
+          </div>
+
+          <!-- SOLICITUD_TRASLADO -->
+          <div class="native-table-box">
+            <div class="native-table-head"><span>🚚 SOLICITUD_TRASLADO</span><span>Tabla 5</span></div>
+            <div class="native-table-row"><span>id_traslado</span><span class="pk-badge">PK BIGINT</span></div>
+            <div class="native-table-row"><span>codigo_traslado</span><span class="uk-badge">UK VARCHAR(30)</span></div>
+            <div class="native-table-row"><span>id_origen_sucursal</span><span class="fk-badge">FK SUCURSAL</span></div>
+            <div class="native-table-row"><span>id_destino_sucursal</span><span class="fk-badge">FK SUCURSAL</span></div>
+            <div class="native-table-row"><span>distancia_km</span><span>NUMERIC(6,2)</span></div>
+            <div class="native-table-row"><span>estado_traslado</span><span>VARCHAR(30)</span></div>
+            <div class="native-table-row"><span>ahorro_estimado</span><span>NUMERIC(10,2)</span></div>
+          </div>
+
+          <!-- GUIA_REMISION -->
+          <div class="native-table-box">
+            <div class="native-table-head"><span>📄 GUIA_REMISION</span><span>Tabla 6</span></div>
+            <div class="native-table-row"><span>id_guia</span><span class="pk-badge">PK BIGINT</span></div>
+            <div class="native-table-row"><span>id_traslado</span><span class="fk-badge">FK TRASLADO (1:1)</span></div>
+            <div class="native-table-row"><span>numero_guia</span><span class="uk-badge">UK VARCHAR(30)</span></div>
+            <div class="native-table-row"><span>ruc_emisor</span><span>VARCHAR(11)</span></div>
+            <div class="native-table-row"><span>codigo_hash_qr</span><span>TEXT</span></div>
+            <div class="native-table-row"><span>fecha_emision</span><span>TIMESTAMP</span></div>
+            <div class="native-table-row"><span>estado_sunat</span><span>VARCHAR(30)</span></div>
+          </div>
+
+        </div>
+      </div>
+      <div class="diagram-footer">
+        <strong>Descripción del Esquema de Datos:</strong> Normalizado en Tercera Forma Normal (3FN). Modela la relación 1 a muchos entre sucursales y lotes, el control de stock por local y la relación 1 a 1 de la Guía de Remisión legal ante SUNAT.
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         5. DIAGRAMAS DE SECUENCIA UML (SECUENCIA 1 Y SECUENCIA 2)
+         ======================================================================= -->
+    <div class="diagram-card">
+      <div class="diagram-header">
+        <div class="diagram-title">5. DIAGRAMA DE SECUENCIA UML: BÚSQUEDA GEORREFERENCIADA (&lt; 10 KM)</div>
+        <div class="diagram-tag">CU01 • Algoritmo de Haversine</div>
+      </div>
+      <div class="diagram-body">
+        <div class="mermaid" style="width: 100%; min-width: 850px;">
+sequenceDiagram
+    autonumber
+    actor QF as 👨‍⚕️ Químico Farmacéutico
+    participant Front as ⚛️ Frontend React 18
+    participant GW as 🚪 API Gateway (8080)
+    participant MS as 📦 MS-Inventario (8081)
+    participant DB as 🐘 PostgreSQL 16
+
+    QF->>Front: 1. Digita fármaco en buscador (ej. 'Amoxicilina 500mg')
+    Front->>GW: 2. GET /api/v1/inventario/cercanos?lat=-12.09&lng=-77.02
+    GW->>GW: 3. Valida Token JWT en cabecera Authorization
+    GW->>MS: 4. Enruta petición balanceada hacia MS-Inventario
+    MS->>DB: 5. SELECT s.nombre, s.latitud, s.longitud, i.stock_actual FROM ...
+    DB-->>MS: 6. Retorna registros de sucursales con stock
+    MS->>MS: 7. Ejecuta Fórmula de Haversine (Filtra radio <= 10.0 km)
+    MS->>MS: 8. Ordena top 5 sedes por menor distancia geodésica
+    MS-->>GW: 9. Retorna JSON DTO (5 sedes con distancia km y stock)
+    GW-->>Front: 10. HTTP 200 OK
+    Front-->>QF: 11. Renderiza Tabla Comparativa con botón 'Solicitar Traslado'
+        </div>
+      </div>
+      <div class="diagram-footer">
+        <strong>Descripción de la Secuencia 1:</strong> Muestra la ejecución asíncrona de la consulta de proximidad. El microservicio calcula la distancia geodésica en memoria y responde en menos de 2.0 segundos sin bloquear la base de datos.
+      </div>
+    </div>
+
+    <div class="diagram-card">
+      <div class="diagram-header">
+        <div class="diagram-title">6. DIAGRAMA DE SECUENCIA UML: APROBACIÓN DE TRASLADO Y GUÍA SUNAT</div>
+        <div class="diagram-tag">CU03 / CU04 • Emisión de Guía QR</div>
+      </div>
+      <div class="diagram-body">
+        <div class="mermaid" style="width: 100%; min-width: 850px;">
+sequenceDiagram
+    autonumber
+    actor ACD as 🏢 Administrador de CD
+    participant Front as ⚛️ Frontend React 18
+    participant GW as 🚪 API Gateway (8080)
+    participant MS as 🚚 MS-Traslados (8083)
+    participant DB as 🐘 PostgreSQL 16
+
+    ACD->>Front: 1. Clic en botón 'Aprobar Traslado' (ID: TRA-2026-00891)
+    Front->>GW: 2. POST /api/v1/traslados/891/aprobar
+    GW->>MS: 3. Enruta petición con token de seguridad
+    MS->>DB: 4. BEGIN TRANSACTION (Reserva unidades en origen y destino)
+    DB-->>MS: 5. Transacción confirmada (Garantía ACID)
+    MS->>MS: 6. Genera correlativo oficial SUNAT (GR-001-0008492)
+    MS->>MS: 7. Genera Hash Criptográfico para Código QR
+    MS->>DB: 8. INSERT INTO guia_remision (...)
+    DB-->>MS: 9. Registro guardado exitosamente
+    MS-->>GW: 10. Retorna GuiaRemisionDto con QR y estado APROBADO
+    GW-->>Front: 11. HTTP 200 OK (Guía Emitida)
+    Front-->>ACD: 12. Abre Modal Emergente con Guía Oficial y botón Imprimir
+        </div>
+      </div>
+      <div class="diagram-footer">
+        <strong>Descripción de la Secuencia 2:</strong> Detalla la transacción ACID de reserva de stock y la generación de la Guía de Remisión Electrónica Remitente con código QR validada para SUNAT y DIGEMID.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sección 6: Planteamiento de Alternativas de Solución | UTP 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
+    
+    @page {
+      size: A4;
+      margin: 16mm 14mm 16mm 14mm;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      line-height: 1.5;
+      font-size: 10pt;
+      margin: 0;
+      padding: 20px;
+      background: #f8fafc;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 35px 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .header-banner {
+      border-bottom: 3px solid #c8102e;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+
+    .utp-tag {
+      font-size: 11pt;
+      font-weight: 900;
+      color: #c8102e;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 18pt;
+      color: #0f172a;
+      margin: 8px 0 4px 0;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      font-size: 11pt;
+      color: #0284c7;
+      font-weight: 600;
+    }
+
+    h2 {
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 6px;
+      margin-top: 30px;
+      font-size: 13pt;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      color: #1e3a8a;
+      margin-top: 20px;
+      font-size: 11pt;
+      page-break-after: avoid;
+    }
+
+    h4 {
+      color: #0369a1;
+      margin-top: 14px;
+      font-size: 10pt;
+      font-weight: 800;
+      page-break-after: avoid;
+    }
+
+    .alt-header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-top: 25px;
+      font-size: 11pt;
+      font-weight: 800;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .alt-tag {
+      background: #0284c7;
+      color: white;
+      font-size: 8pt;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .ui-card {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Fira Code', 'Consolas', monospace;
+      font-size: 7.8pt;
+      line-height: 1.35;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      margin: 10px 0 16px 0;
+      border: 1px solid #334155;
+      page-break-inside: avoid;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0 20px 0;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+    }
+
+    table.data-table th {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 6px 8px;
+      border: 1px solid #0f172a;
+      text-transform: uppercase;
+    }
+
+    table.data-table td {
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: middle;
+    }
+
+    table.data-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .print-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 11pt;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .container { box-shadow: none; padding: 0; max-width: 100%; }
+      .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">📥 Guardar como PDF / Imprimir</button>
+
+  <div class="container">
+    
+    <div class="header-banner">
+      <div class="utp-tag">UNIVERSIDAD TECNOLÓGICA DEL PERÚ • CURSO INTEGRADOR I (SECCIÓN 20065)</div>
+      <h1>6. PLANTEAMIENTO DE ALTERNATIVAS DE SOLUCIÓN</h1>
+      <div class="subtitle">Presentación de 3 Alternativas con 5 Pantallas UI/UX c/u (15 Diseños), Uso de TIC (>=50% Java) y Selección</div>
+      <div style="font-size: 9pt; color: #64748b; margin-top: 5px;">
+        <strong>Estudiantes:</strong> Mendoza Paucar Ronny Fernando (U25302314), Herrera Villanueva Luis Javier (U24327771), Richard Martin Ticona Condor (U23246612) • <strong>Docente:</strong> Irani Guillen Gomez
+      </div>
+    </div>
+
+    <!-- ALTERNATIVA 1 -->
+    <div class="alt-header">
+      <span>ALTERNATIVA 1 (SOLUCIÓN ELEGIDA): MICROSERVICIOS CON JAVA SPRING BOOT Y REACT 18</span>
+      <span class="alt-tag">70% TIC JAVA • ALTA ESCALABILIDAD</span>
+    </div>
+
+    <p>
+      <strong>Uso de TIC (70% Java / 30% React):</strong> Backend distribuido en Java 17 con Spring Boot 3, Spring Cloud Gateway, JPA/Hibernate, Base de Datos PostgreSQL 16 y Frontend SPA en React 18 con Tailwind CSS.
+    </p>
+
+    <h4>Pantalla 1.1: Autenticación y Autorización (Login con JWT y Sede Asignada)</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+|  [SIIP v1.0] SISTEMA INTELIGENTE DE INVENTARIO Y PREDICCIÓN - FARMACIAS PERUANAS (Inka / Mifarma)|
+|                                                                                                  |
+|                      +----------------------------------------------------+                      |
+|                      |             ACCESO AL SISTEMA SIIP                 |                      |
+|                      +----------------------------------------------------+                      |
+|                      |  [ 👨‍⚕️ Químico Farmacéutico ] [ 🏢 Admin CD ]      | &lt;- Selector Rápido   |
+|                      |                                                    |                      |
+|                      |  Usuario / Correo Corporativo:                     |                      |
+|                      |  [ 👤 qf_mendoza@farmaciasperuanas.pe            ] |                      |
+|                      |                                                    |                      |
+|                      |  Contraseña de Seguridad:                          |                      |
+|                      |  [ 🔒 ••••••••••••••••••                      👁️ ] |                      |
+|                      |                                                    |                      |
+|                      |  Sede Asignada: [ InkaFarma - San Isidro ] (Fija)  |                      |
+|                      |                                                    |                      |
+|                      |  [          INGRESAR AL SISTEMA SIIP  ➔          ] |                      |
+|                      |                                                    |                      |
+|                      |  🛡️ Autenticación JWT • TLS / HTTPS • Microservicios|                      |
+|                      +----------------------------------------------------+                      |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 1.2: Dashboard Operativo Principal y Analítica de KPIs</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| [SIIP] Farmacias Peruanas | Sede: InkaFarma San Isidro | Usuario: QF. Ronny Mendoza | [ Cerrar ] |
++--------------------------------------------------------------------------------------------------+
+| [TABLERO] [BUSCADOR &lt;10KM] [ALERTAS FEFO] [TRASLADOS] [DIAGRAMAS]                                |
++--------------------------------------------------------------------------------------------------+
+|  +------------------+  +------------------+  +------------------+  +--------------------------+  |
+|  | TASA DE QUIEBRE  |  | REDUCCIÓN MERMAS |  | DISPONIBILIDAD   |  | VALOR EN RIESGO FEFO     |  |
+|  |      3.2%        |  |  -21.4% (Meta 22)|  |      96.8%       |  | S/ 4,120.00 (7 Lotes)    |  |
+|  +------------------+  +------------------+  +------------------+  +--------------------------+  |
+|                                                                                                  |
+|  [ GRÁFICO 1: DEMANDA DIARIA VS STOCK POR CATEGORÍA ]   [ GRÁFICO 2: SEMÁFORO FEFO VENCIMIENTOS ]|
+|  120 |      [Stock]                                      🔴 Crítico &lt;30 días:     3 Lotes (43%)  |
+|   80 |  [Venta] [Stock]                                  🟠 Alerta 30-60 días:   2 Lotes (29%)  |
+|   40 |  [Venta] [Venta]                                  🟡 Atención 60-90 días: 2 Lotes (28%)  |
+|    0 +---------------------------------                  🟢 Óptimo &gt;90 días:     Resto Inventario|
+|       Antibióticos  Analgésicos  Cardio                                                          |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 1.3: Módulo de Consulta de Inventario Georreferenciado (&lt; 10 km)</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| BUSCADOR GEOCERCANO | Radio Máximo: 10.0 Kilómetros (Fórmula de Haversine)                        |
++--------------------------------------------------------------------------------------------------+
+| Fármaco Seleccionado: [ AMOXICILINA 500MG CAJA X 100 ] | Stock en mi Sede: [ 0 cjs - SIN STOCK ] |
++--------------------------------------------------------------------------------------------------+
+| TABLA COMPARATIVA DE LAS 5 SUCURSALES MÁS CERCANAS CON STOCK DISPONIBLE:                         |
+| +---+-----------------------+---------------------+---------------+--------+----------+---------+|
+| |N° | SUCURSAL / MARCA      | DIRECCIÓN / DISTRITO| DISTANCIA KM  | STOCK  |AUTONOMÍA | ACCIÓN  ||
+| +---+-----------------------+---------------------+---------------+--------+----------+---------+|
+| | 1 | [InkaFarma] Corpac    | Av. Canaval 450     |  1.2 km       | 85 cjs | 14 días  |[Pedir ➔]||
+| | 2 | [Mifarma] Miraflores  | Av. Larco 720       |  2.4 km       | 42 cjs |  9 días  |[Pedir ➔]||
+| | 3 | [InkaFarma] San Borja | Av. Aviación 2800   |  3.1 km       | 60 cjs | 12 días  |[Pedir ➔]||
+| | 4 | [Mifarma] Lince       | Av. Arequipa 1980   |  3.8 km       | 30 cjs |  7 días  |[Pedir ➔]||
+| | 5 | [InkaFarma] Surquillo | Av. Angamos 1200    |  4.5 km       | 50 cjs | 11 días  |[Pedir ➔]||
+| +---+-----------------------+---------------------+---------------+--------+----------+---------+|
+| [ Botón: Solicitar Traslado Express de Emergencia al Centro de Distribución ]                    |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 1.4: Bandeja de Alertas Predictivas y Reporte Tabular FEFO</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| CONTROL DE CADUCIDADES FEFO &amp; QUIEBRES | Meta: -22% Mermas | Dinero en Riesgo: S/ 4,120.00       |
++--------------------------------------------------------------------------------------------------+
+| [ Pestaña: Lotes FEFO (90, 60 y 30 días) ]   [ Pestaña: Riesgo de Quiebre a 7 Días ]             |
+| Filtros: [ Todos (7) ] [ 🔴 Crítico &lt;30d (3) ] [ 🟠 Alerta 30-60d (2) ] [ 🟡 Atención 60-90d (2) ]|
++--------------------------------------------------------------------------------------------------+
+| REPORTE TABULAR DE LOTES PRÓXIMOS A VENCER:                                                      |
+| +-----------+-------------------------+-------------+--------+---------+----------+-------------+|
+| |LOTE       | MEDICAMENTO / REG. DIG. | SUCURSAL    |VENCE EN|SEMÁFORO |CANTIDAD  |RIESGO (S/.) ||
+| +-----------+-------------------------+-------------+--------+---------+----------+-------------+|
+| |LT-AMX-01  | Amoxicilina 500mg       | San Isidro  | 18 días|🔴CRÍTICO|  40 cjs  | S/ 1,440.00 ||
+| |LT-AZI-04  | Azitromicina 500mg      | Miraflores  | 25 días|🔴CRÍTICO|  25 cjs  | S/ 1,125.00 ||
+| |LT-PAN-09  | Panadol Antigripal      | Surco       | 42 días|🟠ALERTA |  80 cjs  | S/   960.00 ||
+| |LT-IBU-12  | Ibuprofeno 400mg        | San Borja   | 75 días|🟡ATENCIÓN| 110 cjs | S/   595.00 ||
+| +-----------+-------------------------+-------------+--------+---------+----------+-------------+|
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 1.5: Gestor de Traslados Internos y Emisión de Guía SUNAT</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| GESTIÓN DE TRASLADOS INTERNOS | Aprobación en 1 Clic • Emisión de Guía de Remisión Electrónica   |
++--------------------------------------------------------------------------------------------------+
+| +--------------+-----------------------+---------------------+----------+--------+--------------+|
+| |CÓDIGO        | ORIGEN (SOBRESTOCK)   | DESTINO (QUIEBRE)   |FÁRMACO   |CANTIDAD| ACCIONES     ||
+| +--------------+-----------------------+---------------------+----------+--------+--------------+|
+| |TRA-2026-00891| InkaFarma Surquillo   | InkaFarma San Isidro|Amoxicilin| 25 cjs |[✓ Aprobar]   ||
+| |TRA-2026-00892| Mifarma Lince         | Mifarma Miraflores  |Azitromici| 15 cjs |[✓ Aprobar]   ||
+| +--------------+-----------------------+---------------------+----------+--------+--------------+|
+|                                                                                                  |
+| [ MODAL EMERGENTE: GUÍA DE REMISIÓN ELECTRÓNICA REMITENTE - SUNAT ]                              |
+| +----------------------------------------------------------------------------------------------+ |
+| | GUÍA DE REMISIÓN ELECTRÓNICA: GR-001-0008492      | [ QR CODE SUNAT ]                        | |
+| | RUC Emisor: 20509872134 (FARMACIAS PERUANAS S.A.) |  ████  ██  ██                            | |
+| | Transportista: Logística Express Inka/Mifarma     |  ██  ████  ██  Hash: e8b9f1...           | |
+| | Placa Vehículo: ABC-782 | Chofer: J. Morales      |  ████  ██  ██                            | |
+| | Motivo: TRASLADO ENTRE ESTABLECIMIENTOS DE LA MISMA EMPRESA (Art. 18 R.S. SUNAT)            | |
+| | [ Botón: Imprimir Documento Oficial ]   [ Botón: Descargar PDF ]                             | |
+| +----------------------------------------------------------------------------------------------+ |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <!-- ALTERNATIVA 2 -->
+    <div class="alt-header" style="background:#334155;">
+      <span>ALTERNATIVA 2: APLICACIÓN WEB MONOLÍTICA TRADICIONAL (JAVA EE / JSF)</span>
+      <span class="alt-tag" style="background:#475569;">90% TIC JAVA • ENFOQUE MONOLITO</span>
+    </div>
+
+    <p>
+      <strong>Uso de TIC (90% Java / 10% HTML):</strong> Aplicación empaquetada en un solo <code>.war</code> ejecutado sobre WildFly con JavaServer Faces (JSF), EJB y JPA/Hibernate.
+    </p>
+
+    <h4>Pantalla 2.1: Autenticación Estándar JSF</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+|                             SISTEMA WEB DE FARMACIAS PERUANAS (JSF)                              |
+|                                                                                                  |
+|                      +----------------------------------------------------+                      |
+|                      |             INICIO DE SESIÓN - JAVA EE             |                      |
+|                      +----------------------------------------------------+                      |
+|                      |  Nombre de Usuario:                                |                      |
+|                      |  [_______________________________________]         |                      |
+|                      |                                                    |                      |
+|                      |  Contraseña:                                       |                      |
+|                      |  [***************************************]         |                      |
+|                      |                                                    |                      |
+|                      |  [ Botón: Iniciar Sesión (HTTP POST síncrono) ]   |                      |
+|                      +----------------------------------------------------+                      |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 2.2: Menú de Navegación Clásico con Tablas JSF</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| CABECERA: Sistema Farmacias (Java EE) | Usuario: admin | Rol: Administrador General | [ Salir ]  |
++---------------------+----------------------------------------------------------------------------+
+| MENÚ PRINCIPAL      | PANEL CENTRAL DE INVENTARIO LOCAL                                          |
+| - Inicio            | Sucursal: Local 001 - San Isidro                                           |
+| - Mantenimiento     | +---------------+-------------------+---------------+--------+-------------+|
+|   * Fármacos        | | Código EAN    | Nombre Producto   | Categoría     | Stock  | Precio S/.  ||
+|   * Lotes           | +---------------+-------------------+---------------+--------+-------------+|
+| - Movimientos       | | 7750123456789 | Amoxicilina 500mg | Antibióticos  | 25 cjs | S/ 36.00    ||
+|   * Entradas        | | 7750987654321 | Paracetamol 500mg | Analgésicos   | 80 cjs | S/ 12.50    ||
+|   * Salidas         | +---------------+-------------------+---------------+--------+-------------+|
+| - Reportes          | Mostrando página 1 de 25 [ Anterior ] [ 1 ] [ 2 ] [ Siguiente ]            |
++---------------------+----------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 2.3: Formulario Síncrono de Mantenimiento (CRUD) de Medicamentos</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| MANTENIMIENTO DE MEDICAMENTOS (FORMULARIO CRUD - JSF)                                            |
++--------------------------------------------------------------------------------------------------+
+|  Código de Barras EAN-13: [ 7750123456789        ]                                               |
+|  Nombre Comercial:        [ Amoxicilina 500mg Cápsulas                   ]                       |
+|  Principio Activo:        [ Amoxicilina Trihidrato                       ]                       |
+|  Registro DIGEMID:        [ EN-04892 DIGEMID                             ]                       |
+|  Precio Unitario (S/.):   [ 36.00       ]  Stock de Seguridad: [ 20      ]                       |
+|  Requiere Receta Médica:  [X] SÍ  [ ] NO                                                         |
+|                                                                                                  |
+|  [ Botón: Guardar Registro ]    [ Botón: Modificar ]    [ Botón: Eliminar ]    [ Botón: Cancelar]|
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 2.4: Reporte Tabular Estático de Caducidades</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| REPORTE DE VENCIMIENTOS DE LOTES (SISTEMA MONOLÍTICO)                                            |
++--------------------------------------------------------------------------------------------------+
+| Fecha de Corte: [ 30/09/2026 ]  Sucursal: [ Todas las Sucursales (Consolidado) v ] [ Generar ]   |
++--------------------------------------------------------------------------------------------------+
+| +-------------+-------------------------+--------------------+------------------+---------------+ |
+| | Código Lote | Fármaco                 | Fecha Vencimiento  | Días Restantes   | Cantidad Cajas| |
+| +-------------+-------------------------+--------------------+------------------+---------------+ |
+| | LT-AMX-2024 | Amoxicilina 500mg       | 15/10/2026         | 15 días          | 40            | |
+| | LT-AZI-2024 | Azitromicina 500mg      | 28/10/2026         | 28 días          | 25            | |
+| +-------------+-------------------------+--------------------+------------------+---------------+ |
+| [ Botón: Exportar a Microsoft Excel (.xls) ]    [ Botón: Imprimir Reporte en PDF ]               |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 2.5: Historial de Movimientos de Almacén (Kardex Físico)</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| CONSULTA DE KARDEX DE ALMACÉN (HISTORIAL TRANSACCIONAL)                                          |
++--------------------------------------------------------------------------------------------------+
+| Fármaco: [ Amoxicilina 500mg v ]  Rango: [ 01/09/2026 ] al [ 25/09/2026 ] [ Consultar Kardex ]   |
++--------------------------------------------------------------------------------------------------+
+| +------------------+-------------------+-----------+------------+------------+-----------------+ |
+| | Fecha y Hora     | Tipo Movimiento   | N° Doc.   | Entrada    | Salida     | Saldo Actual    | |
+| +------------------+-------------------+-----------+------------+------------+-----------------+ |
+| | 20/09/2026 09:30 | Venta Ventanilla  | BOL-10492 | -          | 2 cajas    | 25 cajas        | |
+| | 18/09/2026 14:15 | Entrada de CD     | GUIA-8490 | 20 cajas   | -          | 27 cajas        | |
+| | 15/09/2026 11:00 | Venta Ventanilla  | BOL-10380 | -          | 1 caja     | 7 cajas         | |
+| +------------------+-------------------+-----------+------------+------------+-----------------+ |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <!-- ALTERNATIVA 3 -->
+    <div class="alt-header" style="background:#1e3a8a;">
+      <span>ALTERNATIVA 3: ERP COMERCIAL CLOUD CON MIDDLEWARE DE INTEGRACIÓN JAVA</span>
+      <span class="alt-tag" style="background:#3b82f6;">50% TIC JAVA • ENFOQUE ERP</span>
+    </div>
+
+    <p>
+      <strong>Uso de TIC (50% Java / 50% ERP Cloud):</strong> Middleware broker en Java (Spring Integration / Apache Camel / JMS) conectado con plataformas ERP propietarias.
+    </p>
+
+    <h4>Pantalla 3.1: Panel de Monitoreo del Middleware de Integración Java</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| [JAVA MIDDLEWARE MONITOR] - Broker de Integración SIIP &lt;-&gt; ERP Cloud                             |
++--------------------------------------------------------------------------------------------------+
+| Estado de Conexión ERP: [ 🟢 CONECTADO ] | Latencia Promedio: [ 142 ms ] | Hilos Activos: [ 16 ] |
++--------------------------------------------------------------------------------------------------+
+| MÉTRICAS DE COLAS DE MENSAJES (APACHE CAMEL / JMS):                                              |
+| - Cola de Salidas de Stock:  [ 124 msg/seg ] - Estado: 🟢 Normal                                |
+| - Cola de Órdenes Traslado:  [   8 msg/seg ] - Estado: 🟢 Normal                                |
+| - Cola de Errores/Reintentos:[   2 mensajes] - Estado: 🟡 Atención                              |
+|                                                                                                  |
+| [ LOG DE TRAMAS EN TIEMPO REAL ]:                                                                |
+| 14:02:11 [INFO] Sincronización exitosa SUC-001 -&gt; ERP_INVENTORY_UPDATE (ID: 98124)               |
+| 14:02:15 [INFO] Solicitud de reabastecimiento enviada a ERP_MRP_MODULE (ID: 98125)               |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 3.2: Interfaz del ERP - Gestión Maestra de Almacenes</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| ERP CLOUD - MÓDULO DE GESTIÓN DE MATERIALES Y ALMACENES (CD CENTRAL HUACHIPA)                    |
++--------------------------------------------------------------------------------------------------+
+| Almacén Central: [ ALM-01 HUACHIPA CENTRAL v ] | Moneda: [ PEN - Soles ]                         |
++--------------------------------------------------------------------------------------------------+
+| +--------------+-------------------------+-------------+---------------+------------------------+|
+| | Código Mat.  | Descripción Material    | Stock Físico| Stock Reserva | Valorización Total     ||
+| +--------------+-------------------------+-------------+---------------+------------------------+|
+| | MAT-100849   | Amoxicilina 500mg Cax100| 12,400 cjs  |  1,500 cjs    | S/ 446,400.00          ||
+| | MAT-100912   | Paracetamol 500mg Cax100| 35,000 cjs  |  4,200 cjs    | S/ 437,500.00          ||
+| +--------------+-------------------------+-------------+---------------+------------------------+|
+| [ Botón ERP: Ajuste de Inventario ]   [ Botón ERP: Bloqueo de Lote ]   [ Botón ERP: Auditoría ]  |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 3.3: Interfaz del ERP - Planificación de Demanda (Módulo MRP)</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| ERP CLOUD - PLANIFICACIÓN DE NECESIDADES DE MATERIALES (MRP)                                     |
++--------------------------------------------------------------------------------------------------+
+| Periodo de Pronóstico: [ Octubre 2026 v ] | Método: [ Media Móvil Ponderada ERP v ]              |
++--------------------------------------------------------------------------------------------------+
+| +------------------+---------------------+-------------------+------------------+---------------+|
+| | Proveedor / Lab. | Producto            | Demanda Proyectada| Stock Proyectado | Pedido Suger. ||
+| +------------------+---------------------+-------------------+------------------+---------------+|
+| | Medifarma S.A.   | Amoxicilina 500mg   | 45,000 cajas      | 12,400 cajas     | 32,600 cajas  ||
+| | Farmindustria    | Azitromicina 500mg  | 18,000 cajas      |  4,100 cajas     | 13,900 cajas  ||
+| +------------------+---------------------+-------------------+------------------+---------------+|
+| [ Botón ERP: Generar Órdenes de Compra Automáticas hacia Laboratorios Fabricantes ]              |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 3.4: Interfaz del ERP - Asignación y Despacho Logístico</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| ERP CLOUD - GESTIÓN LOGÍSTICA DE DISTRIBUCIÓN Y EMBARQUE                                         |
++--------------------------------------------------------------------------------------------------+
+| Ruta: [ RUTA-04 LIMA SUR (Miraflores - Surco - Chorrillos) v ] | Fecha: [ 28/09/2026 ]           |
++--------------------------------------------------------------------------------------------------+
+| Vehículo Asignado: [ Camión Isuzu 5 Ton (Placa B4F-892) ] | Conductor: [ Carlos Huamán ]         |
+| Capacidad Utilizada: [ ████████████████░░░░ ] 82% (3.8 Toneladas)                                |
+|                                                                                                  |
+| Sedes de la Ruta de Entrega:                                                                     |
+| 1. SUC-002 Mifarma Miraflores (Entrega: 45 bultos) - Estado: Programado                          |
+| 2. SUC-005 InkaFarma Surco (Entrega: 60 bultos) - Estado: Programado                             |
+|                                                                                                  |
+| [ Botón ERP: Cerrar Manifiesto de Carga ]   [ Botón ERP: Imprimir Hojas de Ruta ]                |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h4>Pantalla 3.5: Pantalla de Trazabilidad y Errores (Logs del Middleware)</h4>
+    <div class="ui-card">+--------------------------------------------------------------------------------------------------+
+| MIDDLEWARE JAVA - BANDEJA DE EXCEPCIONES Y RETRANSICIÓN DE TRAMAS FALLIDAS                       |
++--------------------------------------------------------------------------------------------------+
+| Filtro de Error: [ Todos los Errores (HTTP 500 / Timeout) v ] [ Actualizar Consola ]             |
++--------------------------------------------------------------------------------------------------+
+| +------------+------------------+---------+------------------------------+----------------------+|
+| | ID Trama   | Sucursal Origen  | Hora    | Detalle del Error Devuelto   | Acción de Corrección ||
+| +------------+------------------+---------+------------------------------+----------------------+|
+| | TRM-99120  | SUC-042 Tacna    | 13:45:10| SOAP_TIMEOUT: ERP no responde| [ 🔄 Reintentar ]    ||
+| | TRM-99124  | SUC-018 Trujillo | 13:50:22| INVALID_SKU: Código no existe| [ ✏️ Editar Payload ] ||
+| +------------+------------------+---------+------------------------------+----------------------+|
+| [ Botón: Reintentar Todas las Tramas Encoladas (Batch Retry) ]                                   |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h2>6.2. COMPARACIÓN EXHAUSTIVA ENTRE LAS ALTERNATIVAS</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Criterio Evaluado</th>
+          <th>Alternativa 1 (Elegida): Microservicios Spring + React</th>
+          <th>Alternativa 2: Monolito Java EE / JSF</th>
+          <th>Alternativa 3: ERP Cloud + Middleware Java</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Uso de TIC Java</strong></td>
+          <td><strong>70% Java</strong> (Spring Boot, Spring Cloud, JPA)</td>
+          <td><strong>90% Java</strong> (Java EE, EJB, JSF, Servlets)</td>
+          <td><strong>50% Java</strong> (Middleware JMS/Camel)</td>
+        </tr>
+        <tr>
+          <td><strong>Escalabilidad</strong></td>
+          <td><strong>Alta:</strong> Escalado horizontal elástico por servicio.</td>
+          <td><strong>Baja:</strong> Escalado vertical costoso.</td>
+          <td><strong>Media:</strong> Restricciones de concurrencia ERP.</td>
+        </tr>
+        <tr>
+          <td><strong>Resiliencia a Fallos</strong></td>
+          <td><strong>Alta:</strong> Si falla Alertas, Consultas sigue operando.</td>
+          <td><strong>Nula:</strong> Caída del monolito paraliza la red.</td>
+          <td><strong>Alta en ERP / Media en enlace.</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Experiencia de Usuario (UX)</strong></td>
+          <td><strong>Excelente:</strong> Asíncrona, ágil y reactiva (SPA).</td>
+          <td><strong>Básica:</strong> Recargas completas de página síncronas.</td>
+          <td><strong>Compleja:</strong> Formularios ERP poco amigables.</td>
+        </tr>
+        <tr>
+          <td><strong>Costo de Licenciamiento</strong></td>
+          <td><strong>S/ 0 (100% Open Source):</strong> Sin pagos por usuario.</td>
+          <td><strong>S/ 0 (Open Source).</strong></td>
+          <td><strong>Muy Alto (Inviable):</strong> Licencias para >2,500 QF.</td>
+        </tr>
+        <tr>
+          <td><strong>Factibilidad Técnica</strong></td>
+          <td><strong>ALTA:</strong> Estándar de la industria para retail.</td>
+          <td><strong>MEDIA / BAJA:</strong> Considerada deuda técnica.</td>
+          <td><strong>MEDIA:</strong> Dependencia de APIs propietarias.</td>
+        </tr>
+        <tr>
+          <td><strong>Factibilidad Económica</strong></td>
+          <td><strong>ALTA:</strong> Máximo retorno de inversión (ROI).</td>
+          <td><strong>MEDIA:</strong> Alto costo de mantenimiento.</td>
+          <td><strong>BAJA:</strong> TCO prohibitivo.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6.3. SELECCIÓN Y JUSTIFICACIÓN DE LA ALTERNATIVA MÁS VIABLE</h2>
+    <p>
+      Se selecciona concluyentemente la <strong>Alternativa 1 (Arquitectura de Microservicios con Java Spring Boot y React)</strong> debido a que:
+    </p>
+    <ol>
+      <li><strong>Soporte de Alta Concurrencia:</strong> Procesa más de <strong>350 transacciones por segundo (TPS)</strong> distribuidas en >2,200 locales sin riesgo de bloqueo monolítico.</li>
+      <li><strong>Viabilidad Financiera:</strong> Al basarse en software libre (Spring Boot, PostgreSQL, React), ahorra cientos de miles de dólares en licencias comerciales por usuario.</li>
+      <li><strong>Algoritmo Predictivo a Medida:</strong> Otorga flexibilidad total para calcular la <strong>distancia de Haversine (&lt; 10 km)</strong> y el <strong>semáforo FEFO a 90, 60 y 30 días</strong>, garantizando el cumplimiento de la meta de <strong>reducir en un 22% las pérdidas económicas por mermas</strong>.</li>
+      <li><strong>Restricción Académica UTP:</strong> Cumple holgadamente con el requisito de emplear más del 50% de desarrollo en tecnología Java (70%).</li>
+    </ol>
+
+  </div>
+
+</body>
+</html>

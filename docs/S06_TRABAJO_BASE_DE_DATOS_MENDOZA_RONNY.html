@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>S06 - Trabajo de Base de Datos | Mendoza Paucar Ronny Fernando UTP</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      line-height: 1.5;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    .cover {
+      text-align: center;
+      padding-top: 40px;
+      page-break-after: always;
+    }
+
+    .utp-header {
+      font-size: 22pt;
+      font-weight: 900;
+      color: #c8102e;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .faculty-header {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #334155;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .doc-title {
+      font-size: 18pt;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 40px 0 15px 0;
+      line-height: 1.3;
+    }
+
+    .doc-subtitle {
+      font-size: 12pt;
+      font-weight: 600;
+      color: #0284c7;
+      margin-bottom: 60px;
+    }
+
+    .student-card {
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+      font-size: 10.5pt;
+    }
+
+    .student-card table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .student-card td {
+      padding: 6px 4px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .student-card td.label {
+      font-weight: 700;
+      color: #475569;
+      width: 40%;
+    }
+
+    .student-card td.value {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .content {
+      padding: 10px 0;
+    }
+
+    h2 {
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 6px;
+      margin-top: 30px;
+      font-size: 14pt;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      color: #1e3a8a;
+      margin-top: 20px;
+      font-size: 12pt;
+      page-break-after: avoid;
+    }
+
+    p, li {
+      text-align: justify;
+      color: #334155;
+      font-size: 10pt;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0 25px 0;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+    }
+
+    table.data-table th {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 6px 8px;
+      border: 1px solid #0f172a;
+      text-transform: uppercase;
+    }
+
+    table.data-table td {
+      padding: 5px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: middle;
+    }
+
+    table.data-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .badge-pk {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+    }
+
+    .badge-fk {
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+    }
+
+    .badge-uk {
+      background: #fef3c7;
+      color: #b45309;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+    }
+
+    .code-box {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: 'Consolas', monospace;
+      font-size: 8pt;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      margin: 15px 0;
+      page-break-inside: avoid;
+    }
+
+    .alert-box {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 12px;
+      margin: 15px 0;
+      font-size: 9.5pt;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .print-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 11pt;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    @media print {
+      .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">📥 Guardar como PDF / Imprimir</button>
+
+  <!-- CARATULA -->
+  <div class="cover">
+    <div class="utp-header">UTP • UNIVERSIDAD TECNOLÓGICA DEL PERÚ</div>
+    <div class="faculty-header">FACULTAD DE INGENIERÍA DE SISTEMAS E INFORMÁTICA</div>
+
+    <div style="margin: 30px auto; width: 80px; height: 4px; background: #c8102e; border-radius: 2px;"></div>
+
+    <div class="doc-title">S06 - TRABAJO DE BASE DE DATOS</div>
+    <div class="doc-subtitle">
+      DISEÑO, ESTRUCTURACIÓN Y DIMENSIONAMIENTO DE LA BASE DE DATOS RELACIONAL<br>
+      <strong>PROYECTO INTEGRADOR: SISTEMA INTELIGENTE DE INVENTARIO Y PREDICCIÓN (SIIP)<br>
+      FARMACIAS PERUANAS (INKAFARMA / MIFARMA)</strong>
+    </div>
+
+    <div class="student-card">
+      <table>
+        <tr>
+          <td class="label">CURSO:</td>
+          <td class="value">Curso Integrador I: Sistemas Software</td>
+        </tr>
+        <tr>
+          <td class="label">SECCIÓN:</td>
+          <td class="value">20065</td>
+        </tr>
+        <tr>
+          <td class="label">DOCENTE:</td>
+          <td class="value">IRANI GUILLEN GOMEZ</td>
+        </tr>
+        <tr>
+          <td class="label">ESTUDIANTE:</td>
+          <td class="value"><strong>MENDOZA PAUCAR RONNY FERNANDO</strong></td>
+        </tr>
+        <tr>
+          <td class="label">CÓDIGO UTP:</td>
+          <td class="value"><strong>U25302314</strong></td>
+        </tr>
+        <tr>
+          <td class="label">CICLO:</td>
+          <td class="value">5to Semestre - 2026</td>
+        </tr>
+        <tr>
+          <td class="label">FECHA DE ENTREGA:</td>
+          <td class="value">18 de septiembre de 2026</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CONTENIDO DEL INFORME -->
+  <div class="content">
+
+    <h2>1. INTRODUCCIÓN Y CONTEXTO DEL ESCENARIO SIMULADO</h2>
+    <p>
+      El presente trabajo académico aborda la estructuración integral de la base de datos para <strong>Farmacias Peruanas S.A.</strong> (cadena líder en retail farmacéutico que opera las marcas comerciales <strong>InkaFarma</strong> y <strong>Mifarma</strong>). La empresa cuenta con una red de más de 2,200 locales a nivel nacional, abastecidos por centros de distribución principales (CD Huachipa y CD Lurín).
+    </p>
+    <div class="alert-box">
+      <strong>Propósito Central del Esquema de Datos:</strong> Eliminar los quiebres de stock en ventanilla mediante consultas de proximidad geodésica (&lt; 10 km con la fórmula de Haversine) y cumplir con la meta de <strong>reducir en un 22% las pérdidas económicas por productos vencidos</strong> aplicando el algoritmo de salida <strong>FEFO (First Expired, First Out)</strong> con semáforo a 90, 60 y 30 días, garantizando la trazabilidad ante DIGEMID y SUNAT.
+    </div>
+
+    <h2>2. PROCEDIMIENTOS PARA LA ESTRUCTURACIÓN DE INICIO A FIN</h2>
+    <p>Para la concepción y dimensionamiento de la base de datos se aplicó una metodología rigurosa compuesta por 8 etapas secuenciales:</p>
+
+    <h3>2.1. Análisis de Usuarios, Roles y Carga Concurrente</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Perfil / Rol de Usuario</th>
+          <th style="text-align: center;">Usuarios Totales</th>
+          <th>Tipo de Transacciones en BD</th>
+          <th style="text-align: center;">Concurrencia Máxima</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Químico Farmacéutico (Ventanilla)</strong></td>
+          <td style="text-align: center;">~2,500 usuarios</td>
+          <td><code>SELECT</code> (Stock local y sedes &lt;10km), <code>UPDATE</code> (Salidas por dispensación), <code>INSERT</code> (Solicitud traslado).</td>
+          <td style="text-align: center;"><strong>1,800 concurrentes</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Administrador Centro de Distribución (CD)</strong></td>
+          <td style="text-align: center;">~80 usuarios</td>
+          <td><code>SELECT</code> (Alertas predictivas 7d y vencimientos FEFO), <code>UPDATE</code> (Aprobación traslados), <code>INSERT</code> (Guías SUNAT).</td>
+          <td style="text-align: center;"><strong>50 concurrentes</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Gerencia de Operaciones y Mermas</strong></td>
+          <td style="text-align: center;">~30 usuarios</td>
+          <td><code>SELECT</code> analítico (Reportes de mermas, KPI de reducción 22%, tendencias de rotación por distrito).</td>
+          <td style="text-align: center;"><strong>15 concurrentes</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Motor Predictivo SIIP (Procesos Batch)</strong></td>
+          <td style="text-align: center;">Daemon Server</td>
+          <td><code>SELECT</code> masivo (Ventas últimos 14 días), <code>INSERT</code> (Alertas de caducidad), <code>UPDATE</code> (Cálculo CPD).</td>
+          <td style="text-align: center;"><strong>Procesamiento en Lote</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2.2. Estimación de Dimensionamiento y Capacidad de Almacenamiento (Volumetría)</h3>
+    <p>Se calculó el tamaño promedio en bytes por fila para determinar el espacio necesario durante el primer año de operación:</p>
+    
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Entidad / Tabla</th>
+          <th style="text-align: center;">Bytes x Fila</th>
+          <th style="text-align: center;">Registros Iniciales</th>
+          <th style="text-align: center;">Nuevos / Mes</th>
+          <th style="text-align: center;">Espacio Inicial</th>
+          <th style="text-align: center;">Crecimiento Anual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>SUCURSAL</code></td><td style="text-align: center;">420 B</td><td style="text-align: center;">2,200</td><td style="text-align: center;">10</td><td style="text-align: center;">0.92 MB</td><td style="text-align: center;">0.05 MB</td></tr>
+        <tr><td><code>CATEGORIA</code></td><td style="text-align: center;">180 B</td><td style="text-align: center;">50</td><td style="text-align: center;">2</td><td style="text-align: center;">0.01 MB</td><td style="text-align: center;">&lt;0.01 MB</td></tr>
+        <tr><td><code>MEDICAMENTO</code></td><td style="text-align: center;">550 B</td><td style="text-align: center;">8,500</td><td style="text-align: center;">50</td><td style="text-align: center;">4.67 MB</td><td style="text-align: center;">0.33 MB</td></tr>
+        <tr><td><code>LOTE</code></td><td style="text-align: center;">260 B</td><td style="text-align: center;">45,000</td><td style="text-align: center;">12,000</td><td style="text-align: center;">11.70 MB</td><td style="text-align: center;">37.44 MB</td></tr>
+        <tr><td><code>INVENTARIO_SUCURSAL</code></td><td style="text-align: center;">180 B</td><td style="text-align: center;">1,870,000</td><td style="text-align: center;">10,000</td><td style="text-align: center;">336.60 MB</td><td style="text-align: center;">21.60 MB</td></tr>
+        <tr><td><code>SOLICITUD_TRASLADO</code></td><td style="text-align: center;">320 B</td><td style="text-align: center;">1,000</td><td style="text-align: center;">15,000</td><td style="text-align: center;">0.32 MB</td><td style="text-align: center;">57.60 MB</td></tr>
+        <tr><td><code>DETALLE_TRASLADO</code></td><td style="text-align: center;">120 B</td><td style="text-align: center;">2,500</td><td style="text-align: center;">35,000</td><td style="text-align: center;">0.30 MB</td><td style="text-align: center;">50.40 MB</td></tr>
+        <tr><td><code>GUIA_REMISION</code></td><td style="text-align: center;">680 B</td><td style="text-align: center;">800</td><td style="text-align: center;">12,000</td><td style="text-align: center;">0.54 MB</td><td style="text-align: center;">97.92 MB</td></tr>
+        <tr><td><code>ALERTA_PREDICTIVA</code></td><td style="text-align: center;">290 B</td><td style="text-align: center;">5,000</td><td style="text-align: center;">60,000</td><td style="text-align: center;">1.45 MB</td><td style="text-align: center;">208.80 MB</td></tr>
+        <tr><td><code>HISTORIAL_VENTAS</code></td><td style="text-align: center;">150 B</td><td style="text-align: center;">500,000</td><td style="text-align: center;">1,800,000</td><td style="text-align: center;">75.00 MB</td><td style="text-align: center;">3,240.00 MB</td></tr>
+        <tr><td><code>USUARIO</code> &amp; <code>ROL</code></td><td style="text-align: center;">280 B</td><td style="text-align: center;">2,650</td><td style="text-align: center;">20</td><td style="text-align: center;">0.74 MB</td><td style="text-align: center;">0.07 MB</td></tr>
+        <tr style="background:#e2e8f0; font-weight:bold;">
+          <td>SUBTOTAL DATOS NETOS (Año 1):</td>
+          <td colspan="3" style="text-align:center;">-</td>
+          <td style="text-align: center;">432.25 MB</td>
+          <td style="text-align: center;">3.71 GB</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Proyección con Factores de Operación:</strong> Añadiendo espacio de índices B-Tree/PostGIS (40%), logs transaccionales WAL (30%) y holgura de crecimiento (50%), el almacenamiento real proyectado para el primer año es de <strong>8.15 GB</strong> (y <strong>42.5 GB a 5 años</strong>), requiriendo un almacenamiento inicial aprovisionado de <strong>100 GB SSD NVMe</strong>.
+    </p>
+
+    <h3>2.3. Selección y Justificación del SGBD (PostgreSQL 16)</h3>
+    <p>
+      Se seleccionó <strong>PostgreSQL 16</strong> debido a:
+    </p>
+    <ul>
+      <li><strong>Transacciones ACID estrictas:</strong> Evita la doble asignación o sobreventa de lotes durante transferencias inter-sucursales.</li>
+      <li><strong>Manejo Geoespacial (PostGIS):</strong> Soporte de funciones nativas de distancia geodésica para ubicar las 5 sucursales más cercanas a &lt; 10 km.</li>
+      <li><strong>Alta Concurrencia mediante MVCC:</strong> Permite lecturas masivas de catálogo sin bloquear las escrituras de inventario.</li>
+      <li><strong>Viabilidad Económica (Open Source):</strong> Cero costo de licenciamiento, a diferencia de motores comerciales como Oracle o SQL Server.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>3. CATEGORIZACIÓN DE TIPOS DE DATOS EN FORMATO TABLA (DICCIONARIO CONCEPTUAL)</h2>
+    <p>A continuación se detallan las tablas que conforman el modelo relacional normalizado en Tercera Forma Normal (3FN):</p>
+
+    <h3>Tabla 1: SUCURSAL</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo SQL</th>
+          <th>Nulo</th>
+          <th>Clave</th>
+          <th>Restricciones</th>
+          <th>Descripción Conceptual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id_sucursal</td><td>BIGINT</td><td>NO</td><td><span class="badge-pk">PK</span></td><td>AUTO_INCREMENT</td><td>Identificador único de la sucursal.</td></tr>
+        <tr><td>codigo</td><td>VARCHAR(20)</td><td>NO</td><td><span class="badge-uk">UK</span></td><td>UNIQUE</td><td>Código oficial (ej. 'SUC-001').</td></tr>
+        <tr><td>marca</td><td>VARCHAR(50)</td><td>NO</td><td>-</td><td>CHECK ('InkaFarma','Mifarma','Corporativo')</td><td>Marca comercial del establecimiento.</td></tr>
+        <tr><td>nombre</td><td>VARCHAR(150)</td><td>NO</td><td>-</td><td>-</td><td>Nombre descriptivo de la sede.</td></tr>
+        <tr><td>direccion</td><td>VARCHAR(250)</td><td>NO</td><td>-</td><td>-</td><td>Dirección física y calle.</td></tr>
+        <tr><td>distrito</td><td>VARCHAR(100)</td><td>NO</td><td>-</td><td>-</td><td>Distrito de ubicación.</td></tr>
+        <tr><td>latitud</td><td>NUMERIC(10,7)</td><td>NO</td><td>-</td><td>BETWEEN -90 AND 90</td><td>Coordenada GPS latitud.</td></tr>
+        <tr><td>longitud</td><td>NUMERIC(10,7)</td><td>NO</td><td>-</td><td>BETWEEN -180 AND 180</td><td>Coordenada GPS longitud.</td></tr>
+        <tr><td>es_centro_distribucion</td><td>BOOLEAN</td><td>NO</td><td>-</td><td>DEFAULT FALSE</td><td>Indica si es un CD Principal (Huachipa/Lurín).</td></tr>
+        <tr><td>activo</td><td>BOOLEAN</td><td>NO</td><td>-</td><td>DEFAULT TRUE</td><td>Estado operativo de la sede.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tabla 2: MEDICAMENTO</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo SQL</th>
+          <th>Nulo</th>
+          <th>Clave</th>
+          <th>Restricciones</th>
+          <th>Descripción Conceptual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id_medicamento</td><td>BIGINT</td><td>NO</td><td><span class="badge-pk">PK</span></td><td>AUTO_INCREMENT</td><td>Identificador único del fármaco.</td></tr>
+        <tr><td>codigo_ean</td><td>VARCHAR(30)</td><td>NO</td><td><span class="badge-uk">UK</span></td><td>UNIQUE</td><td>Código de barras EAN-13 oficial.</td></tr>
+        <tr><td>nombre_comercial</td><td>VARCHAR(150)</td><td>NO</td><td>-</td><td>-</td><td>Nombre comercial (ej. 'Amoxicilina 500mg').</td></tr>
+        <tr><td>principio_activo</td><td>VARCHAR(150)</td><td>NO</td><td>-</td><td>-</td><td>DCI / Principio activo (ej. 'Amoxicilina Trihidrato').</td></tr>
+        <tr><td>presentacion</td><td>VARCHAR(100)</td><td>NO</td><td>-</td><td>-</td><td>Presentación (ej. 'Caja x 100 Cápsulas').</td></tr>
+        <tr><td>laboratorio</td><td>VARCHAR(100)</td><td>NO</td><td>-</td><td>-</td><td>Laboratorio fabricante (ej. 'Medifarma S.A.').</td></tr>
+        <tr><td>id_categoria</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>REFERENCES CATEGORIA</td><td>Familia farmacológica.</td></tr>
+        <tr><td>precio_unitario</td><td>NUMERIC(10,2)</td><td>NO</td><td>-</td><td>CHECK (&gt; 0)</td><td>Precio de venta en Soles (S/.).</td></tr>
+        <tr><td>registro_sanitario_digemid</td><td>VARCHAR(50)</td><td>NO</td><td>-</td><td>-</td><td>Registro sanitario emitido por DIGEMID.</td></tr>
+        <tr><td>requiere_receta</td><td>BOOLEAN</td><td>NO</td><td>-</td><td>DEFAULT FALSE</td><td>Indica si es de venta con receta médica.</td></tr>
+        <tr><td>umbral_minimo</td><td>INT</td><td>NO</td><td>-</td><td>CHECK (&gt;= 0)</td><td>Stock mínimo antes de alerta.</td></tr>
+        <tr><td>umbral_seguridad</td><td>INT</td><td>NO</td><td>-</td><td>CHECK (&gt;= umbral_minimo)</td><td>Stock de seguridad asignado.</td></tr>
+        <tr><td>consumo_promedio_diario</td><td>NUMERIC(8,2)</td><td>NO</td><td>-</td><td>DEFAULT 0.00</td><td>Ritmo de salida diaria promedio (CPD).</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tabla 3: LOTE</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo SQL</th>
+          <th>Nulo</th>
+          <th>Clave</th>
+          <th>Restricciones</th>
+          <th>Descripción Conceptual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id_lote</td><td>BIGINT</td><td>NO</td><td><span class="badge-pk">PK</span></td><td>AUTO_INCREMENT</td><td>Identificador único del lote.</td></tr>
+        <tr><td>codigo_lote</td><td>VARCHAR(50)</td><td>NO</td><td>-</td><td>-</td><td>Código de lote grabado en empaque.</td></tr>
+        <tr><td>id_medicamento</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>REFERENCES MEDICAMENTO</td><td>Medicamento correspondiente.</td></tr>
+        <tr><td>id_sucursal</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>REFERENCES SUCURSAL</td><td>Sede física donde está almacenado.</td></tr>
+        <tr><td>fecha_fabricacion</td><td>DATE</td><td>NO</td><td>-</td><td>-</td><td>Fecha de manufactura.</td></tr>
+        <tr><td>fecha_vencimiento</td><td>DATE</td><td>NO</td><td>-</td><td>CHECK (&gt; fabricacion)</td><td>Fecha límite de caducidad.</td></tr>
+        <tr><td>cantidad</td><td>INT</td><td>NO</td><td>-</td><td>CHECK (&gt;= 0)</td><td>Cajas disponibles de este lote.</td></tr>
+        <tr><td>semaforo_fefo</td><td>VARCHAR(20)</td><td>NO</td><td>-</td><td>CHECK ('ROJO','NARANJA','AMARILLO','VERDE')</td><td>Clasificación FEFO (90, 60, 30 días).</td></tr>
+        <tr><td>accion_recomendada</td><td>TEXT</td><td>SÍ</td><td>-</td><td>-</td><td>Acción preventiva sugerida por SIIP.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tabla 4: INVENTARIO_SUCURSAL</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo SQL</th>
+          <th>Nulo</th>
+          <th>Clave</th>
+          <th>Restricciones</th>
+          <th>Descripción Conceptual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id_inventario</td><td>BIGINT</td><td>NO</td><td><span class="badge-pk">PK</span></td><td>AUTO_INCREMENT</td><td>Identificador único de stock por sede.</td></tr>
+        <tr><td>id_sucursal</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>REFERENCES SUCURSAL</td><td>Sucursal evaluada.</td></tr>
+        <tr><td>id_medicamento</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>REFERENCES MEDICAMENTO</td><td>Medicamento evaluado.</td></tr>
+        <tr><td>stock_actual</td><td>INT</td><td>NO</td><td>-</td><td>CHECK (&gt;= 0)</td><td>Stock físico disponible en el local.</td></tr>
+        <tr><td>stock_seguridad</td><td>INT</td><td>NO</td><td>-</td><td>DEFAULT 20</td><td>Stock de seguridad local.</td></tr>
+        <tr><td>dias_autonomia</td><td>NUMERIC(6,1)</td><td>NO</td><td>-</td><td>stock_actual / CPD</td><td>Días restantes calculados antes de quiebre.</td></tr>
+        <tr><td>estado_stock</td><td>VARCHAR(30)</td><td>NO</td><td>-</td><td>CHECK ('OPTIMO','SOBRESTOCK','QUIEBRE_CRITICO','ALERTA_BAJA')</td><td>Estado calculado del inventario.</td></tr>
+        <tr><td>lote_principal</td><td>VARCHAR(50)</td><td>SÍ</td><td>-</td><td>-</td><td>Lote FEFO prioritario a dispensar.</td></tr>
+        <tr><td>ultima_actualizacion</td><td>TIMESTAMP</td><td>NO</td><td>-</td><td>DEFAULT CURRENT_TIMESTAMP</td><td>Momento de última sincronización.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tabla 5: SOLICITUD_TRASLADO &amp; DETALLE_TRASLADO</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo SQL</th>
+          <th>Nulo</th>
+          <th>Clave</th>
+          <th>Restricciones</th>
+          <th>Descripción Conceptual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id_traslado</td><td>BIGINT</td><td>NO</td><td><span class="badge-pk">PK</span></td><td>AUTO_INCREMENT</td><td>Identificador de la orden de traslado.</td></tr>
+        <tr><td>codigo_traslado</td><td>VARCHAR(30)</td><td>NO</td><td><span class="badge-uk">UK</span></td><td>UNIQUE</td><td>Código de traslado (ej. 'TRA-2026-00891').</td></tr>
+        <tr><td>id_origen_sucursal</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>REFERENCES SUCURSAL</td><td>Sede donante con sobrestock.</td></tr>
+        <tr><td>id_destino_sucursal</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>REFERENCES SUCURSAL</td><td>Sede receptora con riesgo de quiebre.</td></tr>
+        <tr><td>estado_traslado</td><td>VARCHAR(30)</td><td>NO</td><td>-</td><td>CHECK ('PROPUESTO','PENDIENTE','APROBADO_EN_TRANSITO','ENTREGADO','RECHAZADO')</td><td>Estado del ciclo de vida del traslado.</td></tr>
+        <tr><td>distancia_km</td><td>NUMERIC(6,2)</td><td>NO</td><td>-</td><td>CHECK (&lt;= 10.0)</td><td>Distancia geodésica calculada por Haversine.</td></tr>
+        <tr><td>ahorro_estimado_soles</td><td>NUMERIC(10,2)</td><td>SÍ</td><td>-</td><td>-</td><td>Valor monetario rescatado de merma.</td></tr>
+        <tr><td>fecha_sugerencia</td><td>TIMESTAMP</td><td>NO</td><td>-</td><td>DEFAULT CURRENT_TIMESTAMP</td><td>Fecha de generación por el algoritmo.</td></tr>
+        <tr><td>fecha_autorizacion</td><td>TIMESTAMP</td><td>SÍ</td><td>-</td><td>-</td><td>Fecha de aprobación por Administrador CD.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tabla 6: GUIA_REMISION (SUNAT / DIGEMID)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo SQL</th>
+          <th>Nulo</th>
+          <th>Clave</th>
+          <th>Restricciones</th>
+          <th>Descripción Conceptual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id_guia</td><td>BIGINT</td><td>NO</td><td><span class="badge-pk">PK</span></td><td>AUTO_INCREMENT</td><td>Identificador de la guía de remisión.</td></tr>
+        <tr><td>id_traslado</td><td>BIGINT</td><td>NO</td><td><span class="badge-fk">FK</span></td><td>UNIQUE (1 a 1)</td><td>Orden de traslado respaldada.</td></tr>
+        <tr><td>numero_guia</td><td>VARCHAR(30)</td><td>NO</td><td><span class="badge-uk">UK</span></td><td>UNIQUE</td><td>Numeración oficial SUNAT (ej. 'GR-001-0008492').</td></tr>
+        <tr><td>ruc_emisor</td><td>VARCHAR(11)</td><td>NO</td><td>-</td><td>'20509872134'</td><td>RUC de Farmacias Peruanas S.A.</td></tr>
+        <tr><td>transportista</td><td>VARCHAR(150)</td><td>NO</td><td>-</td><td>-</td><td>Razón social o conductor autorizado.</td></tr>
+        <tr><td>placa_vehiculo</td><td>VARCHAR(20)</td><td>NO</td><td>-</td><td>-</td><td>Placa del vehículo de reparto.</td></tr>
+        <tr><td>codigo_hash_qr</td><td>TEXT</td><td>NO</td><td>-</td><td>-</td><td>Cadena criptográfica para código QR legal.</td></tr>
+        <tr><td>fecha_emision</td><td>TIMESTAMP</td><td>NO</td><td>-</td><td>DEFAULT CURRENT_TIMESTAMP</td><td>Fecha y hora legal de emisión.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>4. CONCLUSIONES</h2>
+    <ol>
+      <li><strong>Robustez y Rendimiento:</strong> La estructura relacional normalizada en 3FN y optimizada con índices B-Tree garantiza tiempos de respuesta inferiores a 2.0 segundos, soportando holgadamente la concurrencia de más de 2,200 locales.</li>
+      <li><strong>Cumplimiento de la Meta del 22%:</strong> La trazabilidad de lotes mediante el semáforo FEFO a 90, 60 y 30 días previene las mermas económicas antes de su vencimiento físico.</li>
+      <li><strong>Validez Legal y Regulatoria:</strong> La integración de las tablas <code>LOTE</code> y <code>GUIA_REMISION</code> cumple con la normativa sanitaria de DIGEMID y los estándares tributarios de SUNAT.</li>
+    </ol>
+
+  </div>
+
+</body>
+</html>

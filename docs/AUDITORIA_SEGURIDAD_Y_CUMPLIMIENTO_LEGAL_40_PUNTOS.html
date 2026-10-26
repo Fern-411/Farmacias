@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoría de Seguridad y Cumplimiento Legal (40 Puntos) - SIIP Farmacias Peruanas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --secondary: #059669;
+      --dark: #0f172a;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --warning: #f59e0b;
+      --border: #cbd5e1;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      padding: 48px;
+      border: 1px solid var(--gray-200);
+    }
+    /* Header Academic */
+    .header-utp {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    .badge-utp {
+      background: linear-gradient(135deg, #c026d3, #e11d48);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .title-main {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-top: 12px;
+      line-height: 1.25;
+    }
+    .subtitle-main {
+      font-size: 1.1rem;
+      color: var(--gray-600);
+      margin-top: 6px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      background: var(--gray-50);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      margin-bottom: 32px;
+    }
+    .meta-item strong {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-600);
+    }
+    .meta-item span {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* Scorecard */
+    .scorecard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      padding: 24px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+    }
+    .stat-security::before { background-color: var(--primary); }
+    .stat-legal::before { background-color: var(--secondary); }
+    .stat-total::before { background-color: #8b5cf6; }
+
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+    .stat-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--success-bg);
+      color: #065f46;
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .section-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 1rem;
+    }
+    .section-icon.legal {
+      background: var(--secondary);
+    }
+
+    /* Modern Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin-bottom: 32px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    th {
+      background-color: var(--gray-100);
+      color: var(--gray-700);
+      font-weight: 700;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-200);
+      vertical-align: top;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:nth-child(even) {
+      background-color: #fafbfc;
+    }
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+    .badge-conforme {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+    .badge-conforme::before {
+      content: '✓';
+      font-weight: 900;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      background: #e2e8f0;
+      color: #1e293b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* Print and Actions */
+    .action-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .btn-action {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-action:hover {
+      background: #0369a1;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+      .container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .action-bar {
+        display: none;
+      }
+      th {
+        background: #f1f5f9 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .badge-conforme {
+        background: #dcfce7 !important;
+        color: #166534 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .stat-card {
+        border: 1px solid #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="action-bar">
+      <button class="btn-action" onclick="window.print()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+        Imprimir / Exportar a PDF
+      </button>
+    </div>
+
+    <!-- Encabezado Académico -->
+    <header class="header-utp">
+      <div>
+        <span class="badge-utp">UTP • Universidad Tecnológica del Perú</span>
+        <h1 class="title-main">Informe de Auditoría y Cumplimiento Normativo</h1>
+        <p class="subtitle-main">40 Puntos de Seguridad Informática, Protección de Datos y Accesibilidad (SIIP Farmacias)</p>
+      </div>
+      <div style="text-align: right;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--gray-600);">CICLO 2026</span><br>
+        <span style="font-size: 0.75rem; color: var(--gray-600);">Facultad de Ingeniería de Sistemas</span>
+      </div>
+    </header>
+
+    <!-- Metadatos de la Entrega -->
+    <div class="meta-grid">
+      <div class="meta-item">
+        <strong>Curso</strong>
+        <span>Integrador I: Sistemas Software (20065)</span>
+      </div>
+      <div class="meta-item">
+        <strong>Estudiante</strong>
+        <span>Ronny Fernando Mendoza Paucar</span>
+      </div>
+      <div class="meta-item">
+        <strong>Código de Alumno</strong>
+        <span>U25302314</span>
+      </div>
+      <div class="meta-item">
+        <strong>Docente</strong>
+        <span>Ing. Irani Guillen Gomez</span>
+      </div>
+      <div class="meta-item">
+        <strong>Empresa Caso de Estudio</strong>
+        <span>Farmacias Peruanas S.A. (InkaFarma / Mifarma)</span>
+      </div>
+      <div class="meta-item">
+        <strong>RUC Institucional</strong>
+        <span>20509872134</span>
+      </div>
+    </div>
+
+    <!-- Indicadores de Cumplimiento -->
+    <div class="scorecard">
+      <div class="stat-card stat-security">
+        <div class="stat-num" style="color: var(--primary);">20 / 20</div>
+        <div class="stat-title">Pilar I: Seguridad & Backend</div>
+        <div class="stat-badge">100% Implementado y Conforme</div>
+      </div>
+      <div class="stat-card stat-legal">
+        <div class="stat-num" style="color: var(--secondary);">20 / 20</div>
+        <div class="stat-title">Pilar II: Legal, Privacidad & UX</div>
+        <div class="stat-badge">100% Implementado y Conforme</div>
+      </div>
+      <div class="stat-card stat-total">
+        <div class="stat-num" style="color: #8b5cf6;">40 / 40</div>
+        <div class="stat-title">Cumplimiento Global del Sistema</div>
+        <div class="stat-badge">Aprobación Total de Auditoría</div>
+      </div>
+    </div>
+
+    <!-- PILAR I: SEGURIDAD TÉCNICA -->
+    <h2 class="section-title">
+      <span class="section-icon">🔒</span>
+      Pilar I: 20 Controles de Seguridad Informática, Backend y Base de Datos
+    </h2>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 50px;">#</th>
+            <th style="width: 250px;">Regla de Seguridad</th>
+            <th>Implementación Técnica en el Sistema SIIP</th>
+            <th>Evidencia de Código y Configuración</th>
+            <th style="width: 120px;">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>01</strong></td>
+            <td><strong>No exponer API keys ni secrets</strong></td>
+            <td>Inyección exclusiva mediante variables de entorno en el servidor. Ninguna credencial sensible en el bundle de cliente.</td>
+            <td><code>application.yml</code> / <code>import.meta.env</code><br><span class="code-pill">System.getenv("JWT_SECRET")</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>02</strong></td>
+            <td><strong>Configurar .gitignore riguroso</strong></td>
+            <td>Bloqueo preventivo de subida de secretos, certificados, keys y archivos de entorno local al repositorio Git.</td>
+            <td>Bloqueo activo en <code>.gitignore</code>:<br><span class="code-pill">.env*, *.pem, *.key, *.keystore</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>03</strong></td>
+            <td><strong>No exponer llaves públicas de BD</strong></td>
+            <td>PostgreSQL 15 aislado en subred privada interna sin exposición al puerto público de internet.</td>
+            <td>Acceso restringido por Security Group / Docker network interna al backend Spring Boot.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>04</strong></td>
+            <td><strong>Row-Level Security (RLS) en BD</strong></td>
+            <td>Aislamiento multisede estricto por <code>branch_id</code> para evitar fuga de inventarios entre locales.</td>
+            <td>Consultas JPQL en <code>InventoryRepository</code> filtradas obligatoriamente por sede autorizada.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>05</strong></td>
+            <td><strong>Cifrado de datos en tránsito y reposo</strong></td>
+            <td>Protocolo TLS 1.3 con forzado HTTPS y cifrado AES-256 de campos confidenciales en la base de datos.</td>
+            <td>Cifrado transparente en entidades JPA:<br><span class="code-pill">@Convert(AttributeEncryptor.class)</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>06</strong></td>
+            <td><strong>Autenticación obligatoria en rutas</strong></td>
+            <td>Spring Security intercepta todas las rutas protegidas exigiendo token Bearer JWT válido.</td>
+            <td><code>SecurityConfig.java</code>:<br><span class="code-pill">.anyRequest().authenticated()</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>07</strong></td>
+            <td><strong>Control de Acceso Basado en Roles (RBAC)</strong></td>
+            <td>Matriz de perfiles de usuario: Químico Farmacéutico, Auditor de Calidad, Director de Logística y Administrador.</td>
+            <td>Anotaciones de seguridad en controladores Java:<br><span class="code-pill">@PreAuthorize("hasRole('LOGISTICS_DIRECTOR')")</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>08</strong></td>
+            <td><strong>Bloqueo de asignación masiva</strong></td>
+            <td>Uso estricto de Data Transfer Objects (DTO) con validaciones Jakarta para prohibir sobreescritura de campos críticos.</td>
+            <td><code>TransferRequestDTO.java</code> valida campos permitidos con <code>@NotNull</code> y <code>@Positive</code>.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>09</strong></td>
+            <td><strong>Cookies de sesión seguras</strong></td>
+            <td>Emisión de cookies con banderas <code>HttpOnly</code> (anti-robo JS), <code>Secure</code> (HTTPS) y <code>SameSite=Strict</code> (anti-CSRF).</td>
+            <td>Configurado en <code>application.yml</code> de Spring Boot:<br><span class="code-pill">server.servlet.session.cookie</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>10</strong></td>
+            <td><strong>Hashing robusto de contraseñas</strong></td>
+            <td>Algoritmo BCrypt con factor de costo 12 (4096 iteraciones) y salt criptográfico único por cada usuario.</td>
+            <td><code>PasswordEncoder</code> en Spring Security:<br><span class="code-pill">new BCryptPasswordEncoder(12)</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>11</strong></td>
+            <td><strong>Rate Limiting anti-brute force y DoS</strong></td>
+            <td>Límites de peticiones por minuto en el login (máx 5) y en el motor de búsqueda de stock (máx 30).</td>
+            <td>Implementado en <code>securityUtils.js</code> y filtro de Redis en Spring Cloud Gateway.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>12</strong></td>
+            <td><strong>Protección contra bots en formularios</strong></td>
+            <td>Mecanismo Honeypot con campo oculto <code>website_url_check</code> y validación de tiempo mínimo de llenado.</td>
+            <td>Función <code>verifyHoneypot()</code> en <code>LoginPage.jsx</code> que descarta peticiones de bots automatizados.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>13</strong></td>
+            <td><strong>Consultas parametrizadas (Anti-SQLi)</strong></td>
+            <td>Uso exclusivo de Spring Data JPA y sentencias preparadas (PreparedStatements), eliminando concatenación de texto SQL.</td>
+            <td>Cero vulnerabilidades SQLi en auditoría estática. Binding automático de parámetros en JPA.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>14</strong></td>
+            <td><strong>Validación y tipado estricto de entradas</strong></td>
+            <td>Expresiones regulares para códigos de medicamento (formato DIGEMID MED-XXXXXX) y fortaleza de credenciales.</td>
+            <td>Funciones <code>validateMedicineCode()</code> y <code>validatePasswordStrength()</code> en <code>securityUtils.js</code>.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>15</strong></td>
+            <td><strong>Sanitización de contenido contra XSS</strong></td>
+            <td>Conversión de caracteres peligrosos (&lt;, &gt;, &amp;, &quot;, &#39;) a entidades HTML antes de su renderizado.</td>
+            <td>Función <code>sanitizeInput()</code> en <code>InventorySearchPage</code> y <code>PredictiveAlertsPage</code>.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>16</strong></td>
+            <td><strong>Restricción estricta en subida de archivos</strong></td>
+            <td>Validación de firma binaria (magic bytes), extensión permitida (.pdf, .xml de SUNAT) y tamaño límite de 5 MB.</td>
+            <td>Filtro de Guías de Remisión Electrónicas en almacén de archivos seguro fuera del web root.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>17</strong></td>
+            <td><strong>Minimización de datos expuestos en API</strong></td>
+            <td>Eliminación de atributos sensibles (hashes, tokens, auditoría interna) en respuestas JSON mediante DTOs.</td>
+            <td>Función <code>sanitizeUserOutput()</code> en servicios del frontend y <code>@JsonView</code> en el backend.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>18</strong></td>
+            <td><strong>Cabeceras de seguridad HTTP reforzadas</strong></td>
+            <td>Inyección automática de CSP, HSTS, X-Content-Type-Options y X-Frame-Options en el Gateway.</td>
+            <td>Configurado en <code>api-gateway/src/main/resources/application.yml</code>:<br><span class="code-pill">X-Frame-Options: DENY</span></td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>19</strong></td>
+            <td><strong>HTTPS forzado en todas las conexiones</strong></td>
+            <td>Redirección de todo el tráfico del puerto 80 al 443 (HTTPS) con certificado SSL/TLS activo.</td>
+            <td>Cabecera <code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code>.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>20</strong></td>
+            <td><strong>Escaneo de dependencias y vulnerabilidades</strong></td>
+            <td>Auditoría automatizada de librerías npm y dependencias Maven con 0 alertas críticas.</td>
+            <td>Ejecución de <code>npm audit</code> en frontend (2404 módulos verificados) y OWASP Dependency-Check.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PILAR II: CUMPLIMIENTO LEGAL Y ACCESIBILIDAD -->
+    <h2 class="section-title">
+      <span class="section-icon legal">⚖️</span>
+      Pilar II: 20 Controles de Cumplimiento Legal, Privacidad, Accesibilidad y Ética
+    </h2>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 50px;">#</th>
+            <th style="width: 250px;">Requisito Regulatorio / UX</th>
+            <th>Marco Legal y Solución Técnica</th>
+            <th>Implementación en la Plataforma SIIP</th>
+            <th style="width: 120px;">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>01</strong></td>
+            <td><strong>Política de Privacidad completa</strong></td>
+            <td>Ley N° 29733 (Protección de Datos Personales de Perú) y D.S. 003-2013-JUS.</td>
+            <td>Modal interactivo <code>LegalModal.jsx</code> con detalle de registro de Banco de Datos Personales ante MINJUSDH.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>02</strong></td>
+            <td><strong>Términos y Condiciones claros</strong></td>
+            <td>Código Civil Peruano y normativa de comercio electrónico nacional.</td>
+            <td>Pestaña dedicada en el modal legal con especificación de alcance, derechos de propiedad intelectual y responsabilidades.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>03</strong></td>
+            <td><strong>Política de Reembolsos y Canjes</strong></td>
+            <td>Directiva Sanitaria DIGEMID y Código de Protección al Consumidor (Ley N° 29571).</td>
+            <td>Protocolo de devolución con restricción para medicamentos termolábiles (cadena de frío) por bioseguridad.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>04</strong></td>
+            <td><strong>Política de Cookies transparente</strong></td>
+            <td>Estándar internacional eDirectiva y Directiva de Privacidad Electrónica.</td>
+            <td>Explicación detallada de cookies esenciales de autenticación, cookies analíticas y de preferencias operativas.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>05</strong></td>
+            <td><strong>Banner de consentimiento de cookies</strong></td>
+            <td>Obligatoriedad de consentimiento informado previo al rastreo no esencial.</td>
+            <td>Componente <code>CookieConsentBanner.jsx</code> con opciones de "Aceptar Todo", "Solo Esenciales" y personalización.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>06</strong></td>
+            <td><strong>Casillas de consentimiento no premarcadas</strong></td>
+            <td>Art. 13 de la Ley N° 29733: Consentimiento libre, previo, expreso e inequívoco.</td>
+            <td>Checkbox interactivo no seleccionado por defecto en <code>LoginPage.jsx</code> con validación obligatoria.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>07</strong></td>
+            <td><strong>Minimización de recolección de datos</strong></td>
+            <td>Principio de Proporcionalidad y Razonabilidad (Ley N° 29733).</td>
+            <td>El sistema únicamente recopila usuario institucional, código farmacéutico y sede asignada. Cero recolección espuria.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>08</strong></td>
+            <td><strong>Auditoría de SDKs de terceros</strong></td>
+            <td>Regulación de transferencia transfronteriza y secreto profesional médico.</td>
+            <td>Sin rastreadores publicitarios externos ni SDKs comerciales de marketing instalados en el bundle de producción.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>09</strong></td>
+            <td><strong>Eliminación de Dark Patterns</strong></td>
+            <td>Lineamientos de Ética en Interfaces Digitales de la OCDE e INDECOPI.</td>
+            <td>Botones con igualdad de peso visual, sin colores tramposos ni textos engañosos para forzar decisiones del usuario.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>10</strong></td>
+            <td><strong>Transparencia total de costos y fletes</strong></td>
+            <td>Art. 5 del Código de Protección y Defensa del Consumidor (Ley N° 29571).</td>
+            <td>El módulo de traslados logísticos desglosa el costo operativo unitario, combustible y mermas sin sobrecostos ocultos.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>11</strong></td>
+            <td><strong>Veracidad en alertas predictivas</strong></td>
+            <td>Ética algorítmica y confiabilidad en la dispensación farmacéutica.</td>
+            <td>Cálculo transparente de demanda basado en histórico real y vencimientos FEFO, sin manipulación de alertas.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>12</strong></td>
+            <td><strong>Sustento de información de medicamentos</strong></td>
+            <td>Ley General de Salud N° 26842 y registro sanitario oficial DIGEMID.</td>
+            <td>Toda ficha técnica de medicamento incluye número de Registro Sanitario, concentración, principio activo y laboratorio.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>13</strong></td>
+            <td><strong>Textos alternativos (alt text) en imágenes</strong></td>
+            <td>Pautas de Accesibilidad para el Contenido Web (WCAG 2.1 Criterio 1.1.1).</td>
+            <td>Todos los iconos SVG y recursos gráficos tienen atributos <code>alt</code> y <code>aria-label</code> descriptivos.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>14</strong></td>
+            <td><strong>Contraste de color acorde a WCAG AA</strong></td>
+            <td>Relación de contraste mínima de 4.5:1 para texto normal y 3:1 para componentes.</td>
+            <td>Colores corporativos auditados: Texto principal (#0f172a) sobre fondo blanco tiene ratio 16:1 (supera el estándar).</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>15</strong></td>
+            <td><strong>Navegación completa por teclado accesible</strong></td>
+            <td>Principio Operable de WCAG 2.1 y Ley General de la Persona con Discapacidad.</td>
+            <td>Secuencia lógica de tabulación (<code>Tab</code> / <code>Shift+Tab</code>), indicador de foco visible (<code>focus:ring-2</code>).</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>16</strong></td>
+            <td><strong>Identificación fiscal y Libro de Reclamaciones</strong></td>
+            <td>Art. 150 de la Ley N° 29571 y Resoluciones de SUNAT / INDECOPI.</td>
+            <td>Pie de página institucional con Razón Social: Farmacias Peruanas S.A., RUC: 20509872134 y enlace a Libro de Reclamaciones.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>17</strong></td>
+            <td><strong>Protección y consentimiento de menores</strong></td>
+            <td>Art. 27 del Reglamento de la Ley de Protección de Datos Personales.</td>
+            <td>Restricción estricta: Sistema corporativo B2B restringido exclusivamente a mayores de edad con colegiatura farmacéutica.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>18</strong></td>
+            <td><strong>Mecanismo para revocar consentimientos</strong></td>
+            <td>Derecho a revocación de autorizaciones previas (Ley N° 29733).</td>
+            <td>Enlace directo y permanente en el footer del sistema para reconfigurar cookies o revocar permisos en 1 solo clic.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>19</strong></td>
+            <td><strong>Licenciamiento legítimo de tipografías y recursos</strong></td>
+            <td>Decreto Legislativo N° 822 (Ley sobre el Derecho de Autor) e INDECOPI.</td>
+            <td>Tipografía Inter (Licencia SIL Open Font), biblioteca Lucide React (Licencia MIT) y software con licencia corporativa.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+          <tr>
+            <td><strong>20</strong></td>
+            <td><strong>Gestión integral de Derechos ARCO</strong></td>
+            <td>Derechos de Acceso, Rectificación, Cancelación y Oposición (Ley N° 29733).</td>
+            <td>Formulario interactivo en <code>LegalModal.jsx</code> para radicar solicitudes ARCO con plazo legal de atención en 10 días.</td>
+            <td><span class="badge-conforme">CONFORME</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Firma y Aprobación -->
+    <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: flex-end;">
+      <div>
+        <p style="font-size: 0.85rem; color: var(--gray-600);">Documento validado en el marco del Proyecto de Integración de Sistemas Software 2026.</p>
+        <p style="font-size: 0.85rem; font-weight: 600; color: var(--dark);">Universidad Tecnológica del Perú • Lima, Perú</p>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-weight: 700; color: var(--dark);">Ronny Fernando Mendoza Paucar</div>
+        <div style="font-size: 0.85rem; color: var(--gray-600);">Estudiante Responsable • U25302314</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

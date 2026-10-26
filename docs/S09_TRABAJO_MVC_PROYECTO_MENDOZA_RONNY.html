@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>S09 - Creación del MVC del Proyecto Integrador | Mendoza Paucar Ronny Fernando UTP</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
+    
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      line-height: 1.55;
+      font-size: 10.5pt;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    .cover {
+      text-align: center;
+      padding-top: 45px;
+      page-break-after: always;
+    }
+
+    .utp-header {
+      font-size: 22pt;
+      font-weight: 900;
+      color: #c8102e;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .faculty-header {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #334155;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .doc-title {
+      font-size: 18pt;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 35px 0 15px 0;
+      line-height: 1.3;
+    }
+
+    .doc-subtitle {
+      font-size: 11.5pt;
+      font-weight: 600;
+      color: #0284c7;
+      margin-bottom: 50px;
+    }
+
+    .student-card {
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+      font-size: 10pt;
+    }
+
+    .student-card table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .student-card td {
+      padding: 6px 4px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .student-card td.label {
+      font-weight: 700;
+      color: #475569;
+      width: 38%;
+    }
+
+    .student-card td.value {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .content {
+      padding: 10px 0;
+    }
+
+    h2 {
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 6px;
+      margin-top: 30px;
+      font-size: 13pt;
+      text-transform: uppercase;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      color: #1e3a8a;
+      margin-top: 20px;
+      font-size: 11pt;
+      page-break-after: avoid;
+    }
+
+    p, li {
+      text-align: justify;
+      color: #334155;
+      font-size: 9.5pt;
+    }
+
+    /* Diagram Box */
+    .diagram-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 10px;
+      padding: 14px;
+      margin: 15px 0 20px 0;
+      font-family: 'Fira Code', 'Consolas', monospace;
+      font-size: 7.8pt;
+      line-height: 1.35;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      border: 1px solid #334155;
+      page-break-inside: avoid;
+    }
+
+    /* Data Tables */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 20px 0;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+    }
+
+    table.data-table th {
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: left;
+      padding: 6px 8px;
+      border: 1px solid #0f172a;
+      text-transform: uppercase;
+    }
+
+    table.data-table td {
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+      vertical-align: middle;
+    }
+
+    table.data-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .alert-box {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 12px 16px;
+      margin: 15px 0;
+      font-size: 9pt;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .badge-layer {
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .print-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 11pt;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    @media print {
+      .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">📥 Guardar como PDF / Imprimir</button>
+
+  <!-- CARÁTULA OFICIAL UTP -->
+  <div class="cover">
+    <div class="utp-header">UTP • UNIVERSIDAD TECNOLÓGICA DEL PERÚ</div>
+    <div class="faculty-header">FACULTAD DE INGENIERÍA DE SISTEMAS E INFORMÁTICA</div>
+
+    <div style="margin: 25px auto; width: 80px; height: 4px; background: #c8102e; border-radius: 2px;"></div>
+
+    <div class="doc-title">S09 - TRABAJO DE ARQUITECTURA DE SOFTWARE</div>
+    <div class="doc-subtitle">
+      DISEÑO Y ESTRUCTURACIÓN DEL PATRÓN MODELO-VISTA-CONTROLADOR (MVC)<br>
+      Y FLUJOS TRANSACCIONALES DE INFORMACIÓN DE INICIO A FIN<br>
+      <strong>PROYECTO: SISTEMA INTELIGENTE DE INVENTARIO Y PREDICCIÓN (SIIP)<br>
+      FARMACIAS PERUANAS (INKAFARMA / MIFARMA)</strong>
+    </div>
+
+    <div class="student-card">
+      <table>
+        <tr>
+          <td class="label">CURSO:</td>
+          <td class="value">Curso Integrador I: Sistemas Software</td>
+        </tr>
+        <tr>
+          <td class="label">SECCIÓN:</td>
+          <td class="value">20065</td>
+        </tr>
+        <tr>
+          <td class="label">DOCENTE:</td>
+          <td class="value">IRANI GUILLEN GOMEZ</td>
+        </tr>
+        <tr>
+          <td class="label">ESTUDIANTE:</td>
+          <td class="value"><strong>MENDOZA PAUCAR RONNY FERNANDO</strong></td>
+        </tr>
+        <tr>
+          <td class="label">CÓDIGO UTP:</td>
+          <td class="value"><strong>U25302314</strong></td>
+        </tr>
+        <tr>
+          <td class="label">CICLO ACADÉMICO:</td>
+          <td class="value">5to Semestre • 2026</td>
+        </tr>
+        <tr>
+          <td class="label">FECHA DE ENTREGA:</td>
+          <td class="value">09 de Octubre de 2026</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div class="content">
+
+    <h2>1. INTRODUCCIÓN Y CONTEXTO DEL PROYECTO</h2>
+    <p>
+      El presente informe aborda el diseño y estructuración formal del patrón arquitectónico <strong>Modelo-Vista-Controlador (MVC)</strong> para el <strong>Sistema Inteligente de Inventario y Predicción (SIIP)</strong> de <strong>Farmacias Peruanas S.A.</strong> (cadena líder nacional que opera las marcas <strong>InkaFarma</strong> y <strong>Mifarma</strong> en más de 2,200 locales).
+    </p>
+    <div class="alert-box">
+      <strong>Propósito del Patrón MVC en el SIIP:</strong> Desacoplar la experiencia de usuario asíncrona en ventanilla (Vista en React 18) del procesamiento de algoritmos matemáticos críticos (Controlador y Servicios en Java 17 Spring Boot 3 para Haversine &lt; 10 km y semáforo FEFO 90/60/30 días) y de la persistencia relacional transaccional (Modelo en PostgreSQL 16), asegurando alta disponibilidad (99.9%) y respuestas inferiores a 2.0 segundos.
+    </div>
+
+    <h2>2. PROCEDIMIENTOS DE ESTRUCTURACIÓN DE INICIO A FIN</h2>
+    <p>La estructuración del MVC siguió 5 procedimientos formales de ingeniería de software:</p>
+
+    <h3>2.1. Análisis de Usuarios y Roles Operativos</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Perfil de Usuario</th>
+          <th>Capa en el MVC</th>
+          <th>Interacción en el Flujo de Datos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Químico Farmacéutico (Ventanilla)</strong></td>
+          <td><span class="badge-layer">Capa Vista (UI)</span></td>
+          <td>Inicia consultas de stock geocercano (&lt; 10 km), registra ventas por dispensación y genera traslados de emergencia.</td>
+        </tr>
+        <tr>
+          <td><strong>Administrador Centro Distribución (CD)</strong></td>
+          <td><span class="badge-layer">Vista / Control</span></td>
+          <td>Recibe alertas predictivas de quiebre, autoriza transferencias en 1 clic y emite Guías de Remisión SUNAT.</td>
+        </tr>
+        <tr>
+          <td><strong>Gerencia de Operaciones y Mermas</strong></td>
+          <td><span class="badge-layer">Vista Analítica</span></td>
+          <td>Monitorea dashboards ejecutivos de rotación y cumplimiento de la meta de <strong>-22% en pérdidas por vencidos</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Motor Predictivo / Cron Jobs</strong></td>
+          <td><span class="badge-layer">Capa Servicio</span></td>
+          <td>Proceso en segundo plano que evalúa el consumo promedio diario ($CPD$) y actualiza lotes FEFO cada 6 horas.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2.2. Desglose de Módulos y Capas del Sistema</h3>
+    <ul>
+      <li><strong>Capa Vista (V):</strong> SPA construida en React 18 con Vite, Tailwind CSS y Recharts para KPIs y reportes tabulares.</li>
+      <li><strong>Capa Controlador (C):</strong> Clases <code>@RestController</code> en Java Spring Boot (enrutadas por Spring Cloud API Gateway en puerto 8080) encargadas de recibir peticiones HTTP, validar tokens JWT y retornar DTOs normalizados.</li>
+      <li><strong>Capa Modelo (M):</strong> Entidades JPA (<code>@Entity</code>), Repositorios (<code>@Repository</code>) y Servicios de lógica de negocio (<code>@Service</code>) conectados a PostgreSQL 16 con transacciones ACID.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>3. DIAGRAMA ARQUITECTÓNICO DEL PATRÓN MVC EN EL SIIP</h2>
+    <div class="diagram-box">+--------------------------------------------------------------------------------------------------+
+|                            1. CAPA VISTA (REACT 18 SPA - FRONTEND)                               |
+|   [ Login JWT ]   [ Dashboard KPIs Recharts ]   [ Buscador &lt;10km ]   [ Modal Guía SUNAT QR ]     |
++--------------------------------------------------------------------------------------------------+
+                                        │ Peticiones HTTPS / JSON (Axios)
+                                        ▼
++--------------------------------------------------------------------------------------------------+
+|                      ENRUTADOR PERIMETRAL: SPRING CLOUD API GATEWAY (8080)                       |
+|                      Filtro de Seguridad JWT • CORS Global • Balanceo Reactivo                   |
++--------------------------------------------------------------------------------------------------+
+                                        │ Enrutamiento REST por Microservicio
+                                        ▼
++--------------------------------------------------------------------------------------------------+
+|                       2. CAPA CONTROLADOR (SPRING BOOT REST CONTROLLERS)                         |
+|   AuthController (8084) | InventarioController (8081) | AlertasController (8082) | Traslados (8083)|
++--------------------------------------------------------------------------------------------------+
+                                        │ Invocación de Métodos de Negocio
+                                        ▼
++--------------------------------------------------------------------------------------------------+
+|                        CAPA DE SERVICIOS Y REGLAS DE NEGOCIO (@Service)                          |
+|   HaversineGeoService (Distancia &lt; 10 km) | MotorPredictivoService (CPD) | GuiaRemisionService QR  |
++--------------------------------------------------------------------------------------------------+
+                                        │ Acceso a Datos / Mapeo Objeto-Relacional
+                                        ▼
++--------------------------------------------------------------------------------------------------+
+|                       3. CAPA MODELO (ENTIDADES JPA, REPOSITORIOS Y DTOs)                        |
+|   Entidades: Sucursal, Medicamento, Lote, Traslado, Guia | Repositorios: Spring Data JPA          |
++--------------------------------------------------------------------------------------------------+
+                                        │ Consultas SQL Indexadas / Transacciones ACID
+                                        ▼
++--------------------------------------------------------------------------------------------------+
+|                        BASE DE DATOS RELACIONAL: POSTGRESQL 16 ENTERPRISE                        |
+|                        Tablas en 3FN • Índices B-Tree • Extensiones PostGIS                      |
++--------------------------------------------------------------------------------------------------+</div>
+
+    <h2>4. FLUJOS DE INFORMACIÓN DE INICIO A FIN (SECUENCIAS EXPLICADAS)</h2>
+
+    <h3>4.1. Flujo 1: Consulta de Inventario Georreferenciado (&lt; 10 km con Haversine)</h3>
+    <p><strong>De dónde inicia, hacia dónde va y cómo termina:</strong></p>
+    <div class="diagram-box">1. [INICIO: VISTA]        Químico Farmacéutico digita "Amoxicilina 500mg" en el Buscador React.
+2. [CLIENTE -> GATEWAY]   Vista envía: GET /api/v1/inventario/cercanos?lat=-12.09&amp;lng=-77.02
+3. [GATEWAY -> CONTROL]   Gateway valida Token JWT y entrega petición a InventarioController (Puerto 8081).
+4. [CONTROL -> SERVICIO]  Controlador invoca: HaversineGeoService.buscarStockCercano().
+5. [SERVICIO -> MODELO]   Servicio ejecuta consulta mediante InventarioRepository.findStockByMedicamento().
+6. [MODELO -> BD]         PostgreSQL ejecuta SELECT indexado recuperando coordenadas GPS de farmacias con stock.
+7. [BD -> SERVICIO]       Retorna entidades. El servicio calcula distancia geodésica mediante Haversine.
+8. [SERVICIO -> CONTROL]  Filtra sedes &lt;= 10.0 km, ordena Top 5 más cercanas y transforma a SucursalDto.
+9. [CONTROL -> VISTA]     Controlador responde JSON con código HTTP 200 OK hacia el navegador.
+10.[TÉRMINO: VISTA]       React renderiza la Tabla Comparativa con distancia exacta en km y botón de traslado.</div>
+
+    <h3>4.2. Flujo 2: Evaluación Predictiva de Caducidades FEFO (Meta: -22% de Mermas)</h3>
+    <div class="diagram-box">1. [INICIO: TIMER]        Cron Job automático se dispara cada 6 horas invocando AlertasController.
+2. [CONTROL -> SERVICIO]  Controlador solicita evaluación a MotorPredictivoService.
+3. [SERVICIO -> MODELO]   Servicio consulta LoteRepository.findLotesActivos() en PostgreSQL.
+4. [LÓGICA FEFO]          Servicio calcula días restantes (vencimiento - hoy) y clasifica en Semáforo:
+                          - 🔴 ROJO (&lt;= 30 días): Crítico / Devolución a laboratorio.
+                          - 🟠 NARANJA (31-60 días): Alerta / Dispensación prioritaria FEFO en ventanilla.
+                          - 🟡 AMARILLO (61-90 días): Atención / Descuento Agora / Monedero.
+5. [CÁLCULO MONETARIO]    Multiplica cantidad x precio_unitario para obtener "Impacto Financiero en Riesgo S/.".
+6. [PERSISTENCIA]         Inserta alertas en tabla ALERTA_PREDICTIVA y actualiza semáforo en LOTE.
+7. [TÉRMINO: VISTA]       React actualiza en tiempo real el Reporte Tabular de Caducidades y Dashboard.</div>
+
+    <h3>4.3. Flujo 3: Aprobación de Traslado y Emisión de Guía SUNAT con QR</h3>
+    <div class="diagram-box">1. [INICIO: VISTA]        Administrador de CD hace clic en "Aprobar Traslado" en la interfaz React.
+2. [CLIENTE -> GATEWAY]   Envía: POST /api/v1/traslados/891/aprobar con cabecera de autenticación.
+3. [CONTROL -> SERVICIO]  TrasladosController recibe y transfiere a GuiaRemisionService bajo @Transactional.
+4. [SERVICIO -> BD]       Ejecuta transacción ACID: Reserva stock en origen y actualiza estado a EN_TRANSITO.
+5. [GENERACIÓN LEGAL QR]  Servicio construye número oficial GR-001-0008492 y genera Hash SHA-256 para QR SUNAT.
+6. [PERSISTENCIA MODELO]  Inserta comprobante en GUIA_REMISION y hace COMMIT en PostgreSQL.
+7. [TÉRMINO: VISTA]       Retorna GuiaRemisionDto y React abre el modal oficial de Guía SUNAT para imprimir.</div>
+
+    <h2>5. CONCLUSIONES</h2>
+    <ol>
+      <li><strong>Separación de Responsabilidades:</strong> La arquitectura MVC desacoplada garantiza que la lógica matemática de Haversine y FEFO resida en servicios testeables en Java, mientras que la interfaz en React permanece ligera y fluida.</li>
+      <li><strong>Trazabilidad y Seguridad:</strong> Cada transacción cuenta con validación perimetral JWT en el Gateway y persistencia ACID en PostgreSQL, impidiendo inconsistencias de stock en la red de farmacias.</li>
+      <li><strong>Cumplimiento de Metas:</strong> El flujo de información estructurado soporta directamente la reducción del 22% en mermas económicas y asegura la disponibilidad continua de medicamentos críticos.</li>
+    </ol>
+
+  </div>
+
+</body>
+</html>
