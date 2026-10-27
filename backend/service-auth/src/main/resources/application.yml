@@ -5,7 +5,34 @@ spring:
   application:
     name: service-auth
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:authdb;DB_CLOSE_DELAY=-1}
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: 
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5445/siip_farmacias_db}
+    driver-class-name: org.postgresql.Driver
+    username: ${SPRING_DATASOURCE_USERNAME:siip_admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:siip_secure_password_2026}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+      continue-on-error: true
+
+# Configuración de Seguridad y Bloqueo de Intentos (Guava Cache)
+security:
+  auth:
+    max-login-attempts: 5
+    lockout-duration-minutes: 15
+
+# Configuración de Auditoría con Logback
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.farmacias: INFO
+    org.springframework.security: WARN
