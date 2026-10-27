@@ -125,7 +125,7 @@ export default function Navbar({
           {/* User Role Badge */}
           <div className="flex items-center space-x-2.5">
             <div className="w-8 h-8 rounded-full bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-cyan-300 font-bold text-xs">
-              {currentUser.role === 'FARMACEUTICO' ? 'QF' : currentUser.role === 'ADMIN_CD' ? 'CD' : 'GO'}
+              {currentUser.role?.includes('FARMACEUTICO') ? 'QF' : currentUser.role?.includes('ADMIN_CD') ? 'CD' : currentUser.role?.includes('SUPERVISOR') ? 'SUP' : currentUser.role?.includes('ASISTENTE') ? 'TEC' : currentUser.role?.includes('AUDITOR') ? 'AUD' : 'SIIP'}
             </div>
             <div className="hidden lg:block text-left">
               <div className="text-xs font-semibold text-white leading-tight">{currentUser.name}</div>

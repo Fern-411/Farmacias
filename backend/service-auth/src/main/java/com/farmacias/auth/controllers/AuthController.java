@@ -1,5 +1,6 @@
 package com.farmacias.auth.controllers;
 
+import com.farmacias.auth.model.Rol;
 import com.farmacias.auth.model.Usuario;
 import com.farmacias.auth.service.IAuthService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -46,6 +48,27 @@ public class AuthController {
             err.put("mensaje", "Error interno en el servidor de autenticación PostgreSQL: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(err);
         }
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Rol>> getRoles() {
+        return ResponseEntity.ok(authService.listarRoles());
+    }
+
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<Map<String, Object>>> getUsuarios() {
+        return ResponseEntity.ok(authService.listarUsuariosActivos());
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<?> health() {
+        Map<String, Object> health = new HashMap<>();
+        health.put("status", "UP");
+        health.put("database", "PostgreSQL 16 (farmacias_db)");
+        health.put("service", "ms-auth");
+        health.put("security", "BCrypt + Google Guava LoadingCache Lockout");
+        health.put("timestamp", System.currentTimeMillis());
+        return ResponseEntity.ok(health);
     }
 
     @PostMapping("/register")

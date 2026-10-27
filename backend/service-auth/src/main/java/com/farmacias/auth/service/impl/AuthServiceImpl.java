@@ -118,6 +118,8 @@ public class AuthServiceImpl implements IAuthService {
         Map<String, Object> response = new HashMap<>();
         response.put("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.siip_farmacias_jwt_" + System.currentTimeMillis());
         response.put("username", usuario.getUsername());
+        response.put("nombres", usuario.getNombres());
+        response.put("apellidos", usuario.getApellidos());
         response.put("nombreCompleto", usuario.getNombres() + " " + usuario.getApellidos());
         response.put("rol", usuario.getRol().getCodigo());
         response.put("rolDescripcion", usuario.getRol().getNombre());
@@ -177,6 +179,34 @@ public class AuthServiceImpl implements IAuthService {
                 .build();
 
         return usuarioDao.save(nuevo);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Rol> listarRoles() {
+        return rolDao.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> listarUsuariosActivos() {
+        List<Usuario> usuarios = usuarioDao.findAll();
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (Usuario u : usuarios) {
+            Map<String, Object> dto = new HashMap<>();
+            dto.put("id", u.getId());
+            dto.put("username", u.getUsername());
+            dto.put("nombres", u.getNombres());
+            dto.put("apellidos", u.getApellidos());
+            dto.put("nombreCompleto", u.getNombres() + " " + u.getApellidos());
+            dto.put("email", u.getEmail());
+            dto.put("rolCodigo", u.getRol() != null ? u.getRol().getCodigo() : null);
+            dto.put("rolNombre", u.getRol() != null ? u.getRol().getNombre() : null);
+            dto.put("sucursalId", u.getSucursalId());
+            dto.put("bloqueado", u.getBloqueado());
+            result.add(dto);
+        }
+        return result;
     }
 
     private void registrarAuditoria(Long usuarioId, String username, String accion, String detalle, String ipOrigen, boolean exito) {
