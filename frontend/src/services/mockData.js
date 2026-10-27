@@ -1681,3 +1681,120 @@ export function rejectTransferOrder(transferId, motivoRechazo = 'Rechazado por c
   return transfer;
 }
 
+/**
+ * 5. Ejecutar Traslado Express Inmediato:
+ * Crea, emite GRE SUNAT, asigna precinto y aplica la entrada física en destino al instante.
+ * Ajusta formalmente el inventario de ambas sucursales y persiste inmediatamente en localStorage.
+ */
+export function executeDirectTransfer({
+  origenSucursalId,
+  destinoSucursalId,
+  medicamentoId,
+  cantidadSugerida,
+  motivo = 'QUIEBRE_VENTANILLA',
+  justificacion = 'Traslado express inmediato por quiebre de stock en ventanilla',
+  prioridad = 'URGENTE',
+  usuario = 'Químico Farmacéutico Responsable'
+}) {
+  const oId = Number(origenSucursalId);
+  const dId = Number(destinoSucursalId);
+  const mId = Number(medicamentoId);
+  const qty = Number(cantidadSugerida);
+
+  const med = MEDICAMENTOS.find(m => m.id === mId);
+  const origen = SUCURSALES.find(s => s.id === oId);
+  const destino = SUCURSALES.find(s => s.id === dId);
+
+  const distancia = origen && destino 
+    ? calcularDistanciaHaversine(origen.lat, origen.lng, destino.lat, destino.lng) 
+    : 2.5;
+
+  const ahorro = (med?.precioUnitario || 35.0) * qty;
+  const numeroGuia = T001-;
+  const numeroActa = ACTA-BPA-2026-;
+  const numeroGuiaEntrada = GE-001-;
+  const precinto = PREC-SEC-;
+
+  const guiaSalida = {
+    numeroGuia,
+    codigoHashSunat: (Math.random().toString(36).substring(2, 12) + Math.random().toString(36).substring(2, 10)).toUpperCase(),
+    fechaEmision: new Date().toISOString().replace('T', ' ').substring(0, 16),
+    conductor: 'Carlos Mendoza Quispe',
+    licenciaConducir: 'Q-45892110',
+    placaVehiculo: 'BCV-912',
+    marcaVehiculo: 'Mercedes-Benz Sprinter Furgón Isotérmico',
+    precintoSeguridad: precinto,
+    temperaturaDespacho: '20.5 °C',
+    bultosTotales: 1,
+    pesoBrutoKg: Math.round((qty * 0.25) * 10) / 10,
+    despachadoPor: QF Director Técnico ()
+  };
+
+  const guiaEntrada = {
+    numeroActaRecepcion: numeroActa,
+    numeroGuiaEntrada,
+    fechaRecepcion: new Date().toISOString().replace('T', ' ').substring(0, 16),
+    qfReceptor: usuario,
+    conteoVerificado: true,
+    cantidadRecibida: qty,
+    precintoIntacto: true,
+    precintoVerificado: precinto,
+    temperaturaLlegada: '21.0 °C',
+    estadoFisico: 'CONFORME_SIN_OBSERVACIONES',
+    loteVerificado: 'LT-CONF-' + new Date().getFullYear(),
+    vencimientoVerificado: '2028-12-31',
+    observaciones: Traslado express de  cajas de  transferidas exitosamente desde  hacia .
+  };
+
+  const completedTransfer = {
+    id: Date.now(),
+    codigo: 'TRA-2026-' + Math.floor(10000 + Math.random() * 90000),
+    fechaSugerencia: new Date().toISOString().replace('T', ' ').substring(0, 16),
+    origenSucursalId: oId,
+    destinoSucursalId: dId,
+    medicamentoId: mId,
+    cantidadSugerida: qty,
+    distanciaKm: distancia,
+    prioridad,
+    motivo,
+    justificacion,
+    estado: 'RECEPCIONADO_CONFORME',
+    ahorroEstimadoSoles: Math.round(ahorro * 100) / 100,
+    solicitadoPor: usuario,
+    guiaSalida,
+    guiaEntrada
+  };
+
+  // 1. Descontar stock en sede origen
+  adjustStockRecord(
+    oId,
+    mId,
+    -qty,
+    'SALIDA_TRASLADO_INTERNO',
+    Despacho express hacia  bajo GRE ,
+    numeroGuia,
+    guiaSalida.despachadoPor
+  );
+
+  // 2. Sumar stock en sede destino
+  adjustStockRecord(
+    dId,
+    mId,
+    qty,
+    'ENTRADA_TRASLADO_INTERNO',
+    Recepción express desde  bajo Acta ,
+    numeroGuiaEntrada,
+    guiaEntrada.qfReceptor
+  );
+
+  // 3. Registrar en historial de traslados
+  TRASLADOS_SUGERIDOS.unshift(completedTransfer);
+  setStoredItem(STORAGE_KEYS.TRASLADOS, TRASLADOS_SUGERIDOS);
+
+  // 4. Persistir estado de inventario global y notificar a componentes reactivos
+  setStoredItem(STORAGE_KEYS.INVENTARIO, INVENTARIO_DATA);
+  setStoredItem(STORAGE_KEYS.KARDEX, KARDEX_MOVIMIENTOS);
+  notifyDataChange();
+
+  return completedTransfer;
+}

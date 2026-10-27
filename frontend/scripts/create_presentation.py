@@ -27,8 +27,8 @@ def build_presentation():
     COLOR_AMBER_BOX = RGBColor(254, 243, 199)
 
     screenshots_dir = r"C:\Users\Ronny Mendoza\.gemini\antigravity\brain\0d8a0e1e-14ef-4338-b8be-33749b4f2178\screenshots"
-    out_brain = r"C:\Users\Ronny Mendoza\.gemini\antigravity\brain\0d8a0e1e-14ef-4338-b8be-33749b4f2178\PRUEBAS_SISTEMA_SIIP_FARMACIAS.pptx"
-    out_project = r"D:\UTP\5 SEMESTRE\Integrador\PROIYECTO\Farmacias\PRUEBAS_SISTEMA_SIIP_FARMACIAS.pptx"
+    out_brain = r"C:\Users\Ronny Mendoza\.gemini\antigravity\brain\0d8a0e1e-14ef-4338-b8be-33749b4f2178\PRUEBAS_SISTEMA_SIIP_FARMACIAS_AVANCE3.pptx"
+    out_project = r"D:\UTP\5 SEMESTRE\Integrador\PROIYECTO\Farmacias\PRUEBAS_SISTEMA_SIIP_FARMACIAS_FINAL.pptx"
 
     def add_top_bar(slide, section_label, title_text):
         # Fondo general
@@ -724,6 +724,49 @@ def build_presentation():
             cp.font.size = Pt(10)
             cp.font.bold = (c_idx == 0)
             cp.font.color.rgb = COLOR_PRIMARY if c_idx == 0 else COLOR_SLATE_DARK
+
+    # =========================================================================
+    # SLIDE 10B: CONTROL DE ACCESO RBAC - LOS 5 ROLES INDISPENSABLES
+    # =========================================================================
+    s_roles = prs.slides.add_slide(blank_layout)
+    add_top_bar(s_roles, "Control de Acceso y Seguridad RBAC", "Los 5 Roles Indispensables del Negocio Farmacéutico (DIGEMID & SUNAT)")
+
+    t_roles_shape = s_roles.shapes.add_table(6, 4, Inches(0.8), Inches(1.4), Inches(11.7), Inches(5.4))
+    t_roles = t_roles_shape.table
+    t_roles.columns[0].width = Inches(2.2)
+    t_roles.columns[1].width = Inches(2.3)
+    t_roles.columns[2].width = Inches(5.0)
+    t_roles.columns[3].width = Inches(2.2)
+
+    h_roles = ["Código de Rol (PostgreSQL)", "Perfil Operativo", "Responsabilidades y Base Legal (DIGEMID / SUNAT)", "Usuario de Prueba"]
+    for c_idx, h in enumerate(h_roles):
+        cell = t_roles.cell(0, c_idx)
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = COLOR_PRIMARY
+        cp = cell.text_frame.paragraphs[0]
+        cp.text = h
+        cp.font.bold = True
+        cp.font.size = Pt(11)
+        cp.font.color.rgb = COLOR_ACCENT
+
+    roles_data = [
+        ("ROLE_FARMACEUTICO", "Químico Farmacéutico (Director Técnico)", "Dispensación ética, recetas médicas, control FEFO de psicotrópicos y transferencias inter-sucursales (Ley 29459, R.M. 833-2015).", "qf_mendoza (CQFP 18492)"),
+        ("ROLE_ADMIN_CD", "Administrador CD (Huachipa)", "Gestión logística mayorista, emisión de Guías Remitente SUNAT con QR/HASH, despacho inter-sedes y recepción de laboratorios.", "admin_cd_huachipa (CIP 84920)"),
+        ("ROLE_SUPERVISOR", "Supervisor Regional Operaciones", "Monitoreo global de la red (15 sedes a nivel nacional), balanceo de sobrestock entre boticas, control de mermas y auditoría.", "supervisor_nacional"),
+        ("ROLE_ASISTENTE_FARMACIA", "Técnico en Farmacia (Ventanilla)", "Atención en ventanilla, consulta rápida de genéricos DCI con fotos en Cloudflare R2, registro de venta y recepción conforme.", "tecnico_ventanilla"),
+        ("ROLE_AUDITOR_CALIDAD", "Auditor Calidad & DIGEMID", "Fiscalización de Buenas Prácticas de Almacenamiento (BPA), trazabilidad FEFO de lotes por vencer y descarga de reportes Apache POI.", "auditor_digemid (CQFP 14205)")
+    ]
+
+    for r_idx, row in enumerate(roles_data):
+        for c_idx, val in enumerate(row):
+            cell = t_roles.cell(r_idx + 1, c_idx)
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = RGBColor(255, 255, 255) if r_idx % 2 == 0 else RGBColor(241, 245, 249)
+            cp = cell.text_frame.paragraphs[0]
+            cp.text = val
+            cp.font.size = Pt(10)
+            cp.font.bold = (c_idx == 0 or c_idx == 3)
+            cp.font.color.rgb = COLOR_PRIMARY if c_idx == 0 else (COLOR_UTP_RED if c_idx == 3 else COLOR_SLATE_DARK)
 
     # =========================================================================
     # SLIDES 11 A 21: PANTALLAS Y EVIDENCIAS DE PRUEBAS FUNCIONALES

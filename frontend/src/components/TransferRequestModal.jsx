@@ -14,6 +14,7 @@ import {
   Package, 
   Info,
   Layers,
+  Zap,
   DollarSign,
   Search,
   MapPin
@@ -53,6 +54,7 @@ export default function TransferRequestModal({
   const [quantity, setQuantity] = useState(5);
   const [motivo, setMotivo] = useState('QUIEBRE_VENTANILLA');
   const [prioridad, setPrioridad] = useState('URGENTE');
+  const [isExpress, setIsExpress] = useState(true); // Traslado Express Inmediato por defecto
   const [observaciones, setObservaciones] = useState('');
 
   // Sincronizar sede origen y cantidad por defecto al abrir el modal
@@ -176,7 +178,8 @@ export default function TransferRequestModal({
       cantidadSugerida: finalQty,
       motivo,
       justificacion: observaciones || `Solicitud por ${motivo.replace(/_/g, ' ').toLowerCase()} desde ${destBranch.nombre} hacia ${originBranch.nombre}.`,
-      prioridad
+      prioridad,
+      isExpress
     };
 
     onConfirmTransfer(transferPayload);
@@ -615,6 +618,57 @@ export default function TransferRequestModal({
             </div>
           </div>
 
+          {/* MODALIDAD DE OPERACIÓN: EXPRESS INMEDIATO VS SOLICITUD REGULAR */}
+          <div className="bg-gradient-to-r from-blue-50/90 to-indigo-50/90 border border-blue-200 rounded-2xl p-4 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-black uppercase text-blue-950 tracking-wider flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-blue-700" />
+                <span>Modalidad de Ejecución (SUNAT GRE & DIGEMID BPA):</span>
+              </span>
+              <span className="text-[10px] font-bold text-blue-800 bg-blue-100/80 px-2.5 py-0.5 rounded-full border border-blue-200">
+                Persistencia Inmediata
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button
+                type="button"
+                onClick={() => setIsExpress(true)}
+                className={`p-3 rounded-xl border text-left transition cursor-pointer ${
+                  isExpress
+                    ? 'bg-blue-700 text-white border-blue-800 shadow-md ring-2 ring-blue-500/30'
+                    : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                }`}
+              >
+                <div className="flex items-center space-x-2">
+                  <Zap className={`w-4 h-4 ${isExpress ? 'text-amber-300' : 'text-amber-500'}`} />
+                  <span className="font-extrabold text-xs">⚡ Traslado Express Inmediato</span>
+                </div>
+                <p className={`text-[11px] mt-1 ${isExpress ? 'text-blue-100 font-medium' : 'text-slate-500'}`}>
+                  Afecta el stock al instante (suma a mi sede y descuenta en origen) con Guía GRE SUNAT y Acta DIGEMID.
+                </p>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsExpress(false)}
+                className={`p-3 rounded-xl border text-left transition cursor-pointer ${
+                  !isExpress
+                    ? 'bg-slate-900 text-white border-slate-950 shadow-md ring-2 ring-slate-500/30'
+                    : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                }`}
+              >
+                <div className="flex items-center space-x-2">
+                  <Clock className={`w-4 h-4 ${!isExpress ? 'text-cyan-300' : 'text-slate-500'}`} />
+                  <span className="font-extrabold text-xs">📋 Solicitud Regular en Cola</span>
+                </div>
+                <p className={`text-[11px] mt-1 ${!isExpress ? 'text-slate-300 font-medium' : 'text-slate-500'}`}>
+                  Queda en estado "Pendiente de Aprobación" para despacho posterior en el módulo de traslados.
+                </p>
+              </button>
+            </div>
+          </div>
+
           {/* Botones de Acción */}
           <div className="pt-3 flex items-center justify-between border-t border-slate-200">
             <button
@@ -631,7 +685,7 @@ export default function TransferRequestModal({
               className="inline-flex items-center space-x-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 disabled:opacity-50 text-white text-xs font-black rounded-xl transition shadow-md hover:shadow-lg cursor-pointer transform active:scale-95"
             >
               <Truck className="w-4 h-4" />
-              <span>Emitir Solicitud ({quantity} Cajas)</span>
+              <span>{isExpress ? `⚡ Ejecutar Traslado Express (${quantity} Cajas)` : `Emitir Solicitud (${quantity} Cajas)`}</span>
             </button>
           </div>
 

@@ -45,7 +45,8 @@ import {
   addNewProduct,
   updateExistingProduct,
   adjustStockRecord,
-  createTransferOrder
+  createTransferOrder,
+  executeDirectTransfer
 } from '../services/mockData';
 import { sanitizeInput } from '../services/securityUtils';
 import TransferRequestModal from '../components/TransferRequestModal';
@@ -142,9 +143,9 @@ export default function ProductManagementPage({ currentBranch, currentUser, onSe
   });
 
   // Verificación de Permisos RBAC
-  const canCreateProduct = activeRole === 'ADMIN_CD' || activeRole === 'GERENCIA';
-  const canEditProduct = activeRole === 'ADMIN_CD' || activeRole === 'GERENCIA';
-  const canAdjustStock = activeRole === 'ADMIN_CD' || activeRole === 'FARMACEUTICO';
+  const canCreateProduct = activeRole.includes('ADMIN_CD') || activeRole.includes('GERENCIA') || activeRole.includes('SUPERVISOR');
+  const canEditProduct = activeRole.includes('ADMIN_CD') || activeRole.includes('GERENCIA');
+  const canAdjustStock = activeRole.includes('ADMIN_CD') || activeRole.includes('FARMACEUTICO') || activeRole.includes('SUPERVISOR');
 
   // Categorías disponibles
   const categoriesList = [
@@ -268,11 +269,17 @@ export default function ProductManagementPage({ currentBranch, currentUser, onSe
   };
 
   const handleConfirmTransfer = (transferPayload) => {
-    const newTransfer = createTransferOrder(transferPayload);
+    let newTransfer;
+    if (transferPayload.isExpress !== false) {
+      newTransfer = executeDirectTransfer(transferPayload);
+      showNotify(`¡Traslado Express completado! Se transfirieron ${newTransfer.cantidadSugerida} cajas de "${selectedProductForTransfer?.nombreComercial}". Stock actualizado en Kardex y persistido.`);
+    } else {
+      newTransfer = createTransferOrder(transferPayload);
+      showNotify(`¡Solicitud de traslado emitida para ${newTransfer.cantidadSugerida} cajas de "${selectedProductForTransfer?.nombreComercial}"!`);
+    }
     if (onSelectTransfer) {
       onSelectTransfer(newTransfer);
     }
-    showNotify(`¡Solicitud de traslado emitida para ${newTransfer.cantidadSugerida} cajas de "${selectedProductForTransfer?.nombreComercial}"!`);
   };
 
   // Guardar Producto (Alta o Edición)
@@ -378,35 +385,53 @@ export default function ProductManagementPage({ currentBranch, currentUser, onSe
 
         {/* Simulador de Rol RBAC y Botones de Creación / Kardex */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full lg:w-auto">
-          {/* Selector de Rol */}
-          <div className="bg-slate-100 p-1.5 rounded-2xl border border-slate-200 flex items-center space-x-1">
-            <span className="text-[10px] font-black uppercase text-slate-500 px-2">Rol:</span>
+          {/* Selector de Rol (5 Roles Indispensables) */}
+          <div className="bg-slate-100 p-1.5 rounded-2xl border border-slate-200 flex flex-wrap items-center gap-1">
+            <span className="text-[10px] font-black uppercase text-slate-500 px-1">Rol:</span>
             <button
-              onClick={() => setActiveRole('ADMIN_CD')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
-                activeRole === 'ADMIN_CD' ? 'bg-purple-700 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              onClick={() => setActiveRole('ROLE_ADMIN_CD')}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
+                activeRole.includes('ADMIN_CD') ? 'bg-purple-700 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
-              title="Permiso total: Crear, Editar, Ajustar Stock"
+              title="Permiso total: Catálogo, Edición y Ajuste Stock"
             >
-              👑 Admin Central
+              👑 Admin CD
             </button>
             <button
-              onClick={() => setActiveRole('FARMACEUTICO')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
-                activeRole === 'FARMACEUTICO' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              onClick={() => setActiveRole('ROLE_FARMACEUTICO')}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
+                activeRole.includes('FARMACEUTICO') ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
-              title="Permiso operativo: Ajustar stock en sede"
+              title="Permiso operativo: Dispensación y Ajuste en Sede"
             >
-              💊 Farmacéutico
+              💊 Farmacéutico (DT)
             </button>
             <button
-              onClick={() => setActiveRole('AUDITOR')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
-                activeRole === 'AUDITOR' ? 'bg-amber-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              onClick={() => setActiveRole('ROLE_SUPERVISOR')}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
+                activeRole.includes('SUPERVISOR') ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
-              title="Solo lectura: Auditor DIGEMID"
+              title="Monitoreo y balanceo de red nacional"
             >
-              🔒 Auditor (Lectura)
+              📊 Supervisor
+            </button>
+            <button
+              onClick={() => setActiveRole('ROLE_ASISTENTE_FARMACIA')}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
+                activeRole.includes('ASISTENTE') ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              }`}
+              title="Ventanilla y mostrador de atención"
+            >
+              🧑‍⚕️ Técnico
+            </button>
+            <button
+              onClick={() => setActiveRole('ROLE_AUDITOR_CALIDAD')}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer ${
+                activeRole.includes('AUDITOR') ? 'bg-amber-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              }`}
+              title="Solo lectura: Auditor DIGEMID / SUNAT"
+            >
+              🔒 Auditor BPA
             </button>
           </div>
 

@@ -31,6 +31,12 @@ import RouteMapModal from '../components/RouteMapModal';
 import TransferRequestModal from '../components/TransferRequestModal';
 
 export default function InventorySearchPage({ currentBranch, onSelectTransfer }) {
+  const [, setForceUpdate] = useState(0);
+  useEffect(() => {
+    const onDataUpdated = () => setForceUpdate(v => v + 1);
+    window.addEventListener('siip:data_updated', onDataUpdated);
+    return () => window.removeEventListener('siip:data_updated', onDataUpdated);
+  }, []);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMedId, setSelectedMedId] = useState(101);
   const [filterCategory, setFilterCategory] = useState('ALL');
@@ -123,13 +129,24 @@ export default function InventorySearchPage({ currentBranch, onSelectTransfer })
   };
 
   const handleConfirmTransfer = (transferPayload) => {
-    const newTransfer = createTransferOrder(transferPayload);
+    let newTransfer;
+    if (transferPayload.isExpress !== false) {
+      newTransfer = executeDirectTransfer(transferPayload);
+      setRequestSuccessMsg(
+        `¡Traslado Express completado con éxito! Se transfirieron ${newTransfer.cantidadSugerida} cajas de ${activeMed.nombreComercial} desde ${selectedTransferBranch?.nombre || 'Sede Donante'}. Stock actualizado y persistido en el sistema (Guía GRE SUNAT ${newTransfer.guiaSalida?.numeroGuia}).`
+      );
+    } else {
+      newTransfer = createTransferOrder(transferPayload);
+      setRequestSuccessMsg(
+        `¡Solicitud registrada para transferir ${newTransfer.cantidadSugerida} cajas de ${activeMed.nombreComercial} desde ${selectedTransferBranch?.nombre || 'Sede Donante'}!`
+      );
+    }
+
     if (onSelectTransfer) {
       onSelectTransfer(newTransfer);
     }
 
-    setRequestSuccessMsg(`¡Solicitud registrada para transferir ${newTransfer.cantidadSugerida} cajas de ${activeMed.nombreComercial} desde ${selectedTransferBranch?.nombre || 'Sede Donante'}!`);
-    setTimeout(() => setRequestSuccessMsg(null), 5000);
+    setTimeout(() => setRequestSuccessMsg(null), 6000);
   };
 
   return (
