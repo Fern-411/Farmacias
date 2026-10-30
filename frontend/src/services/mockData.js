@@ -1710,10 +1710,10 @@ export function executeDirectTransfer({
     : 2.5;
 
   const ahorro = (med?.precioUnitario || 35.0) * qty;
-  const numeroGuia = T001-;
-  const numeroActa = ACTA-BPA-2026-;
-  const numeroGuiaEntrada = GE-001-;
-  const precinto = PREC-SEC-;
+  const numeroGuia = 'T001-' + Math.floor(10000000 + Math.random() * 90000000);
+  const numeroActa = 'ACTA-BPA-2026-' + Math.floor(10000 + Math.random() * 90000);
+  const numeroGuiaEntrada = 'GE-001-' + Math.floor(1000000 + Math.random() * 9000000);
+  const precinto = 'PREC-SEC-' + Math.floor(10000 + Math.random() * 90000);
 
   const guiaSalida = {
     numeroGuia,
@@ -1727,7 +1727,7 @@ export function executeDirectTransfer({
     temperaturaDespacho: '20.5 °C',
     bultosTotales: 1,
     pesoBrutoKg: Math.round((qty * 0.25) * 10) / 10,
-    despachadoPor: QF Director Técnico ()
+    despachadoPor: 'QF Director Técnico (' + (origen?.nombre || 'Sede Donante') + ')'
   };
 
   const guiaEntrada = {
@@ -1743,7 +1743,7 @@ export function executeDirectTransfer({
     estadoFisico: 'CONFORME_SIN_OBSERVACIONES',
     loteVerificado: 'LT-CONF-' + new Date().getFullYear(),
     vencimientoVerificado: '2028-12-31',
-    observaciones: Traslado express de  cajas de  transferidas exitosamente desde  hacia .
+    observaciones: 'Traslado express de ' + qty + ' cajas de ' + (med?.nombreComercial || 'medicamento') + ' transferidas exitosamente desde ' + (origen?.nombre || 'origen') + ' hacia ' + (destino?.nombre || 'destino') + '.'
   };
 
   const completedTransfer = {
@@ -1771,7 +1771,7 @@ export function executeDirectTransfer({
     mId,
     -qty,
     'SALIDA_TRASLADO_INTERNO',
-    Despacho express hacia  bajo GRE ,
+    'Despacho express hacia ' + (destino?.nombre || dId) + ' bajo GRE ' + numeroGuia,
     numeroGuia,
     guiaSalida.despachadoPor
   );
@@ -1782,7 +1782,7 @@ export function executeDirectTransfer({
     mId,
     qty,
     'ENTRADA_TRASLADO_INTERNO',
-    Recepción express desde  bajo Acta ,
+    'Recepción express desde ' + (origen?.nombre || oId) + ' bajo Acta ' + numeroActa,
     numeroGuiaEntrada,
     guiaEntrada.qfReceptor
   );
