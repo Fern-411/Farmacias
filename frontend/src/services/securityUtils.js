@@ -35,7 +35,7 @@ export function validatePasswordStrength(password) {
 }
 
 // 3. Rate Limiting en Cliente contra Abuso y Fuerza Bruta (Punto 11)
-class RateLimiter {
+export class RateLimiter {
   constructor(maxRequests = 30, windowSeconds = 60) {
     this.maxRequests = maxRequests;
     this.windowSeconds = windowSeconds;
